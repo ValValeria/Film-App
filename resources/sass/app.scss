@@ -1,0 +1,31 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    width:100vw;
+    min-height:100vh;
+}
+
+.wrap-md-pd{
+    width:90%;
+    margin:0 auto;
+    padding: 2rem 0;
+}
+
+.wrap-md{
+    width:90%;
+    margin:0 auto;
+}

@@ -8,11 +8,12 @@ import './bootstrap';
 window.Vue = require('vue');
 
 import vuetify from './vuetify';
-
+import {router} from './routes/routes'
 import App from './RootComponent.vue';
 
 new Vue({
     vuetify,
+    router,
     render: h => h(App),
     el: '#app',
 });

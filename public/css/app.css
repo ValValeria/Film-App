@@ -10909,6 +10909,11 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
+.allspace {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   width: 100vw;
   min-height: 100vh;
@@ -10923,5 +10928,13 @@ body {
 .wrap-md {
   width: 90%;
   margin: 0 auto;
+}
+
+.brand-name {
+  color: white;
+  font-weight: 300;
+  font-size: 27px;
+  margin: 0;
+  padding: 20px !important;
 }
 

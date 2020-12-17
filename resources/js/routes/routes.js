@@ -4,7 +4,7 @@ import HomePage from '../pages/HomePage.vue';
 
 
 const routes = [
-    {path:"/", component: HomePage}
+    {path:"", component: HomePage}
 ];
 
 export const router = new VueRouter({

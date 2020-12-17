@@ -43,3 +43,26 @@ body{
     margin: 0;
     padding: 20px !important;
 }
+
+.img-container{
+    width: 30px;
+    height: 30px;
+
+    img{
+        width:100%;
+        object-fit: contain;
+    }
+}
+
+.v-system-bar{
+    margin-left:45px;
+}
+
+.v-list-item__title a{
+    color: #231F20 !important;
+    font-weight: 400;
+}
+
+a:hover,a{
+    text-decoration:none ;
+}

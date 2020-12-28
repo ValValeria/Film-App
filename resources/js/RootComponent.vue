@@ -1,13 +1,21 @@
 <template>
   <v-app>
-    <v-system-bar  height="72px" style="background-color:#231F20">
-         <h1 class="text-center brand-name w-100">MyPizza</h1>
+    <v-system-bar 
+     height="72px"
+     style="background-color:#231F20"
+     class="center"
+     >
+         <div class="wrap-md center flex-row">
+            <h1 class="brand-name text-left">MyPizza</h1>
+            <HeaderLinks/> 
+         </div>
     </v-system-bar>
 
     <v-navigation-drawer
      app
      permanent
      expand-on-hover
+     v-if="false"
      >
       <HeaderComponent/>
     </v-navigation-drawer>
@@ -26,16 +34,30 @@
 import HeaderComponent from './components/VHeader';
 import BannerComponent from './components/VBanner';
 import FooterComponent from './components/VFooter';
-
+import HeaderLinks from './components/VHeaderLinks';
 
 export default {
   components:{
     HeaderComponent,
     BannerComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderLinks
   },
   data:function(){
     return ({drawer: false});
   }
 };
 </script>
+
+
+<style lang="scss" scoped>
+ .title{
+    margin: 0 auto !important;
+    text-transform: uppercase;
+    font-size: 70px !important;
+    line-height: 80px;
+    word-break: break-word;
+    width: 90%;
+    margin-bottom: 1.44rem !important;
+}
+</style>

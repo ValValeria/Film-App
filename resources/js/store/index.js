@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state:{
         products:[
-            {title:"", image:"", category: '', price: '', weight: 0}
+            { title: "Итальяская пицца", url:"/images/pizza_sm.jpg", category: 'пицца', price: '50', weight: 800, descr: 'Очень вкусная пицца'}
         ]
     }
 });

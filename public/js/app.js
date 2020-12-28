@@ -1967,6 +1967,80 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VCard.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VCard.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Card',
+  props: {
+    url: String,
+    title: String,
+    descr: String,
+    subtitle: String
+  },
+  data: function data() {
+    return {
+      show: false
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VFooter.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VFooter.vue?vue&type=script&lang=js& ***!
@@ -2089,6 +2163,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BasicLayout',
   props: {
@@ -2116,6 +2194,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_VBanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/VBanner */ "./resources/js/components/VBanner.vue");
 /* harmony import */ var _layouts_VBasicLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layouts/VBasicLayout */ "./resources/js/layouts/VBasicLayout.vue");
+/* harmony import */ var _components_VCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/VCard */ "./resources/js/components/VCard.vue");
 //
 //
 //
@@ -2141,13 +2220,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'HomePage',
   components: {
     BannerComponent: _components_VBanner__WEBPACK_IMPORTED_MODULE_0__["default"],
-    BasicLayout: _layouts_VBasicLayout__WEBPACK_IMPORTED_MODULE_1__["default"]
+    BasicLayout: _layouts_VBasicLayout__WEBPACK_IMPORTED_MODULE_1__["default"],
+    CardComponent: _components_VCard__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -6631,7 +6746,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".title[data-v-1aa81206] {\n  margin: 0 auto !important;\n  text-transform: uppercase;\n  font-size: 35px !important;\n  line-height: 80px;\n  word-break: break-word;\n  width: 90%;\n  font-weight: 300;\n  margin-bottom: 1.44rem !important;\n}", ""]);
+exports.push([module.i, ".title[data-v-1aa81206] {\n  margin: 0 auto !important;\n  text-transform: uppercase;\n  font-size: 35px !important;\n  line-height: 40px;\n  word-break: break-word;\n  width: 90%;\n  font-weight: 300;\n  margin-bottom: 0.54rem !important;\n}\n.description-sm[data-v-1aa81206] {\n  font-weight: 300;\n  margin: 10px 0;\n  text-align: center;\n}\n.content[data-v-1aa81206] {\n  padding-top: 1rem;\n}", ""]);
 
 // exports
 
@@ -38673,6 +38788,95 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VCard.vue?vue&type=template&id=2d3e7a4b&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VCard.vue?vue&type=template&id=2d3e7a4b& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-card",
+    { staticClass: "mx-auto", attrs: { "max-width": "344" } },
+    [
+      _c("v-img", { attrs: { src: _vm.url, height: "200px" } }),
+      _vm._v(" "),
+      _c("v-card-title", [_vm._v("\n    " + _vm._s(_vm.title) + "\n  ")]),
+      _vm._v(" "),
+      _c("v-card-subtitle", [_vm._v("\n    " + _vm._s(_vm.subtitle) + "\n  ")]),
+      _vm._v(" "),
+      _c(
+        "v-card-actions",
+        [
+          _c("v-btn", { attrs: { color: "orange lighten-2", text: "" } }, [
+            _vm._v("\n      Подробнее\n    ")
+          ]),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: { icon: "" },
+              on: {
+                click: function($event) {
+                  _vm.show = !_vm.show
+                }
+              }
+            },
+            [
+              _c("v-icon", [
+                _vm._v(_vm._s(_vm.show ? "mdi-chevron-up" : "mdi-chevron-down"))
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-expand-transition", [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.show,
+                expression: "show"
+              }
+            ]
+          },
+          [
+            _c("v-divider"),
+            _vm._v(" "),
+            _c("v-card-text", [
+              _vm._v("\n        " + _vm._s(_vm.descr) + "\n      ")
+            ])
+          ],
+          1
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VFooter.vue?vue&type=template&id=4465da96&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/VFooter.vue?vue&type=template&id=4465da96& ***!
@@ -38840,7 +39044,14 @@ var render = function() {
       _c("div", { staticClass: "wrap-md-pd center" }, [
         _c("h2", { staticClass: "title text-center" }, [_vm._t("title")], 2),
         _vm._v(" "),
-        _c("div", { staticClass: "items" }, [_vm._t("content")], 2)
+        _c(
+          "p",
+          { staticClass: "description-sm" },
+          [_vm._t("descr"), _vm._v(" "), _c("v-divider")],
+          2
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "items w-100" }, [_vm._t("content")], 2)
       ])
     ]
   )
@@ -38884,11 +39095,55 @@ var render = function() {
             proxy: true
           },
           {
+            key: "descr",
+            fn: function() {
+              return [
+                _vm._v("\n            Самое вкусное, самое ароматное\n        ")
+              ]
+            },
+            proxy: true
+          },
+          {
             key: "content",
             fn: function() {
-              return _vm._l(_vm.$store.state.products, function(item) {
-                return _c("div", { key: item })
-              })
+              return [
+                _c(
+                  "v-item-group",
+                  [
+                    _c(
+                      "v-container",
+                      [
+                        _c(
+                          "v-row",
+                          _vm._l(_vm.$store.state.products, function(item) {
+                            return _c(
+                              "v-col",
+                              {
+                                key: item + Math.random(),
+                                attrs: { cols: 4, md: 12 }
+                              },
+                              [
+                                _c("CardComponent", {
+                                  attrs: {
+                                    url: item.url,
+                                    title: item.title,
+                                    descr: item.descr,
+                                    subtitle: item.subtitle
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          }),
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
             },
             proxy: true
           }
@@ -38902,6 +39157,48 @@ var render = function() {
             key: "title",
             fn: function() {
               return [_vm._v("\n            У нас большой выбор\n        ")]
+            },
+            proxy: true
+          },
+          {
+            key: "descr",
+            fn: function() {
+              return [
+                _vm._v(
+                  "\n            Каждую неделю мы стараемся придумывать для вас что-то новое\n        "
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "content",
+            fn: function() {
+              return [_c("v-container", { attrs: { fluid: "" } })]
+            },
+            proxy: true
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c("BasicLayout", {
+        attrs: { isSection: true },
+        scopedSlots: _vm._u([
+          {
+            key: "title",
+            fn: function() {
+              return [_vm._v("\n            Нас легко найти\n        ")]
+            },
+            proxy: true
+          },
+          {
+            key: "descr",
+            fn: function() {
+              return [
+                _vm._v(
+                  "\n            Мы находимся в самом центре Киева\n        "
+                )
+              ]
             },
             proxy: true
           },
@@ -99727,6 +100024,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/VCard.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/VCard.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VCard_vue_vue_type_template_id_2d3e7a4b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VCard.vue?vue&type=template&id=2d3e7a4b& */ "./resources/js/components/VCard.vue?vue&type=template&id=2d3e7a4b&");
+/* harmony import */ var _VCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VCard.vue?vue&type=script&lang=js& */ "./resources/js/components/VCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VCard_vue_vue_type_template_id_2d3e7a4b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VCard_vue_vue_type_template_id_2d3e7a4b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/VCard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/VCard.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/VCard.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./VCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/VCard.vue?vue&type=template&id=2d3e7a4b&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/VCard.vue?vue&type=template&id=2d3e7a4b& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VCard_vue_vue_type_template_id_2d3e7a4b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./VCard.vue?vue&type=template&id=2d3e7a4b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/VCard.vue?vue&type=template&id=2d3e7a4b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VCard_vue_vue_type_template_id_2d3e7a4b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VCard_vue_vue_type_template_id_2d3e7a4b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/VFooter.vue":
 /*!*********************************************!*\
   !*** ./resources/js/components/VFooter.vue ***!
@@ -100156,11 +100522,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     products: [{
-      title: "",
-      image: "",
-      category: '',
-      price: '',
-      weight: 0
+      title: "Итальяская пицца",
+      url: "/images/pizza_sm.jpg",
+      category: 'пицца',
+      price: '50',
+      weight: 800,
+      descr: 'Очень вкусная пицца'
     }]
   }
 });

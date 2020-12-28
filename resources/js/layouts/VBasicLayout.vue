@@ -4,7 +4,11 @@
              <h2 class="title text-center">
                  <slot name="title"></slot>
              </h2>
-             <div class="items">
+             <p class="description-sm">
+                 <slot name="descr"></slot>
+                 <v-divider></v-divider>
+             </p>
+             <div class="items w-100">
                 <slot name="content"></slot>
              </div>
          </div>
@@ -32,10 +36,20 @@ export default {
     margin: 0 auto !important;
     text-transform: uppercase;
     font-size: 35px !important;
-    line-height: 80px;
+    line-height: 40px;
     word-break: break-word;
     width: 90%;
     font-weight: 300;
-    margin-bottom: 1.44rem !important;
+    margin-bottom: 0.54rem !important;
+   }
+
+   .description-sm{
+       font-weight:300;
+       margin:10px 0;
+       text-align: center;
+   }
+
+   .content{
+       padding-top:1rem;
    }
 </style>

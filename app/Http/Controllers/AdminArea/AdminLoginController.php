@@ -19,6 +19,8 @@ class AdminLoginController extends Controller{
         'email' => ['bail','required','email','max:40','min:10', new AuthRule],
         'password' => 'required|max:20|min:10',
        ]);
+
+       return redirect('/admin');
     }
 }
 ?>

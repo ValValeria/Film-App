@@ -1,0 +1,64 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height:100vh;
+    width:100vw;
+}
+
+.nav__area{
+    height:100vh;
+    position: sticky;
+    left:0;
+    top:0;
+    padding:0;
+}
+
+.nav__area nav{
+    height:100%;
+}
+
+.nav__area .navbar-brand {
+    text-transform: uppercase;
+    text-align:center;
+    width:100%;
+}
+
+
+.nav__links a{
+    text-align: left;
+    text-decoration: none;
+    padding: 10px 0;
+    color:white;
+}
+
+.nav__links{
+    padding-top:2rem;
+}
+
+.wrap-md-pd{
+    padding: 3rem 0;
+    width:90%;
+    margin:0 auto;
+}
+
+.wrap-md{
+    width:90%;
+    margin:0 auto;
+}
+
+
+.login__form{
+   max-width:400px;
+   text-align:left;
+   padding-top:2rem;
+}
+
+.center{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}

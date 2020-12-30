@@ -49,15 +49,3 @@ export default {
 };
 </script>
 
-
-<style lang="scss" scoped>
- .title{
-    margin: 0 auto !important;
-    text-transform: uppercase;
-    font-size: 70px !important;
-    line-height: 80px;
-    word-break: break-word;
-    width: 90%;
-    margin-bottom: 1.44rem !important;
-}
-</style>

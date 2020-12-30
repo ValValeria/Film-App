@@ -3,17 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminArea\AdminController;
+use App\Http\Controllers\AdminArea\AdminLoginController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 Route::get('/products',[ProductController::class,'index']);
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->middleware('admin')->name('home');
+    Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
+    Route::post('/login', [AdminLoginController::class, 'login']);
+});
+
 Route::get('/{any}', [HomeController::class,'vueroute'])->where('any', '.*');
 
+?>

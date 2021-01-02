@@ -10,4 +10,5 @@ class Product extends Model
     use HasFactory;
     protected $table = 'laravel_product';
     public $timestamps = false;
+    public $fillable=['title'];
 }

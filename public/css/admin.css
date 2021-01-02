@@ -7,6 +7,7 @@
 body{
     min-height:100vh;
     width:100vw;
+    overflow-x: hidden;
 }
 
 .nav__area{
@@ -33,6 +34,42 @@ body{
     text-decoration: none;
     padding: 10px 0;
     color:white;
+    padding-left:10px;
+}
+
+.avatar{
+        border-radius: 50% !important;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+}
+
+h5{
+    font-weight: 400 !important;
+}
+
+h4{
+    font-weight: 300 !important;
+}
+
+.card-container{
+    display: grid;
+    grid-auto-rows: 250px;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    grid-gap: 10px;
+    padding-top:2rem;
+}
+
+.headline{
+     font-size: 34px;
+}
+
+.font-upper{
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0;
+    letter-spacing: 1px;
 }
 
 .nav__links{

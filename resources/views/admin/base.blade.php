@@ -25,9 +25,8 @@
                             </div>
                             <div class="nav__links col d-flex justify-content-start flex-column text-left">
                                 <a href="/admin"> Главная</a>
-                                <a href="#">Добавить товар</a>
-                                <a href="#">Смотреть товары</a>
-                                <a href="#">Заказы</a>
+                                <a href="/admin/addproduct">Добавить товар</a>
+                                <a href="/products">Смотреть товары</a>
                             </div>
                         </div>
                     </div>
@@ -36,10 +35,10 @@
             <div class="content col-9">
                 <div class="content__wrap text-center wrap-md-pd">
                     @auth
-                    <div class="profile-info col-9 d-flex flex-column p-0">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <h5>Welcome</h5>
+                    <div class="profile-info  d-flex flex-column p-0 w-100">
+                        <ul class="list-group w-100">
+                            <li class="list-group-item d-flex justify-content-between w-100">
+                                <h5 class="font-upper w-100">Welcome, {{Auth::user()->username}}</h5>
                             </li>
                         </ul>
                     </div>

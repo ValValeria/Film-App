@@ -12,20 +12,29 @@ class ProductController extends Controller{
 
     const IS_JSON = 'isjson';
 
-    public function getProduct(Request $request, Product $product)
+    public function getProduct(Request $request, $id = null)
     {   
         $isJson = $request->query(self::IS_JSON);
         $view = 'admin.pages.product';
-        $data = $product;
 
         if(Str::contains($request->url(),'products')){
            $data = Product::paginate(4);
            $view = 'admin.pages.products';
-        } 
+        } else if(is_int(intval($id))){
+           $data = Product::where('id',intval($id))->first();
+        } else{
+           return redirect('/admin');
+        }
 
-        return $isJson ? response()->toJson($data->toJson())
+        return $isJson ? response(json_encode($data,JSON_UNESCAPED_UNICODE),200)
                             :view($view)
                             ->with('data',$data);
+    }
+
+    public function deleteProduct(Request $request, Product $product)
+    {
+        $product->delete();
+        return redirect('/admin');
     }
 }
 

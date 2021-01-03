@@ -49,7 +49,7 @@ export default {
        text-align: center;
    }
 
-   .content{
-       padding-top:1rem;
+   .items{
+       padding-top:1.5rem;
    }
 </style>

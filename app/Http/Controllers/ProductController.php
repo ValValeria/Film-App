@@ -21,7 +21,7 @@ class ProductController extends Controller{
            $data = Product::paginate(4);
            $view = 'admin.pages.products';
         } else if(is_int(intval($id))){
-           $data = Product::where('id',intval($id))->first();
+           $data = Product::findOrFail($id);
         } else{
            return redirect('/admin');
         }

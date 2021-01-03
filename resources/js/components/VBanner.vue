@@ -2,7 +2,7 @@
  <v-parallax
     dark
     src="/images/pizza_banner.jpg"
-    style="min-height:70vh;"
+    style="min-height:100vh;"
   >
     <v-row align="center" justify="center">
       <v-col class="text-center" cols="12">

@@ -6,7 +6,9 @@
      class="center"
      >
          <div class="wrap-md center flex-row">
-            <h1 class="brand-name text-left">MyPizza</h1>
+            <h1 class="brand-name text-left">
+              <router-link to="/">MyPizza</router-link>
+            </h1>
             <HeaderLinks/> 
          </div>
     </v-system-bar>
@@ -49,3 +51,9 @@ export default {
 };
 </script>
 
+
+<style lang="scss">
+.brand-name a{
+  color: white !important;
+}
+</style>

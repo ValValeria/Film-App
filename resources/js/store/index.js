@@ -22,9 +22,6 @@ export const store = new Vuex.Store({
                     type:'getProductAsync',
                     id
                 });
-                console.log('1')
-            } else{
-                console.log('2')
             }
 
             return elem;

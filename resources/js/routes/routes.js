@@ -7,7 +7,7 @@ import ProductPage from '../store/index';
 
 
 const routes = [
-    {path:"", component: HomePage},
+    {path:"/", component: HomePage},
     {path:"/product/:id", component: ProductPage},
     {path: "*", component: NotFoundPage}
 ];

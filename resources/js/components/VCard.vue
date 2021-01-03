@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto card-sm"
+    v-bind:class="'mx-auto card-sm'+classes"
     max-width="344"
   >
     <v-img
@@ -40,7 +40,12 @@ export default {
         title: String,
         descr: String,
         subtitle: String,
-        id:String
+        id: String | Number,
+        classes: {
+          type: String,
+          default: '',
+          required: false
+        }
     },
     data: function(){
       return {show: false}

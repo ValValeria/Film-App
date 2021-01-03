@@ -10929,7 +10929,7 @@ body {
 .wrap-md-pd {
   width: 90%;
   margin: 0 auto;
-  padding: 4rem 0;
+  padding: 6rem 0;
 }
 
 footer {
@@ -10937,7 +10937,7 @@ footer {
 }
 
 .section {
-  min-height: 50vh;
+  min-height: 70vh;
 }
 
 .wrap-md {

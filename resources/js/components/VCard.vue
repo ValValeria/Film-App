@@ -20,11 +20,10 @@
 
     <v-card-actions class="center pb-4" v-if="showAction">
       <v-btn
-        color="warning lighten-2"
+        color="amber darken-2"
         dark
         large
         depressed
-        rounded
       >
        <router-link :to="'product/'+id"></router-link>
         Подробнее

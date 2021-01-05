@@ -10921,7 +10921,7 @@ a.text-dark:focus {
   height: 100%;
 }
 
-.v-image__image--cover {
+.main-cards .v-image__image--cover {
   background-size: contain !important;
 }
 

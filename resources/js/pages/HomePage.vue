@@ -1,7 +1,7 @@
 <template>
   <div class="w-100">
     <BannerComponent />
-    <BasicLayout :isSection="true" :isGrid="true">
+    <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
       <template v-slot:title> Наше меню </template>
       <template #descr> Самое вкусное, самое ароматное </template>
       <template v-slot:content>
@@ -65,7 +65,7 @@
           Специальные предложения только для вас
         </template>
         <template v-slot:content>
-          <Coursel :urls="urls"/>
+          <ImagesComponent :urls="urls"/>
         </template>
       </BasicLayout>
     </div>
@@ -86,7 +86,7 @@ import CardComponent from "../components/VCard";
 import { mapState } from "vuex";
 import Coursel from "../components/VCoursel";
 import PizzaHistoryComponent from '../components/VPizzaHistory'
-
+import ImagesComponent from  '../components/VImages';
 
 export default {
   name: "HomePage",
@@ -120,7 +120,8 @@ export default {
     BasicLayout,
     CardComponent,
     Coursel,
-    PizzaHistoryComponent
+    PizzaHistoryComponent,
+    ImagesComponent
   },
   computed: mapState({
     items: (state) => state.products,

@@ -10,7 +10,7 @@
       <div class="wrap-md-pd font-white center">
         <h6 id="title" class="text-center">Всё самое вкусное</h6>
         <p class="description">Пицца, салаты и не только</p>
-        <v-btn depressed elevation="2" raised color="orange">Смотреть меню</v-btn>
+        <v-btn depressed large elevation="2" raised color="orange">Смотреть меню</v-btn>
       </div>
     </div>
   </section>

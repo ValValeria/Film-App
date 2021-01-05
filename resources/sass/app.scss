@@ -26,6 +26,10 @@
     height:100%;
 }
 
+.v-image__image--cover {
+    background-size: contain !important;
+}
+
 body{
     width:100vw;
     min-height:100vh;
@@ -34,7 +38,7 @@ body{
 .wrap-md-pd{
     width:90%;
     margin:0 auto;
-    padding: 6rem 0;
+    padding: 7.5rem 0 !important;
 }
 
 footer{

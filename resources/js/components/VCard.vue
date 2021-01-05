@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-bind:class="'mx-auto card-sm'+classes"
+    v-bind:class="'mx-auto shadow card-sm'+classes"
     max-width="344"
   >
     <v-img
@@ -9,23 +9,24 @@
     ></v-img>
 
     <v-card-title class="text-center">
-      <div class="w-100 text-center">
+      <div class="w-100 text-center card-sm-title">
         {{title}}
       </div>
     </v-card-title>
 
-    <v-card-subtitle class="text-center pt-2">
+    <v-card-text class="text-center pt-2">
       {{subtitle}}
-    </v-card-subtitle>
+    </v-card-text>
 
-    <v-card-actions class="center pb-4">
+    <v-card-actions class="center pb-4" v-if="showAction">
       <v-btn
         color="warning lighten-2"
         dark
         large
-        :href="'/product/'+id"
         depressed
+        rounded
       >
+       <router-link :to="'product/'+id"></router-link>
         Подробнее
       </v-btn>
     </v-card-actions>
@@ -45,6 +46,12 @@ export default {
           type: String,
           default: '',
           required: false
+        },
+
+        showAction:{
+          type: Boolean,
+          default: true,
+          required: false
         }
     },
     data: function(){
@@ -57,4 +64,9 @@ export default {
   .card-sm .v-image__image{
      background-size:contain !important;
   }
+
+  .shadow{
+    box-shadow: 0 0 20px rgba(73,77,86,0.127021) !important;
+    border-radius: 25px !important;
+}
 </style>

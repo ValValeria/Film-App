@@ -2,8 +2,7 @@
   <v-app>
     <v-system-bar 
      height="72px"
-     style="background-color:#231F20"
-     class="center"
+     class="center bg-dark"
      >
          <div class="wrap-md center flex-row">
             <h1 class="brand-name text-left">
@@ -26,7 +25,7 @@
         <router-view></router-view>
     </v-main>
 
-    <v-footer app style="background-color: rgb(35, 31, 32) !important;">
+    <v-footer app class="bg-dark">
        <FooterComponent/>
     </v-footer>
   </v-app>

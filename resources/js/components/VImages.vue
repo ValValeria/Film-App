@@ -14,7 +14,7 @@
             "
             v-bind="attrs"
             v-on="on"
-            cover
+            contain
           >
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
@@ -46,8 +46,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-image__image--cover {
-  background-size: cover;
-}
-</style>

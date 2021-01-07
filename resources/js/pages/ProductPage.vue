@@ -1,31 +1,47 @@
 <template>
   <div class="w-100 first-slide">
-      Hello
-    <BasicLayout :isSection="true">
-      <template v-slot:title> 
-         {{product().title}}
-      </template>
+     <ProductLayout
+     :items="items"
+     :product="product"
+     >
+      <template v-slot:title> Наше меню </template>
       <template #descr> Самое вкусное, самое ароматное </template>
-      <template v-slot:content> </template>
-    </BasicLayout>
+     </ProductLayout>
   </div>
 </template>
 
 <script>
-import BasicLayout from "../layouts/VBasicLayout";
+import ProductLayout from "../layouts/VPageLayout.vue";
 
 export default {
   name: "ProductPage",
+  data:function(){
+    return {items:[{
+            text:"Главная",
+            disabled:false,
+            href:"/"
+          },
+          {
+            text:"Меню",
+            disabled:false,
+            href:"/products"
+          },
+           {
+            text:"Пицца",
+            disabled:true,
+            href:"./"
+          }]};
+  },
   computed:{
       id: function(){
          return this.$route.params.id;
       },
       product:function(){
-          return this.$store.getters.getProduct(this.id)
-      }
+          return this.$store.getters.getProduct(this.id)||{}
+      },
   },
   components:{
-      BasicLayout
+      ProductLayout
   }
 };
 </script>

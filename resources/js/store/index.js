@@ -28,8 +28,8 @@ export const store = new Vuex.Store({
         }
     },
     actions:{
-        async getProductAsync({commit},id){
-             const response = await fetch(`/admin/product/${id}`);
+        async getProductAsync({commit},obj){
+             const response = await fetch(`/admin/product/${obj.id}/?isjson=true`);
 
              if(response.ok){
                  const data = await response.json();

@@ -162,9 +162,6 @@ export default {
   max-width: 100%;
 }
 
-.v-image__image--cover {
-  background-size: contain;
-}
 .hot-ads{
   background-image: url(/images/bg.png);
   background-size: 300px;

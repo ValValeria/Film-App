@@ -32,7 +32,7 @@
 </template>
 
 <script lang="js">
-import HeaderComponent from './components/VHeader';
+import HeaderComponent from './components/VMediaHeader';
 import BannerComponent from './components/VBanner';
 import FooterComponent from './components/VFooter';
 import HeaderLinks from './components/VHeaderLinks';

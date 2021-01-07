@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import NotFoundPage from '../pages/NotFoundPage.vue';
 import {store} from '../store/index';
-import ProductPage from '../store/index';
+import ProductPage from '../pages/ProductPage.vue';
 
 
 const routes = [

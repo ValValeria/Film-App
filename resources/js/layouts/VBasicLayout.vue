@@ -21,10 +21,12 @@
               <slot name="content"></slot>
             </div>
           </template>
+          <template v-else-if="isTwoCols">
+            <div class="flex-col-2 container-fluid flex align-items-center justify-content-center">
+                 <slot name="content"></slot>
+            </div>
+          </template>
           <slot name="content" v-else></slot>
-          <slot name="slider">
-              
-          </slot>
         </div>
       </div>
     </div>
@@ -57,7 +59,7 @@ export default {
     margin: 0 auto !important;
     text-transform: uppercase;
     font-size: 50px !important;
-    line-height: 40px;
+    line-height: 1.2;
     word-break: break-word;
     width: 90%;
     font-weight: 300;
@@ -83,5 +85,9 @@ export default {
   align-items: center;
   justify-items: center;
   grid-gap: 24px;
+}
+
+.flex-col-2 > div:nth-child(1),.flex-col-2 > div:nth-child(2){
+  margin:10px;
 }
 </style>

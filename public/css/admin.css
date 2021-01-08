@@ -105,3 +105,10 @@ h4{
     align-items: center;
     justify-content: center;
 }
+
+
+.product__title h4, .product__title{
+    font-size: 37px;
+    padding: 1.5rem 0;
+    line-height: 1.2;
+}

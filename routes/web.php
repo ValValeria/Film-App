@@ -8,15 +8,13 @@ use App\Http\Controllers\AdminArea\AdminLoginController;
 use App\Http\Controllers\AdminArea\AdminProductController;
 
 
-Route::get('/delete/{productId}',[ProductController::class,'deleteProduct'])->whereNumber('id')
-->middleware('auth');
-
-
 Route::prefix('admin')->group(function () {
     Route::middleware(['auth'])->group(function(){
        Route::get('/', [AdminController::class, 'index'])->name('home');
        Route::get('/addproduct', [AdminProductController::class, 'index']);
        Route::post('/addproduct', [AdminProductController::class, 'addProduct']);
+       Route::get('/delete/{productId}',[ProductController::class,'deleteProduct'])->whereNumber('id');
+       Route::post('/updateproduct/{id}',[AdminProductController::class,'updateProduct'])->whereNumber('id');
     });
     
     Route::get('/login', [AdminLoginController::class, 'index'])->name('login');

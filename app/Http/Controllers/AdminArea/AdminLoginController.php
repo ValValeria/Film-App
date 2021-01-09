@@ -33,6 +33,7 @@ class AdminLoginController extends Controller{
        } else{
            $user = User::where('email',$request->email)
                         ->where('password',$request->password)
+                        ->where('status','admin')
                         ->first();
 
            if($user){

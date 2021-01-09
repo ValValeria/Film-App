@@ -50,6 +50,11 @@ export default {
       required: false,
       default: false,
     },
+    isTwoCols:{
+      type: Boolean,
+      required: false,
+      default: false,
+    }
   },
 };
 </script>

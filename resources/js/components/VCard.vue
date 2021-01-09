@@ -6,6 +6,7 @@
     <v-img
       :src="url"
       height="200px"
+      class="mt-2"
     ></v-img>
 
     <v-card-title class="text-center">

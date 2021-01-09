@@ -4,8 +4,6 @@
      :items="items"
      :product="product"
      >
-      <template v-slot:title> Наше меню </template>
-      <template #descr> Самое вкусное, самое ароматное </template>
      </ProductLayout>
   </div>
 </template>

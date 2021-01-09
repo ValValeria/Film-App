@@ -3,34 +3,11 @@
     <div class="product__wrap wrap-md-pd" v-if="isLoaded">
       <div class="wrap-md">
         <div class="breadcrumps">
-          <v-breadcrumbs :items="items">
-            <template v-slot:divider>
-              <v-icon>mdi-chevron-right</v-icon>
-            </template>
-          </v-breadcrumbs>
+          <v-breadcrumbs :items="items" divider="/" large> </v-breadcrumbs>
         </div>
-        <div class="product__greeting">
-          <div class="text-center">
-            <h2 class="product__greeting-title text-center">
-              <slot name="title"></slot>
-            </h2>
-            <p class="product__greeting-description">
-              <slot name="descr"></slot>
-              <v-divider></v-divider>
-            </p>
-          </div>
-        </div>
-        <div class="product__content center">
+        <div class="product__content shadow">
           <div class="product__image">
-            <div class="row">
-              <div class="col-8">
-                <v-img
-                  :src="'/' + product.image"
-                  max-width="400px"
-                  min-height="300px"
-                  contain
-                ></v-img>
-              </div>
+            <div class="row h-100">
               <div class="col-2 center">
                 <div class="stars center" v-for="n in 5" :key="n">
                   <v-img
@@ -41,38 +18,95 @@
                   ></v-img>
                 </div>
               </div>
+              <div class="col-8">
+                <v-img
+                  :src="'/' + product.image"
+                  contain
+                  min-width="100%"
+                  height="100%"
+                ></v-img>
+              </div>
             </div>
           </div>
 
           <div class="product__info">
-            <div>
-              <v-card outlined>
-                <v-card-title>
-                  {{ product.title }}
-                </v-card-title>
-                <v-card-text>
-                  {{ product.short_description }}
-                </v-card-text>
-                <v-card-text>
-                  <v-simple-table>
-                    <template v-slot:default>
-                      <thead>
-                        <tr>
-                          <th class="text-left">Характеристики</th>
-                          <th class="text-left">Значения</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr >
-                          <td>Масса</td>
-                          <td>{{product.weight}}</td>
-                        </tr>
-                      </tbody>
-                    </template>
-                  </v-simple-table>
-                </v-card-text>
-              </v-card>
+            <div class="product__card">
+              <div class="product__title">
+                {{ product.title }}
+              </div>
+              <div class="product__available">В наличии</div>
+              <div class="product__short-text">
+                {{ product.short_description }}
+              </div>
+              <div class="product__price">
+                <span>{{ product.price }} ₴</span>
+                /
+                <span>{{ product.weight }} грамм</span>
+              </div>
+              <div class="product__btn">
+                <v-btn color="bg-red" dark x-large depressed block
+                  >В корзину</v-btn
+                >
+              </div>
             </div>
+          </div>
+
+          <div class="product__long-info">
+            <v-card>
+              <v-toolbar flat color="anchor" dark>
+                <v-toolbar-title>Описание</v-toolbar-title>
+              </v-toolbar>
+              <v-tabs vertical>
+                <v-tab> Состав </v-tab>
+                <v-tab> Коротко </v-tab>
+
+                <v-tab-item>
+                  <v-card flat>
+                    <v-list shaped>
+                      <v-subheader>Продукты</v-subheader>
+                      <v-list-item-group v-model="selectedItem">
+                        <v-list-item v-for="(item, i) in products" :key="i">
+                          <v-list-item-content>
+                            <v-list-item-title
+                              v-text="item"
+                            ></v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list-item-group>
+                    </v-list>
+                  </v-card>
+                </v-tab-item>
+
+                 <v-tab-item>
+                  <v-card flat>
+                    <v-card-text>
+                      <p class="product__short-text">
+                        {{ product.long_description }}
+                      </p>
+                    </v-card-text>
+                  </v-card>
+                </v-tab-item>
+              </v-tabs>
+            </v-card>
+          </div>
+
+          <div class="product__ad w-100">
+            <v-card class="product__ad-card" outlined>
+              <v-img src="/images/banner-img2.png" alt="..."></v-img>
+              <v-card-text>
+                <div class="product__ad-item">
+                  <div class="product__ad-title">
+                    <span class="product__ad-title3">Пицца</span>
+                    <span class="product__ad-title4">из двух</span>
+                    <span class="product__ad-title5">половинок</span>
+                  </div>
+                  <div class="product__ad-subtitle">две пиццы в одной</div>
+                  <div class="product__ad-button">
+                     <router-link to="/">Узнать больше</router-link>
+                  </div>
+                </div>
+              </v-card-text>
+            </v-card>
           </div>
         </div>
       </div>
@@ -91,7 +125,12 @@
 export default {
   name: "PageLayoutComponent",
   data: function () {
-    return { rating: 5 };
+    return {
+      rating: 5,
+      tab: null,
+      products: ["Курица", "Сыр пармиан", "Мука пшеничная","Молоко","Кетчуп","Оливковое масло"],
+      selectedItem: 2,
+    };
   },
   props: {
     items: {
@@ -108,45 +147,134 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .product__title {
   margin-bottom: 2.54rem !important;
+  margin: 0 0 25px;
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 300;
+}
+
+.product__image,
+.product__info {
+  width: 100%;
+}
+
+.product__info {
+  padding: 1rem;
+}
+
+.product__content {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  grid-auto-rows: auto auto;
+  grid-gap:10px;
+}
+
+.product__long-info {
+  grid-column: 1/2;
+  margin-top: 1.7rem;
+  padding: 0 15px;
+}
+
+.product__ad {
+  margin-top: 1.7rem;
+}
+
+.product__available {
+  color: #00bb16;
+  font-size: 16px;
+  font-weight: 400;
+  /* font-family: 'GothamPro', 'geometria', Arial, Helvetica, sans-serif; */
+  line-height: 30px;
 }
 
 .product__wrap > div > div {
-  padding-bottom: 1.6rem;
+  padding: 1.6rem;
+}
+
+.product__short-text {
+  margin: 0 0 39px;
+  font-size: 18px;
+  line-height: 34px;
+}
+
+.product__price {
+  margin: 0 0 41px;
+  font-size: 18px;
+  line-height: 30px;
+
+  > span:nth-child(1) {
+    font-size: 30px;
+  }
+
+  > span:nth-child(2) {
+    font-size: 18px;
+  }
 }
 
 .wrap-md-pd {
   padding: 3.5rem 0 !important;
 }
 
-.product__greeting-title {
-  margin: 0 auto !important;
-  text-transform: uppercase;
-  font-size: 45px !important;
-  line-height: 1.2;
-  word-break: break-word;
-  width: 90%;
-  font-weight: 300;
-  margin-bottom: 1.54rem !important;
+.product__ad-button a{
+   display: block;
+    height: 65px;
+    padding: 0 10px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 63px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #fff;
+    border-radius: 33px;
+    margin-bottom: 10px;
 }
 
-.product__greeting-description {
-  font-weight: 300;
-  margin: 20px 0;
-  text-align: center;
-  font-size: 20px;
+.product__ad-button a:hover{
+   background-color: #fff;
+   color: #623403;
+}
+
+.product__ad-card{
+    margin: 1rem;
+    background: #e98010;
+    margin-top: 0;
+}
+
+.product__ad-item{
+      color: #623403;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    span{
+      display:block;
+      line-height: 1.2;
+    }
+
+    span:nth-child(1){
+      font-size: 30px;
+      line-height: 32px;
+    }
+
+    span:nth-child(2), span:nth-child(3){
+      font-size: 20px;
+     line-height: 20px;
+    }
+
+    .product__ad-subtitle{
+      margin-bottom: 30px;
+    margin: 0 0 41px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+    text-transform: uppercase;
+    }
 }
 
 @media screen and (min-width: 900px) {
-  .product__content {
-    flex-direction: row;
-    width: 100%;
-  }
-  .product__content > div {
-    flex: 1 1 50%;
-    max-width: 50%;
-  }
 }
 </style>

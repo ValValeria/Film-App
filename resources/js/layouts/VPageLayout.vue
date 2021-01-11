@@ -1,112 +1,103 @@
 <template>
   <section class="product w-100 first-slide center">
     <div class="product__wrap wrap-md-pd" v-if="isLoaded">
-      <div class="wrap-md">
-        <div class="breadcrumps">
+      <div class="center">
+        <div class="breadcrumps wrap-md">
           <v-breadcrumbs :items="items" divider="/" large> </v-breadcrumbs>
         </div>
-        <div class="product__content shadow">
-          <div class="product__image">
-            <div class="row h-100">
-              <div class="col-2 center">
-                <div class="stars center" v-for="n in 5" :key="n">
+        <div class="shadow  pl-0 pr-0 w-100">
+          <div class="product__content wrap-md">
+            <div class="product__image">
+              <div class="row h-100">
+                <div class="col-2 center">
+                  <div class="stars center" v-for="n in 5" :key="n">
+                    <v-img
+                      src="/images/star.svg"
+                      width="25px"
+                      height="25px"
+                      class="m-1"
+                    ></v-img>
+                  </div>
+                </div>
+                <div class="col-8">
                   <v-img
-                    src="/images/star.svg"
-                    width="25px"
-                    height="25px"
-                    class="m-1"
+                    :src="'/' + product.image"
+                    contain
+                    min-width="100%"
+                    height="100%"
                   ></v-img>
                 </div>
               </div>
-              <div class="col-8">
-                <v-img
-                  :src="'/' + product.image"
-                  contain
-                  min-width="100%"
-                  height="100%"
-                ></v-img>
-              </div>
             </div>
-          </div>
 
-          <div class="product__info">
-            <div class="product__card">
-              <div class="product__title">
-                {{ product.title }}
-              </div>
-              <div class="product__available">В наличии</div>
-              <div class="product__short-text">
-                {{ product.short_description }}
-              </div>
-              <div class="product__price">
-                <span>{{ product.price }} ₴</span>
-                /
-                <span>{{ product.weight }} грамм</span>
-              </div>
-              <div class="product__btn">
-                <v-btn color="bg-red" dark x-large depressed block
-                  >В корзину</v-btn
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="product__long-info">
-            <v-card>
-              <v-toolbar flat color="anchor" dark>
-                <v-toolbar-title>Описание</v-toolbar-title>
-              </v-toolbar>
-              <v-tabs vertical>
-                <v-tab> Состав </v-tab>
-                <v-tab> Коротко </v-tab>
-
-                <v-tab-item>
-                  <v-card flat>
-                    <v-list shaped>
-                      <v-subheader>Продукты</v-subheader>
-                      <v-list-item-group v-model="selectedItem">
-                        <v-list-item v-for="(item, i) in products" :key="i">
-                          <v-list-item-content>
-                            <v-list-item-title
-                              v-text="item"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list-item-group>
-                    </v-list>
-                  </v-card>
-                </v-tab-item>
-
-                 <v-tab-item>
-                  <v-card flat>
-                    <v-card-text>
-                      <p class="product__short-text">
-                        {{ product.long_description }}
-                      </p>
-                    </v-card-text>
-                  </v-card>
-                </v-tab-item>
-              </v-tabs>
-            </v-card>
-          </div>
-
-          <div class="product__ad w-100">
-            <v-card class="product__ad-card" outlined>
-              <v-img src="/images/banner-img2.png" alt="..."></v-img>
-              <v-card-text>
-                <div class="product__ad-item">
-                  <div class="product__ad-title">
-                    <span class="product__ad-title3">Пицца</span>
-                    <span class="product__ad-title4">из двух</span>
-                    <span class="product__ad-title5">половинок</span>
-                  </div>
-                  <div class="product__ad-subtitle">две пиццы в одной</div>
-                  <div class="product__ad-button">
-                     <router-link to="/">Узнать больше</router-link>
-                  </div>
+            <div class="product__info">
+              <div class="product__card">
+                <div class="product__title">
+                  {{ product.title }}
                 </div>
-              </v-card-text>
-            </v-card>
+                <div class="product__available">В наличии</div>
+                <div class="product__short-text">
+                  {{ product.short_description }}
+                </div>
+                <div class="product__price">
+                  <span>{{ product.price }} ₴</span>
+                  /
+                  <span>{{ product.weight }} грамм</span>
+                </div>
+                <div class="product__btn">
+                  <v-btn color="bg-red" dark x-large depressed block
+                    >В корзину</v-btn
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="product__long-info">
+              <v-card>
+                <v-toolbar flat color="anchor" dark>
+                  <v-toolbar-title>Описание</v-toolbar-title>
+                </v-toolbar>
+                <v-tabs vertical>
+                  <v-tab> Состав </v-tab>
+                  <v-tab> Коротко </v-tab>
+
+                  <v-tab-item>
+                    <v-card class="product__tab-item" flat>
+                      <v-list shaped>
+                        <v-subheader>Продукты</v-subheader>
+                        <v-list-item-group v-model="selectedItem">
+                          <v-list-item v-for="(item, i) in products" :key="i">
+                            <v-list-item-content>
+                              <v-list-item-title
+                                v-text="item"
+                              ></v-list-item-title>
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list-item-group>
+                      </v-list>
+                    </v-card>
+                  </v-tab-item>
+
+                  <v-tab-item>
+                    <v-card flat class="product__tab-item">
+                      <v-card-text>
+                        <p class="product__short-text">
+                          {{ product.long_description }}
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+                </v-tabs>
+              </v-card>
+            </div>
+            <div class="product__other-ingredients w-100 h-100"></div>
+          </div>
+          <div class="product__ads w-100">
+               <div :class="'product__ads-bg w-100 center ' + product_ad_class">
+                   <div class="product__ads-content wrap-md">
+                       <slot name="ads"></slot>
+                   </div>
+               </div>
           </div>
         </div>
       </div>
@@ -128,7 +119,14 @@ export default {
     return {
       rating: 5,
       tab: null,
-      products: ["Курица", "Сыр пармиан", "Мука пшеничная","Молоко","Кетчуп","Оливковое масло"],
+      products: [
+        "Курица",
+        "Сыр пармиан",
+        "Мука пшеничная",
+        "Молоко",
+        "Кетчуп",
+        "Оливковое масло",
+      ],
       selectedItem: 2,
     };
   },
@@ -138,6 +136,10 @@ export default {
       default: [],
     },
     product: Object,
+    product_ad_class:{
+      default:"",
+      type: String
+    }
   },
   computed: {
     isLoaded: function (params) {
@@ -159,6 +161,7 @@ export default {
 .product__image,
 .product__info {
   width: 100%;
+  grid-column: span 2;
 }
 
 .product__info {
@@ -167,19 +170,16 @@ export default {
 
 .product__content {
   display: grid;
-  grid-template-columns: 55% 45%;
+  grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto auto;
-  grid-gap:10px;
+  grid-gap: 10px;
+  padding: 2.5rem 0;
 }
 
 .product__long-info {
-  grid-column: 1/2;
+  grid-column: span 2;
   margin-top: 1.7rem;
   padding: 0 15px;
-}
-
-.product__ad {
-  margin-top: 1.7rem;
 }
 
 .product__available {
@@ -218,63 +218,17 @@ export default {
   padding: 3.5rem 0 !important;
 }
 
-.product__ad-button a{
-   display: block;
-    height: 65px;
-    padding: 0 10px;
-    color: #fff;
-    font-size: 18px;
-    line-height: 63px;
-    text-align: center;
-    text-decoration: none;
-    border: 1px solid #fff;
-    border-radius: 33px;
-    margin-bottom: 10px;
+.product__ads {
+  grid-column: 1/-1;
+  padding: 2.5rem 0;
 }
 
-.product__ad-button a:hover{
-   background-color: #fff;
-   color: #623403;
+@media screen and (min-width: 1000px) {
+  .product__tab-item {
+    min-height: 280px;
+  }
 }
 
-.product__ad-card{
-    margin: 1rem;
-    background: #e98010;
-    margin-top: 0;
-}
-
-.product__ad-item{
-      color: #623403;
-    text-align: center;
-    font-weight: 700;
-    text-transform: uppercase;
-
-    span{
-      display:block;
-      line-height: 1.2;
-    }
-
-    span:nth-child(1){
-      font-size: 30px;
-      line-height: 32px;
-    }
-
-    span:nth-child(2), span:nth-child(3){
-      font-size: 20px;
-     line-height: 20px;
-    }
-
-    .product__ad-subtitle{
-      margin-bottom: 30px;
-    margin: 0 0 41px;
-    color: #fff;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 29px;
-    text-transform: uppercase;
-    }
-}
-
-@media screen and (min-width: 900px) {
+@media screen and (max-width: 1000px) {
 }
 </style>

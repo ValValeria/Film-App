@@ -14,9 +14,9 @@ class Order extends Model
     protected $table = 'laravel_order';
     public $timestamps = true;
 
-    public function products()
+    public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function user()

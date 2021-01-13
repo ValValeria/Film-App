@@ -1,107 +1,150 @@
 <template>
-  <section class="product w-100 first-slide center">
-    <div class="product__wrap wrap-md-pd" v-if="isLoaded">
-      <div class="center">
+  <div class="product w-100 first-slide center">
+    <BasicLayout :isSection="true" class="main-cards" v-if="isLoaded">
+      <template #breadcrumps>
         <div class="breadcrumps wrap-md">
           <v-breadcrumbs :items="items" divider="/" large> </v-breadcrumbs>
         </div>
-        <div class="shadow  pl-0 pr-0 w-100">
-          <div class="product__content wrap-md">
-            <div class="product__image">
-              <div class="row h-100">
-                <div class="col-2 center">
-                  <div class="stars center" v-for="n in 5" :key="n">
-                    <v-img
-                      src="/images/star.svg"
-                      width="25px"
-                      height="25px"
-                      class="m-1"
-                    ></v-img>
+      </template>
+      <template v-slot:title> Наше меню </template>
+      <template #descr> Самое вкусное, самое ароматное </template>
+      <template v-slot:content>
+        <div class="product__wrap w-100" v-if="isLoaded">
+          <div class="product__content center">
+            <div class="shadow pl-0 pr-0 w-100">
+              <div class="product__main-content wrap-md">
+                <div class="product__image">
+                  <div class="row h-100">
+                    <div class="col-2 center">
+                      <div class="stars center" v-for="n in 5" :key="n">
+                        <v-img
+                          src="/images/star.svg"
+                          width="25px"
+                          height="25px"
+                          class="m-1"
+                        >
+                        </v-img>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <v-img
+                        :src="'/' + product.image"
+                        contain
+                        min-width="100%"
+                        height="100%"
+                      >
+                        <template v-slot:placeholder>
+                          <v-row
+                            class="fill-height ma-0"
+                            align="center"
+                            justify="center"
+                          >
+                            <v-progress-circular
+                              indeterminate
+                              color="grey lighten-5"
+                            ></v-progress-circular>
+                          </v-row>
+                        </template>
+                      </v-img>
+                    </div>
                   </div>
                 </div>
-                <div class="col-8">
-                  <v-img
-                    :src="'/' + product.image"
-                    contain
-                    min-width="100%"
-                    height="100%"
-                  ></v-img>
+
+                <div class="product__info">
+                  <div class="product__card">
+                    <div class="product__title">
+                      {{ product.title }}
+                    </div>
+                    <div class="product__available">В наличии</div>
+                    <div class="product__short-text">
+                      {{ product.short_description }}
+                    </div>
+                    <div class="product__price">
+                      <span>{{ product.price }} ₴</span>
+                      /
+                      <span>{{ product.weight }} грамм</span>
+                    </div>
+                    <div class="product__btn">
+                      <v-btn color="bg-red" dark x-large depressed block
+                        >В корзину</v-btn
+                      >
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="product__info">
-              <div class="product__card">
-                <div class="product__title">
-                  {{ product.title }}
-                </div>
-                <div class="product__available">В наличии</div>
-                <div class="product__short-text">
-                  {{ product.short_description }}
-                </div>
-                <div class="product__price">
-                  <span>{{ product.price }} ₴</span>
-                  /
-                  <span>{{ product.weight }} грамм</span>
-                </div>
-                <div class="product__btn">
-                  <v-btn color="bg-red" dark x-large depressed block
-                    >В корзину</v-btn
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="product__long-info">
-              <v-card>
-                <v-toolbar flat color="anchor" dark>
-                  <v-toolbar-title>Описание</v-toolbar-title>
-                </v-toolbar>
-                <v-tabs vertical>
-                  <v-tab> Состав </v-tab>
-                  <v-tab> Коротко </v-tab>
-
-                  <v-tab-item>
-                    <v-card class="product__tab-item" flat>
-                      <v-list shaped>
-                        <v-subheader>Продукты</v-subheader>
-                        <v-list-item-group v-model="selectedItem">
-                          <v-list-item v-for="(item, i) in products" :key="i">
-                            <v-list-item-content>
-                              <v-list-item-title
-                                v-text="item"
-                              ></v-list-item-title>
-                            </v-list-item-content>
-                          </v-list-item>
-                        </v-list-item-group>
-                      </v-list>
-                    </v-card>
-                  </v-tab-item>
-
-                  <v-tab-item>
-                    <v-card flat class="product__tab-item">
-                      <v-card-text>
-                        <p class="product__short-text">
+              <div class="product__long-descr wrap-md">
+                <h5 class="title-sm center">Описание</h5>
+                <div class="product__expensions">
+                  <v-expansion-panels focusable>
+                    <v-expansion-panel>
+                      <v-expansion-panel-header expand-icon="fastfood">
+                        <div class="product__expension-text">
+                          Полное описание
+                        </div>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <div class="product__expension-text">
                           {{ product.long_description }}
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                </v-tabs>
-              </v-card>
+                        </div>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                    <v-expansion-panel>
+                      <v-expansion-panel-header expand-icon="local_drink">
+                        <div class="product__expension-text">Состав</div>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <div class="product__expension-text"></div>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                </div>
+              </div>
+
+              <div class="product__ads wrap-md">
+                <h5 class="title-sm center">Попробуйте также</h5>
+                <div class="product__ads-content">
+                  <v-container fluid>
+                    <div class="product__ads-items center">
+                      <GridLayout>
+                        <template #content v-if="!otherProducts.length">
+                          <v-sheet
+                            :color="`grey ${
+                              theme.isDark ? 'darken-2' : 'lighten-4'
+                            }`"
+                            class="pa-3 w-100"
+                            v-for="number in 3"
+                            :key="number"
+                          >
+                            <v-skeleton-loader
+                              class="mx-auto"
+                              max-width="300"
+                              type="card"
+                            ></v-skeleton-loader>
+                          </v-sheet>
+                        </template>
+                        <template #content v-else>
+                          <CardComponent
+                            v-for="item in otherProducts"
+                            :key="item + Math.random()"
+                            :url="item.image"
+                            :title="item.title"
+                            :descr="item.long_description"
+                            :subtitle="item.short_description"
+                            :id="item.id"
+                            classes="card-ad all-width"
+                          />
+                        </template>
+                      </GridLayout>
+                    </div>
+                  </v-container>
+                </div>
+              </div>
             </div>
-            <div class="product__other-ingredients w-100 h-100"></div>
-          </div>
-          <div class="product__ads w-100">
-               <div :class="'product__ads-bg w-100 center ' + product_ad_class">
-                   <div class="product__ads-content wrap-md">
-                       <slot name="ads"></slot>
-                   </div>
-               </div>
           </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </BasicLayout>
     <div class="center w-100 wrap-md-pd" v-else>
       <v-progress-circular
         :size="100"
@@ -109,12 +152,21 @@
         indeterminate
       ></v-progress-circular>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
+import BasicLayout from "./VBasicLayout";
+import GridLayout from "./GridLayout";
+import CardComponent from "../components/VCard";
+
 export default {
   name: "PageLayoutComponent",
+  inject: {
+    theme: {
+      default: { isDark: false },
+    },
+  },
   data: function () {
     return {
       rating: 5,
@@ -136,21 +188,31 @@ export default {
       default: [],
     },
     product: Object,
-    product_ad_class:{
-      default:"",
-      type: String
-    }
+    product_ad_class: {
+      default: "",
+      type: String,
+    },
+    otherProducts: {
+      type: Array,
+      default: [],
+    },
   },
   computed: {
     isLoaded: function (params) {
       return Object.values(this.product).every((v) => v);
     },
   },
+  components: {
+    BasicLayout,
+    GridLayout,
+    CardComponent,
+  },
 };
 </script>
 
-<style scoped lang="scss">
-.product__title {
+<style  lang="scss">
+.product__title,
+.title-sm {
   margin-bottom: 2.54rem !important;
   margin: 0 0 25px;
   font-size: 36px;
@@ -168,11 +230,16 @@ export default {
   padding: 1rem;
 }
 
-.product__content {
+.product__main-content {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto auto;
   grid-gap: 10px;
+}
+
+.product__long-descr,
+.product__main-content,
+.product__ads {
   padding: 2.5rem 0;
 }
 
@@ -200,6 +267,12 @@ export default {
   line-height: 34px;
 }
 
+.product__expension-text {
+  font-size: 18px;
+  line-height: 34px;
+  margin: 20px 0;
+}
+
 .product__price {
   margin: 0 0 41px;
   font-size: 18px;
@@ -223,12 +296,13 @@ export default {
   padding: 2.5rem 0;
 }
 
+.breadcrumps {
+  margin-bottom: 2.5rem;
+}
+
 @media screen and (min-width: 1000px) {
   .product__tab-item {
     min-height: 280px;
   }
-}
-
-@media screen and (max-width: 1000px) {
 }
 </style>

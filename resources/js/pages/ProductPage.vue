@@ -3,20 +3,8 @@
     <ProductLayout 
     :items="items"
     :product="product"
+    :otherProducts="otherProducts"
     >
-      <template #ads>
-        <div class="w-100 center product__inner-section">
-          <h5>Специальные предложения</h5>
-          <div class="center flex-row w-100">
-            <AdComponent
-              class="product__ad first-col"
-              image="/images/banner-img2.png"
-            />
-            <AdComponent class="product__ad" image="/images/banner-img1.png" />
-            <AdComponent class="product__ad" image="/images/banner-img1.png" />
-          </div>
-        </div>
-      </template>
     </ProductLayout>
   </div>
 </template>
@@ -24,6 +12,8 @@
 <script>
 import ProductLayout from "../layouts/VPageLayout.vue";
 import AdComponent from "../components/VAd";
+import { mapState } from "vuex";
+
 
 export default {
   name: "ProductPage",

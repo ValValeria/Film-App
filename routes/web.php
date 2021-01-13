@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminArea\AdminController;
 use App\Http\Controllers\AdminArea\AdminLoginController;
 use App\Http\Controllers\AdminArea\AdminProductController;
 use App\Http\Controllers\AuthArea\AuthController;
+use App\Http\Controllers\AdminArea\AdminOrderController;
+
 
 
 Route::prefix('admin')->group(function () {
@@ -16,6 +18,7 @@ Route::prefix('admin')->group(function () {
        Route::post('/addproduct', [AdminProductController::class, 'addProduct']);
        Route::get('/delete/{productId}',[ProductController::class,'deleteProduct'])->whereNumber('id');
        Route::post('/updateproduct/{id}',[AdminProductController::class,'updateProduct'])->whereNumber('id');
+       Route::get('/orders',AdminOrderController::class);
     });
     
     Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
@@ -30,5 +33,6 @@ Route::get('/{any}', [HomeController::class,'vueroute'])->where('any', '.*');
 Route::prefix("api")->group(function(){
     Route::post('/login', AuthController::class);
     Route::post('/signup', AuthController::class);
-    Route::get('/addorder/{productId}/{quantity}', [ProductController::class,'addOrder'])->whereNumber("quantity")->whereNumber("productId")->middleware('auth');
+    Route::get('/addorder/{productId}/{quantity}', [ProductController::class, 'addOrder'])->whereNumber("quantity")->whereNumber("productId")->middleware('auth');
+    Route::get('/orderlist', [ProductController::class, 'getOrderList'])->middleware('auth');
 });

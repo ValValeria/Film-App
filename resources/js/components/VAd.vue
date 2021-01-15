@@ -50,7 +50,8 @@ export default {
 <style scoped lang="scss">
 
 .product__ad {
-  margin-top: 1.7rem;
+  max-width:fit-content;
+  width:100%;
 }
 
 .product__ad-button a{
@@ -73,9 +74,9 @@ export default {
 }
 
 .product__ad-card{
-    margin: 1rem;
     background: #e98010;
     margin-top: 0;
+    width:100%;
 }
 
 .product__tab-item{

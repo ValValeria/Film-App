@@ -37,6 +37,16 @@ export const store = new Vuex.Store({
              } else{
                  router.replace('/')
              }
+        },
+        
+        async getProducts({commit},page = 1){
+            const response = await fetch(`/admin/products/?page=${page}&isjson=true`);
+
+            if (response.ok) {
+                const json = await response.json();
+                commit('addProducts', json["data"]);
+            }
         }
+
     }
 });

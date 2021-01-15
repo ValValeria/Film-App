@@ -31,8 +31,8 @@ Route::prefix('admin')->group(function () {
 Route::get('/{any}', [HomeController::class,'vueroute'])->where('any', '.*');
 
 Route::prefix("api")->group(function(){
-    Route::post('/login', AuthController::class);
-    Route::post('/signup', AuthController::class);
+    Route::post('/login', [AuthController::class,'index']);
+    Route::post('/signup', [AuthController::class, 'index']);
     Route::get('/addorder/{productId}/{quantity}', [ProductController::class, 'addOrder'])->whereNumber("quantity")->whereNumber("productId")->middleware('auth');
     Route::get('/orderlist', [ProductController::class, 'getOrderList'])->middleware('auth');
 });

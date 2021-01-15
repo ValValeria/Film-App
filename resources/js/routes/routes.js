@@ -4,11 +4,13 @@ import HomePage from '../pages/HomePage.vue';
 import NotFoundPage from '../pages/NotFoundPage.vue';
 import {store} from '../store/index';
 import ProductPage from '../pages/ProductPage.vue';
+import ProductsPage from '../pages/ProductsPage.vue';
 
 
 const routes = [
     {path:"/", component: HomePage},
     {path:"/product/:id", component: ProductPage},
+    {path: "/products", component: ProductsPage },
     {path: "*", component: NotFoundPage}
 ];
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="product container-fluid">
     <div class="wrap-md-pd">
-        <h5 class="text-center">Добавить новый товар</h5>
+        <h5 class="text-center title-sm">Добавить новый товар</h5>
     </div>
     <div class="product__form">
         <form method="POST" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="row center">
-                <button type="submit" class="btn btn-primary mb-3 col-sm-2">Отправить</button>
+                <button type="submit" class="btn btn-dark mb-3 col-sm-2">Отправить</button>
             </div>
             <div class="row">
                  @if ($errors->any())

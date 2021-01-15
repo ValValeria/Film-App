@@ -4,8 +4,9 @@
     max-width="344"
   >
     <v-img
-      :src="url"
+      :src="image"
       height="200px"
+
       class="mt-2"
     ></v-img>
 
@@ -57,6 +58,12 @@ export default {
     },
     data: function(){
       return {show: false}
+    },
+    computed:{
+      image: function(){
+        let image = this.url.startsWith('/') ? this.url : '/'.concat(this.url);
+        return image;
+      }
     }
 }
 </script>

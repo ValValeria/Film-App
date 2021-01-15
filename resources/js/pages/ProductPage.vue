@@ -3,7 +3,7 @@
     <ProductLayout 
     :items="items"
     :product="product"
-    :otherProducts="otherProducts"
+    :otherProducts="products"
     >
     </ProductLayout>
   </div>
@@ -38,6 +38,9 @@ export default {
       ],
     };
   },
+  mounted(){
+    this.$store.dispatch("getProducts");
+  },
   computed: {
     id: function () {
       return this.$route.params.id;
@@ -45,6 +48,9 @@ export default {
     product: function () {
       return this.$store.getters.getProduct(this.id) || {};
     },
+    ...mapState({
+      products:state=>state.products.slice(0,3)
+    })
   },
   components: {
     ProductLayout,

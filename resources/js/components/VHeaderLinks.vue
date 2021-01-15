@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-list-item-group color="primary" class="center flex-row">
-      <v-list-item v-for="link in links" :key="link+Math.random(0,60)">
+      <v-list-item v-for="link in links" :key="link + Math.random(0, 60)">
         <v-list-item-content>
           <v-list-item-title>
             <v-btn text>
@@ -21,9 +21,9 @@ export default {
     return {
       links: [
         { path: "/", name: "Главная" },
-        { path: "/orders-list", name: "Мой заказы" },
-        { path: "/pizza", name: "Пицца" },
-        { path: "/food", name: "Салаты" },
+        { path: "/orders-list", name: "Мои заказы" },
+        { path: "/products", name: "Меню" },
+        { path: "/products", name: "О нас" },
       ],
     };
   },
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-  a{
-    color:white !important;
-  }
+a {
+  color: white !important;
+}
 </style>

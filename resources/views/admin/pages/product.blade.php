@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid product">
-    <form action="/admin/updateproduct/{{$data->id}}" class="w-100"method="post" enctype="multipart/form-data">
+    <form action="/admin/updateproduct/{{$data->id}}" class="w-100" method="post" enctype="multipart/form-data">
         <div class="wrap-md-pd">
             <div class="brdcrumb">
                 <nav aria-label="breadcrumb">
@@ -54,22 +54,20 @@
                         </div>
                     </div>
                     <div class="col align-self-start text-left">
-                        <div class="card">
+                        <div class="card ">
                             <div class="card-header">
-                                <input type="text" name="title" id="" class="form-control-plaintext text-center"
-                                    value=" {{$data->title}}">
+                                <input type="text" name="title" id="" class="form-control-plaintext text-center" value=" {{$data->title}}">
                             </div>
                             <div class="card-body text-left">
                                 <div class="card-title pb-1">
-                                    <input type="text" name="short_description" id="" class="form-control-plaintext text-center"
-                                        value="{{$data->short_description}}">
+                                    <input type="text" name="short_description" id="" class="form-control-plaintext text-center" value="{{$data->short_description}}">
                                 </div>
                                 <div class="row ">
                                     <label for="staticEmail" class="col-sm-3 col-form-label">
                                         <strong>Цена</strong>
                                     </label>
                                     <div class="col-sm-4">
-                                        <input type="number"  name="price" class="form-control-plaintext" value="{{$data->price}}">
+                                        <input type="number" name="price" class="form-control-plaintext" value="{{$data->price}}">
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="text" readonly class="form-control-plaintext" value="грн">
@@ -80,8 +78,7 @@
                                         <strong>Вес</strong>
                                     </label>
                                     <div class="col-sm-4">
-                                        <input type="number"  class="form-control-plaintext"
-                                            value="{{$data->weight}}" name="weight">
+                                        <input type="number" class="form-control-plaintext" value="{{$data->weight}}" name="weight">
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="text" readonly class="form-control-plaintext" value="грамм">
@@ -105,22 +102,18 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="row pt-4">
                     <div class="col">
-                        <div class="accordition">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Полное описание
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <textarea class="form-control-plaintext" name="long_description"cols="30" rows="3">
-                                                {{$data->long_description}}
+                        <div class="product__full-descr card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h5 class="text-sm"> Полное oписание</h5>
+                                </div>
+                                <div class="product__textarea inner-shadow">
+                                    <div>
+                                        <textarea class="form-control-plaintext" name="long_description" cols="30" rows="2">
+                                        {{$data->long_description}}
                                         </textarea>
                                     </div>
                                 </div>
@@ -128,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-               
+
 
                 <div class="row p-1 pt-2">
                     @if ($errors->any())
@@ -147,12 +140,12 @@
 <script>
     const btn = document.querySelector('#download button');
 
-    btn.onclick = ($event)=>{
+    btn.onclick = ($event) => {
         $event.preventDefault();
         const file = document.querySelector('#file');
-        file.click(); 
+        file.click();
 
-        file.addEventListener("change",()=>{
+        file.addEventListener("change", () => {
             btn.classList.remove('btn-dark');
             btn.classList.add('btn-light')
         })

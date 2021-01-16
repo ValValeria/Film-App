@@ -70,12 +70,28 @@
       </BasicLayout>
     </div>
 
+    <BasicLayout
+      :isSection="true"
+      :isGrid="true"
+      class="main-cards"
+      :isFirstSlide="true"
+    >
+      <template v-slot:title>Наши идеи</template>
+      <template #descr> Интересные для вас предложения</template>
+      <template v-slot:content>
+        <AdComponent :image="'/images/banner-img2.png'" />
+        <AdComponent :image="'/images/banner-img2.png'" />
+        <AdComponent :image="'/images/banner-img2.png'" />
+      </template>
+    </BasicLayout>
+
+    <div class="hot-ads bg-dark font-white"> 
     <BasicLayout :isSection="true">
       <template v-slot:title> Нас легко найти </template>
       <template v-slot:descr> Мы находимся в самом центре Киева </template>
       <template v-slot:content> </template>
     </BasicLayout>
-
+    </div>
   </div>
 </template>
 
@@ -87,6 +103,7 @@ import { mapState } from "vuex";
 import Coursel from "../components/VCoursel";
 import PizzaHistoryComponent from '../components/VPizzaHistory'
 import ImagesComponent from  '../components/VImages';
+import AdComponent from "../components/VAd";
 
 export default {
   name: "HomePage",
@@ -121,7 +138,8 @@ export default {
     CardComponent,
     Coursel,
     PizzaHistoryComponent,
-    ImagesComponent
+    ImagesComponent,
+    AdComponent
   },
   computed: mapState({
     items: (state) => state.products,
@@ -169,4 +187,10 @@ export default {
   background-attachment: fixed;
 }
 
+</style>
+
+<style lang="scss">
+.v-main{
+  padding:0 !important;
+}
 </style>

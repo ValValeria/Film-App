@@ -11,6 +11,9 @@ export const store = new Vuex.Store({
     mutations:{
         addProducts(state,products){
             state.products.push(...products);
+        },
+        clearStore(state){
+            state.products.splice(0,state.products.length)
         }
     },
     getters:{

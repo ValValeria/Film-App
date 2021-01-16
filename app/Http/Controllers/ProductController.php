@@ -25,7 +25,7 @@ class ProductController extends Controller
          $data = Product::paginate(4);
          $view = 'admin.pages.products';
 
-         if(!Auth::check()){
+         if(!Auth::check() && !$isJson){
             return redirect()->route('login');
          }
       } else if (is_int(intval($id))) {

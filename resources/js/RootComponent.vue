@@ -55,4 +55,9 @@ export default {
 .brand-name a{
   color: white !important;
 }
+.wrap-md-pd{
+    width:90%;
+    margin:0 auto;
+    padding: 7.5rem 0 !important;
+}
 </style>

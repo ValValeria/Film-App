@@ -15,6 +15,13 @@
         <slot name="descr"></slot>
         <v-divider></v-divider>
       </p>
+      <div class="carousel w-100 center ">
+        <div class="wrap-md">
+          <div class="container-fluid">
+            <slot name="carousel"></slot>
+          </div>
+        </div>
+      </div>
       <div class="items w-100 center">
         <div class="wrap-md">
           <template v-if="isGrid">
@@ -25,7 +32,7 @@
             </GridLayout>
           </template>
           <template v-else-if="isTwoCols">
-            <div class="container-fluid center flex-col-2">
+            <div class="container-fluid center flex-col-2" :style="cssFlex">
               <slot name="content"></slot>
             </div>
           </template>
@@ -45,6 +52,12 @@ export default {
     isFirstSlide: {
       type: Boolean,
       required: false,
+    },
+    cssFlex:{
+      type:Object,
+      default:function(){
+        return {};
+      },
     },
     isSection: {
       type: Boolean,
@@ -95,7 +108,15 @@ export default {
   margin: 10px;
 }
 
-@media screen and (min-width: 900px) {
+.flex-col-2{
+  flex-direction: row;
+}
+
+.carousel{
+  padding: 1.4rem 0;
+}
+
+@media screen and (max-width: 900px) {
   .flex-col-2 {
     flex-direction: column;
   }

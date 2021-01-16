@@ -14,11 +14,11 @@
 
     <v-navigation-drawer
      app
-     permanent
      expand-on-hover
-     v-if="false"
+     permanent
+     dense
      >
-      <HeaderComponent/>
+      <TabsComponent/>
     </v-navigation-drawer>
 
     <v-main>
@@ -36,13 +36,15 @@ import HeaderComponent from './components/VMediaHeader';
 import BannerComponent from './components/VBanner';
 import FooterComponent from './components/VFooter';
 import HeaderLinks from './components/VHeaderLinks';
+import TabsComponent from './components/VTabs'
 
 export default {
   components:{
     HeaderComponent,
     BannerComponent,
     FooterComponent,
-    HeaderLinks
+    HeaderLinks,
+    TabsComponent
   },
   data:function(){
     return ({drawer: false});
@@ -59,5 +61,19 @@ export default {
     width:90%;
     margin:0 auto;
     padding: 7.5rem 0 !important;
+}
+.v-main{
+  padding-left:56px !important;
+}
+</style>
+
+
+<style lang="css" scoped>
+nav{
+    transform: translateX(0%);
+    width: 56px;
+    left: 0px;
+    height: 100%;
+    max-height:100% !important;
 }
 </style>

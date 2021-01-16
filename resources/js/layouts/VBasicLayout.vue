@@ -15,13 +15,6 @@
         <slot name="descr"></slot>
         <v-divider></v-divider>
       </p>
-      <div class="carousel w-100 center ">
-        <div class="wrap-md">
-          <div class="container-fluid">
-            <slot name="carousel"></slot>
-          </div>
-        </div>
-      </div>
       <div class="items w-100 center">
         <div class="wrap-md">
           <template v-if="isGrid">

@@ -23,7 +23,7 @@
             <v-list-item-title>Цена</v-list-item-title>
           </template>
           <div class="product__search-category">
-            <v-slider :v-model="700" step="10" thumb-label ticks color="error"></v-slider>
+            <v-slider :v-model="700" step="10" thumb-label ticks></v-slider>
           </div>
         </v-list-group>
         <v-list-group :value="false" prepend-icon="mdi-account-circle">
@@ -31,7 +31,7 @@
             <v-list-item-title>Вес</v-list-item-title>
           </template>
           <div class="product__search-category">
-            <v-slider :v-model="700" step="10" thumb-label ticks color="error"></v-slider>
+            <v-slider :v-model="700" step="10" thumb-label ticks></v-slider>
           </div>
         </v-list-group>
         <v-list-group :value="false" prepend-icon="mdi-account-circle">
@@ -44,7 +44,7 @@
                 <v-checkbox
                   v-model="sortByAsc"
                   label="От дорогих к дешевым"
-                  color="warning"
+                  color="error"
                   value="warning"
                   hide-details
                 ></v-checkbox>
@@ -57,7 +57,7 @@
                 <v-checkbox
                   v-model="sortByDesc"
                   label="От дешевых к дорогим товарам"
-                  color="warning"
+                  color="error"
                   value="warning"
                   hide-details
                 ></v-checkbox>

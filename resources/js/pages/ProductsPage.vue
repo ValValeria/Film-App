@@ -1,20 +1,6 @@
 <template>
   <div class="w-100 products">
-    <BasicLayout
-      :isSection="true"
-      :isTwoCols="true"
-      class="main-cards"
-      :isFirstSlide="true"
-      :cssFlex="cssFlex"
-    >
-      <template #breadcrumps>
-        <div class="breadcrumps wrap-md">
-          <v-breadcrumbs :items="items" divider="/" large> </v-breadcrumbs>
-        </div>
-      </template>
-      <template v-slot:title> Наше меню </template>
-      <template #descr> Самое вкусное, самое ароматное </template>
-      <template #carousel>
+    <div class="first-slide w-100">
         <v-carousel>
           <v-carousel-item
             v-for="(item, i) in images"
@@ -25,7 +11,21 @@
             class="bg-dark font-white"         
           ></v-carousel-item>
         </v-carousel>
+    </div>
+
+    <BasicLayout
+      :isSection="true"
+      :isTwoCols="true"
+      class="main-cards"
+      :cssFlex="cssFlex"
+    >
+      <template #breadcrumps>
+        <div class="breadcrumps wrap-md">
+          <v-breadcrumbs :items="items" divider="/" large> </v-breadcrumbs>
+        </div>
       </template>
+      <template v-slot:title> Наше меню </template>
+      <template #descr> Самое вкусное, самое ароматное </template>
       <template v-slot:content>
         <div class="products__content">
           <GridLayout>
@@ -88,7 +88,7 @@ export default {
       cssFlex:{
         "align-items":"start"
       },
-      images:["/images/slide1.png","/images/slide2.png"]
+      images:["/images/slide1.jpeg","/images/slide2.jpeg"]
       }
   },
   components:{

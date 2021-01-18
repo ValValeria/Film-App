@@ -1,65 +1,82 @@
 <template>
   <div class="w-100 products">
-    <div class="first-slide w-100">
-        <v-carousel>
-          <v-carousel-item
-            v-for="(item, i) in images"
-            :key="i"
-            :src="item"
-            reverse-transition="fade-transition"
-            transition="fade-transition"
-            class="bg-dark font-white"         
-          ></v-carousel-item>
-        </v-carousel>
-    </div>
-
     <BasicLayout
       :isSection="true"
-      :isTwoCols="true"
       class="main-cards"
       :cssFlex="cssFlex"
+      :isFullContent="true"
+      :isFirstSlide="true"
     >
-      <template #breadcrumps>
-        <div class="breadcrumps wrap-md">
-          <v-breadcrumbs :items="items" divider="/" large> </v-breadcrumbs>
-        </div>
-      </template>
       <template v-slot:title> Наше меню </template>
       <template #descr> Самое вкусное, самое ароматное </template>
-      <template v-slot:content>
-        <div class="products__content">
-          <GridLayout>
-            <template #content>
-              <template v-if="products.length">
-                <CardComponent
-                  v-for="item in products"
-                  :key="item + Math.random()"
-                  :url="item.image"
-                  :title="item.title"
-                  :descr="item.long_description"
-                  :subtitle="item.short_description"
-                  :id="item.id"
-                  classes="card-ad all-width"
-                />
+      <template #content>
+        <div class="products__area center">
+          <div class="products__search" v-if="products.length">
+            <FilterComponent />
+          </div>
+          <div class="products__content">
+            <GridLayout>
+              <template #content>
+                <template v-if="products.length">
+                  <CardComponent
+                    v-for="item in products"
+                    :key="item + Math.random()"
+                    :url="item.image"
+                    :title="item.title"
+                    :descr="item.long_description"
+                    :subtitle="item.short_description"
+                    :id="item.id"
+                    classes="card-ad all-width"
+                  />
+                </template>
+                <template v-else>
+                  <v-row>
+                    <div class="w-100 center">
+                      <v-progress-circular
+                        indeterminate
+                        color="amber"
+                      ></v-progress-circular>
+                    </div>
+                  </v-row>
+                </template>
               </template>
-              <template v-else>
-                <v-row>
-                  <div class="w-100 center">
-                    <v-progress-circular
-                      indeterminate
-                      color="amber"
-                    ></v-progress-circular>
-                  </div>
-                </v-row>
-              </template>
-            </template>
-          </GridLayout>
-        </div>
-        <div class="products__search" v-if="products.length">
-          <FilterComponent />
+            </GridLayout>
+          </div>
         </div>
       </template>
     </BasicLayout>
+
+    <div>
+      <BasicLayout :isSection="true" :isGrid="true" :isFullContent="true">
+        <template #title> Доставка </template>
+        <template #descr> у нас вы можете заказать </template>
+        <template #content>
+          <div class="empty-card" v-for="del in delivery" :key="del.text">
+            <div class="empty-card__img">
+              <img :src="del.url" alt="..." srcset="" />
+            </div>
+            <div class="empty-card__body">
+              <div class="empty-card__title">
+                {{ del.text }}
+              </div>
+            </div>
+          </div>
+        </template>
+      </BasicLayout>
+    </div>
+
+    <div class="first-slide w-100">
+      <v-carousel>
+        <v-carousel-item
+          v-for="(item, i) in images"
+          :key="i"
+          :src="item"
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+          class="bg-dark font-white"
+        ></v-carousel-item>
+      </v-carousel>
+    </div>
   </div>
 </template>
 
@@ -88,7 +105,25 @@ export default {
       cssFlex:{
         "align-items":"start"
       },
-      images:["/images/slide1.jpeg","/images/slide2.jpeg"]
+      images:["/images/slide1.jpeg","/images/slide2.jpeg"],
+      delivery:[
+      {
+        text:"Пицца",
+        url:"/images/pizza_2.svg"
+      },
+      {
+        text:"Десерты",
+        url:"/images/cake_2.svg"
+      },
+      {
+        text:"Суши и сеты",
+        url:"/images/sushi_2.svg"
+      },
+      {
+        text:"Салаты и закуски",
+        url:"/images/salad_2.svg"
+      },
+      ]
       }
   },
   components:{
@@ -111,7 +146,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .flex-col-2 {
   flex-direction: row !important;
   align-items: flex-start !important;
@@ -122,23 +157,53 @@ export default {
   flex: 1 1 60%;
 }
 
+.empty-card {
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  max-width: 150px;
+
+  .empty-card__title {
+    margin-top: 16px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .empty-card__img {
+    height: 120px;
+  }
+}
+
 .products__search {
-  width: 40%;
-  flex: 1 1 40%;
   position: sticky;
   top: 1rem;
   left: 0;
+  width:100%;
+  z-index:999;
 }
 
-@media screen and (max-width:900px){
-.products__content {
-  width: 50%;
-  flex: 1 1 50%;
+.products__area{
+  display:flex;
+  flex-direction: column;
 }
 
-.products__search {
-  width: 50%;
-  flex: 1 1 50%;
+.products__search{
+  margin-bottom:2rem;
 }
+
+.products__content{
+  position: relative;
+  z-index:1;
+  width:100%;
+}
+
+@media screen and (max-width: 900px) {
 }
 </style>

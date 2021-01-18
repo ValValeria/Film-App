@@ -2,7 +2,9 @@
   <v-list nav>
     <v-list-item link v-for="image in items" :key="image.text">
       <v-list-item-icon>
-            <v-img :src="image.src" contain :width="40" :height="40" :min-height="40"></v-img>
+          <div style="width:30px;min-width:30px;height:30px;" class="center">
+             <img :src="image.src" alt="..." class="img-contain">
+          </div>
       </v-list-item-icon>
       <v-list-item-content>
             <v-list-item-title>{{image.text}}</v-list-item-title>
@@ -26,4 +28,11 @@ export default {
 </script>
 
 <style>
+.img-contain{
+  width:100%;
+  object-fit: contain;
+}
+nav{
+  min-width:66px !important;
+}
 </style>

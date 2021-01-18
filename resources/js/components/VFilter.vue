@@ -2,105 +2,114 @@
   <div class="product__search-form">
     <v-card flat class="shadow">
       <v-list rounded>
-        <v-subheader class="text-center w-100">
-          <div class="w-100 text-center">ПОИСК</div>
-        </v-subheader>
-        <v-list-group :value="false" prepend-icon="mdi-account-circle">
-          <template v-slot:activator>
-            <v-list-item-title>Категории</v-list-item-title>
-          </template>
-          <div class="product__search-category">
-            <v-overflow-btn
-              class="my-2"
-              :items="categories"
-              label="Доступные категории"
-              item-value="text"
-            ></v-overflow-btn>
-          </div>
-        </v-list-group>
-        <v-list-group :value="false" prepend-icon="mdi-account-circle">
-          <template v-slot:activator>
-            <v-list-item-title>Цена</v-list-item-title>
-          </template>
-          <div class="product__search-category">
-            <v-slider :v-model="700" step="10" thumb-label ticks></v-slider>
-          </div>
-        </v-list-group>
-        <v-list-group :value="false" prepend-icon="mdi-account-circle">
-          <template v-slot:activator>
-            <v-list-item-title>Вес</v-list-item-title>
-          </template>
-          <div class="product__search-category">
-            <v-slider :v-model="700" step="10" thumb-label ticks></v-slider>
-          </div>
-        </v-list-group>
-        <v-list-group :value="false" prepend-icon="mdi-account-circle">
-          <template v-slot:activator>
-            <v-list-item-title>Другие опции</v-list-item-title>
-          </template>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>
-                <v-checkbox
-                  v-model="sortByAsc"
-                  label="От дорогих к дешевым"
-                  color="error"
-                  value="warning"
-                  hide-details
-                ></v-checkbox>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>
-                <v-checkbox
-                  v-model="sortByDesc"
-                  label="От дешевых к дорогим товарам"
-                  color="error"
-                  value="warning"
-                  hide-details
-                ></v-checkbox>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-group>
-        <v-list-group :value="false" prepend-icon="mdi-account-circle">
-          <template v-slot:activator>
-            <v-list-item-title>Хочу с </v-list-item-title>
-          </template>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>
-                <v-checkbox
-                  v-on:change="foodToIncludes.push('cheese')"
-                  label="Сыр моцарелла"
-                  color="error"
-                  value="warning"
-                  hide-details
-                ></v-checkbox>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>
-                <v-checkbox
-                  v-on:change="foodToIncludes.push('mauran')"
-                  label="Соус майоран"
-                  color="error"
-                  value="warning"
-                  hide-details
-                ></v-checkbox>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-group>
-        <v-list-item>
-          <v-list-item-content>
-            <v-btn class="bg-red" dark large depressed> Найти </v-btn>
-          </v-list-item-content>
-        </v-list-item>
+        <v-tabs
+          color="error"
+          next-icon="mdi-arrow-right-bold-box-outline"
+          prev-icon="mdi-arrow-left-bold-box-outline"
+          centered
+          show-arrows
+          v-model="activeItem"
+        >
+          <v-tab> Категории </v-tab>
+          <v-tab>Цена</v-tab>
+          <v-tab>Вес</v-tab>
+          <v-tab>Другие опции</v-tab>
+          <v-tab>Хочу с </v-tab>
+        </v-tabs>
+
+        <v-tabs-items v-model="activeItem">
+          <v-tab-item>
+            <div class="product__search-category">
+              <v-overflow-btn
+                class="my-2"
+                :items="categories"
+                label="Доступные категории"
+                item-value="text"
+              ></v-overflow-btn>
+            </div>
+          </v-tab-item>
+          <v-tab-item>
+            <div class="product__search-category">
+              <v-slider
+                :v-model="activeWeight"
+                step="50"
+                min="50"
+                max="500"
+                ticks
+                :hint="'Максимальные вес ' + activeWeight"
+              ></v-slider>
+            </div>
+          </v-tab-item>
+          <v-tab-item>
+            <div class="product__search-category">
+              <v-slider
+                :v-model="activePrice"
+                step="50"
+                max="900"
+                min="50"
+                :hint="'Найти товары по цене от ' + activePrice"
+                ticks
+              ></v-slider>
+            </div>
+          </v-tab-item>
+          <v-tab-item>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-checkbox
+                    v-model="sortByAsc"
+                    label="От дорогих к дешевым"
+                    color="error"
+                    value="warning"
+                    hide-details
+                  ></v-checkbox>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-checkbox
+                    v-model="sortByDesc"
+                    label="От дешевых к дорогим товарам"
+                    color="error"
+                    value="warning"
+                    hide-details
+                  ></v-checkbox>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-checkbox
+                    v-on:change="foodToIncludes.push('cheese')"
+                    label="Сыр моцарелла"
+                    color="error"
+                    value="warning"
+                    hide-details
+                  ></v-checkbox>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-checkbox
+                    v-on:change="foodToIncludes.push('mauran')"
+                    label="Соус майоран"
+                    color="error"
+                    value="warning"
+                    hide-details
+                  ></v-checkbox>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-tab-item>
+        </v-tabs-items>
       </v-list>
     </v-card>
   </div>
@@ -114,6 +123,9 @@ export default {
       sortByAsc: false,
       categories: ["Пицца", "Салаты"],
       foodToIncludes: [],
+      activeItem: 0,
+      activePrice: 200,
+      activeWeight: 250,
     };
   },
 };

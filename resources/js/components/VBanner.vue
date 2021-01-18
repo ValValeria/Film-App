@@ -2,19 +2,6 @@
   <section class="section center first-slide position-relative">
     <div class="banner">
       <div class="banner__items center flex-row">
-        <div class="banner__item center">
-          <v-img width="100%" class="bg-dark position-relative" min-height="100%" src="/images/pizza_banner.jpg">
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-            <v-overlay :absolute="true" :value="true" :opacity="0.1"></v-overlay>
-          </v-img>
-        </div>
         <div class="banner__item hot-ads bg-dark"></div>
       </div>
     </div>
@@ -50,21 +37,15 @@ export default {
   min-height: 100vh;
 }
 
-.banner .banner__item {
-  height: 100%;
-  width: 50%;
-  flex: 1 1 50%;
-}
-
 .banner__items {
   width: 100%;
   height: 100%;
 }
 
-.banner .banner__item:nth-child(1) img {
-  object-fit: cover;
-  min-height: 100%;
-  min-width: 100%;
+.banner .banner__item:nth-child(1) {
+  height: 100%;
+  width: 100%;
+  flex: 1 1 100%;
 }
 
 #title {

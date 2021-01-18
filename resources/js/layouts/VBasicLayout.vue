@@ -16,7 +16,7 @@
         <v-divider></v-divider>
       </p>
       <div class="items w-100 center">
-        <div class="wrap-md">
+        <div :class="isFullContent?'w-100':'wrap-md'">
           <template v-if="isGrid">
             <GridLayout>
                 <template #content>
@@ -51,6 +51,10 @@ export default {
       default:function(){
         return {};
       },
+    },
+    isFullContent:{
+      type: Boolean,
+      required: false,
     },
     isSection: {
       type: Boolean,

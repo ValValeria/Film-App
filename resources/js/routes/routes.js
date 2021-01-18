@@ -5,12 +5,13 @@ import NotFoundPage from '../pages/NotFoundPage.vue';
 import {store} from '../store/index';
 import ProductPage from '../pages/ProductPage.vue';
 import ProductsPage from '../pages/ProductsPage.vue';
-
+import ContactPage from '../pages/ContactPage.vue'
 
 const routes = [
     {path:"/", component: HomePage},
     {path:"/product/:id", component: ProductPage},
     {path: "/products", component: ProductsPage },
+    {path: "/contacts", component: ContactPage },
     {path: "*", component: NotFoundPage}
 ];
 

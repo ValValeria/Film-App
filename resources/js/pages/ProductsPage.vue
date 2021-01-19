@@ -47,17 +47,24 @@
     </BasicLayout>
 
     <div>
-      <BasicLayout :isSection="true" :isGrid="true" :isFullContent="true">
+      <BasicLayout
+        :isSection="true"
+        :isGrid="true"
+        :isFullContent="true"
+        class="section_white"
+      >
         <template #title> Доставка </template>
         <template #descr> у нас вы можете заказать </template>
         <template #content>
-          <div class="empty-card" v-for="del in delivery" :key="del.text">
-            <div class="empty-card__img">
-              <img :src="del.url" alt="..." srcset="" />
-            </div>
-            <div class="empty-card__body">
-              <div class="empty-card__title">
-                {{ del.text }}
+          <div class="empty-card-sm" v-for="del in delivery" :key="del.text">
+            <div class="empty-card w-100">
+              <div class="empty-card__img">
+                <img :src="del.url" alt="..." srcset="" />
+              </div>
+              <div class="empty-card__body">
+                <div class="empty-card__title">
+                  {{ del.text }}
+                </div>
               </div>
             </div>
           </div>
@@ -157,7 +164,7 @@ export default {
   flex: 1 1 60%;
 }
 
-.empty-card {
+.empty-card-sm {
   padding: 10px;
   text-align: center;
   width: 100%;
@@ -185,23 +192,23 @@ export default {
   position: sticky;
   top: 1rem;
   left: 0;
-  width:100%;
-  z-index:999;
+  width: 100%;
+  z-index: 999;
 }
 
-.products__area{
-  display:flex;
+.products__area {
+  display: flex;
   flex-direction: column;
 }
 
-.products__search{
-  margin-bottom:2rem;
+.products__search {
+  margin-bottom: 2rem;
 }
 
-.products__content{
+.products__content {
   position: relative;
-  z-index:1;
-  width:100%;
+  z-index: 1;
+  width: 100%;
 }
 
 @media screen and (max-width: 900px) {

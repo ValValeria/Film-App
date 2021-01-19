@@ -2964,6 +2964,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2991,8 +3029,17 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: "",
       email: "",
-      checkbox: false
+      checkbox: false,
+      message: "",
+      snackBar: false
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      _this.$refs.textarea.focus();
+    });
   },
   computed: {
     checkboxErrors: function checkboxErrors() {
@@ -3025,6 +3072,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submit: function submit() {
       this.$v.$touch();
+
+      if (!this.message.length) {
+        this.snackBar = true;
+      }
     },
     clear: function clear() {
       this.$v.$reset();
@@ -8027,7 +8078,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".flex-col-2 {\n  flex-direction: row !important;\n  align-items: flex-start !important;\n}\n.products__content {\n  width: 60%;\n  flex: 1 1 60%;\n}\n.empty-card {\n  padding: 10px;\n  text-align: center;\n  width: 100%;\n  height: 100%;\n  max-width: 150px;\n}\n.empty-card .empty-card__title {\n  margin-top: 16px;\n  font-size: 18px;\n  text-align: center;\n}\n.empty-card img {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.empty-card .empty-card__img {\n  height: 120px;\n}\n.products__search {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 1rem;\n  left: 0;\n  width: 100%;\n  z-index: 999;\n}\n.products__area {\n  display: flex;\n  flex-direction: column;\n}\n.products__search {\n  margin-bottom: 2rem;\n}\n.products__content {\n  position: relative;\n  z-index: 1;\n  width: 100%;\n}", ""]);
+exports.push([module.i, ".flex-col-2 {\n  flex-direction: row !important;\n  align-items: flex-start !important;\n}\n.products__content {\n  width: 60%;\n  flex: 1 1 60%;\n}\n.empty-card-sm {\n  padding: 10px;\n  text-align: center;\n  width: 100%;\n  height: 100%;\n  max-width: 150px;\n}\n.empty-card-sm .empty-card__title {\n  margin-top: 16px;\n  font-size: 18px;\n  text-align: center;\n}\n.empty-card-sm img {\n  height: 100%;\n  width: 100%;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.empty-card-sm .empty-card__img {\n  height: 120px;\n}\n.products__search {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 1rem;\n  left: 0;\n  width: 100%;\n  z-index: 999;\n}\n.products__area {\n  display: flex;\n  flex-direction: column;\n}\n.products__search {\n  margin-bottom: 2rem;\n}\n.products__content {\n  position: relative;\n  z-index: 1;\n  width: 100%;\n}", ""]);
 
 // exports
 
@@ -8122,7 +8173,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.form__area[data-v-62cd1754] {\r\n  max-width: 600px;\r\n  width:100%;\n}\r\n", ""]);
+exports.push([module.i, "\n.form__area[data-v-62cd1754] {\r\n  max-width: 950px;\r\n  min-width: 100%;\r\n  display: flex;\r\n  justify-content: center;\n}\n.form[data-v-62cd1754] {\r\n  width: 100%;\r\n  max-width: 800px;\r\n  padding: 1.6rem;\r\n  background:white;\n}\n.form__content[data-v-62cd1754] {\r\n  flex: 1 1 50%;\r\n  background-color:transparent;\n}\n@media screen and (max-width: 900px) {\n.form__area[data-v-62cd1754] {\r\n    flex-direction: column;\r\n    align-items: center;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -42976,143 +43027,243 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("BasicLayout", {
-    staticClass: "main-cards",
-    attrs: { isSection: true },
-    scopedSlots: _vm._u([
-      {
-        key: "title",
-        fn: function() {
-          return [_vm._v("Обратная связь")]
-        },
-        proxy: true
-      },
-      {
-        key: "descr",
-        fn: function() {
-          return [_vm._v("Свяжитесь с нами в любое удобное для вся время")]
-        },
-        proxy: true
-      },
-      {
-        key: "content",
-        fn: function() {
-          return [
-            _c("div", { staticClass: "w-100 center" }, [
-              _c(
-                "div",
-                { staticClass: "form__area" },
-                [
-                  _c(
-                    "v-card",
-                    { staticClass: "shadow w-100", attrs: { flat: "" } },
-                    [
-                      _c("v-card-text", { staticClass: "p-4 w-100" }, [
+  return _c(
+    "div",
+    { staticClass: "w-100" },
+    [
+      _c("BasicLayout", {
+        staticClass: "main-cards",
+        attrs: { isSection: true },
+        scopedSlots: _vm._u([
+          {
+            key: "title",
+            fn: function() {
+              return [_vm._v("Обратная связь")]
+            },
+            proxy: true
+          },
+          {
+            key: "descr",
+            fn: function() {
+              return [_vm._v("Свяжитесь с нами в любое удобное для вся время")]
+            },
+            proxy: true
+          },
+          {
+            key: "content",
+            fn: function() {
+              return [
+                _c("div", { staticClass: "w-100 center" }, [
+                  _c("div", { staticClass: "form shadow" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form__area" },
+                      [
                         _c(
-                          "form",
-                          { staticClass: "w-100" },
+                          "v-card",
+                          { staticClass: "form__content", attrs: { flat: "" } },
                           [
-                            _c("v-text-field", {
-                              attrs: {
-                                "error-messages": _vm.nameErrors,
-                                counter: 10,
-                                label: "Имя",
-                                required: ""
-                              },
-                              on: {
-                                input: function($event) {
-                                  return _vm.$v.name.$touch()
-                                },
-                                blur: function($event) {
-                                  return _vm.$v.name.$touch()
-                                }
-                              },
-                              model: {
-                                value: _vm.name,
-                                callback: function($$v) {
-                                  _vm.name = $$v
-                                },
-                                expression: "name"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("v-text-field", {
-                              attrs: {
-                                "error-messages": _vm.emailErrors,
-                                label: "Имейл",
-                                required: ""
-                              },
-                              on: {
-                                input: function($event) {
-                                  return _vm.$v.email.$touch()
-                                },
-                                blur: function($event) {
-                                  return _vm.$v.email.$touch()
-                                }
-                              },
-                              model: {
-                                value: _vm.email,
-                                callback: function($$v) {
-                                  _vm.email = $$v
-                                },
-                                expression: "email"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("v-checkbox", {
-                              attrs: {
-                                "error-messages": _vm.checkboxErrors,
-                                label:
-                                  "Я даю согласие на обработку пресональных данных",
-                                required: ""
-                              },
-                              on: {
-                                change: function($event) {
-                                  return _vm.$v.checkbox.$touch()
-                                },
-                                blur: function($event) {
-                                  return _vm.$v.checkbox.$touch()
-                                }
-                              },
-                              model: {
-                                value: _vm.checkbox,
-                                callback: function($$v) {
-                                  _vm.checkbox = $$v
-                                },
-                                expression: "checkbox"
-                              }
-                            }),
-                            _vm._v(" "),
+                            _c("v-card-text", { staticClass: "p-4 w-100" }, [
+                              _c(
+                                "form",
+                                { staticClass: "w-100" },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "error-messages": _vm.nameErrors,
+                                      counter: 10,
+                                      label: "Имя",
+                                      required: "",
+                                      "prepend-inner-icon":
+                                        "assignment_turned_in"
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        return _vm.$v.name.$touch()
+                                      },
+                                      blur: function($event) {
+                                        return _vm.$v.name.$touch()
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.name,
+                                      callback: function($$v) {
+                                        _vm.name = $$v
+                                      },
+                                      expression: "name"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "error-messages": _vm.emailErrors,
+                                      label: "Имейл",
+                                      required: "",
+                                      "prepend-inner-icon": "alternate_email"
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        return _vm.$v.email.$touch()
+                                      },
+                                      blur: function($event) {
+                                        return _vm.$v.email.$touch()
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.email,
+                                      callback: function($$v) {
+                                        _vm.email = $$v
+                                      },
+                                      expression: "email"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-checkbox", {
+                                    attrs: {
+                                      "error-messages": _vm.checkboxErrors,
+                                      label:
+                                        "Я даю согласие на обработку пресональных данных",
+                                      required: ""
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$v.checkbox.$touch()
+                                      },
+                                      blur: function($event) {
+                                        return _vm.$v.checkbox.$touch()
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.checkbox,
+                                      callback: function($$v) {
+                                        _vm.checkbox = $$v
+                                      },
+                                      expression: "checkbox"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "w-100 pt-2" },
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass:
+                                            "mr-4 bg-red text-center",
+                                          attrs: { dark: "", depressed: "" },
+                                          on: { click: _vm.submit }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                      Отправить\n                    "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ])
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-card",
+                          { staticClass: "form__content", attrs: { flat: "" } },
+                          [
                             _c(
-                              "v-btn",
-                              {
-                                staticClass: "mr-4",
-                                attrs: { color: "error", block: "", flat: "" },
-                                on: { click: _vm.submit }
-                              },
+                              "v-card-text",
                               [
-                                _vm._v(
-                                  "\n                Отправить\n              "
-                                )
-                              ]
+                                _c("v-textarea", {
+                                  ref: "textarea",
+                                  staticClass: "p-2",
+                                  attrs: {
+                                    name: "input-7-4",
+                                    label: "Ваше сообщение",
+                                    "auto-grow": "",
+                                    clearable: "",
+                                    rows: "11",
+                                    "clear-icon": "mdi-close-circle",
+                                    color: "grey darken-2",
+                                    "prepend-inner-icon": "mdi-comment"
+                                  },
+                                  model: {
+                                    value: _vm.message,
+                                    callback: function($$v) {
+                                      _vm.message = $$v
+                                    },
+                                    expression: "message"
+                                  }
+                                })
+                              ],
+                              1
                             )
                           ],
                           1
                         )
-                      ])
-                    ],
-                    1
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]
+            },
+            proxy: true
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "v-snackbar",
+        {
+          scopedSlots: _vm._u([
+            {
+              key: "action",
+              fn: function(ref) {
+                var attrs = ref.attrs
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._b(
+                      {
+                        attrs: { color: "pink", text: "" },
+                        on: {
+                          click: function($event) {
+                            _vm.snackИar = false
+                          }
+                        }
+                      },
+                      "v-btn",
+                      attrs,
+                      false
+                    ),
+                    [_vm._v("\n        Закрыть\n      ")]
                   )
-                ],
-                1
-              )
-            ])
-          ]
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.snackBar,
+            callback: function($$v) {
+              _vm.snackBar = $$v
+            },
+            expression: "snackBar"
+          }
         },
-        proxy: true
-      }
-    ])
-  })
+        [
+          _vm._v(
+            "\n    Даже если вы не написали ваше письмо, мы всё равно его отправим!\n\n    "
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43609,6 +43760,7 @@ var render = function() {
         "div",
         [
           _c("BasicLayout", {
+            staticClass: "section_white",
             attrs: { isSection: true, isGrid: true, isFullContent: true },
             scopedSlots: _vm._u([
               {
@@ -43631,21 +43783,23 @@ var render = function() {
                   return _vm._l(_vm.delivery, function(del) {
                     return _c(
                       "div",
-                      { key: del.text, staticClass: "empty-card" },
+                      { key: del.text, staticClass: "empty-card-sm" },
                       [
-                        _c("div", { staticClass: "empty-card__img" }, [
-                          _c("img", {
-                            attrs: { src: del.url, alt: "...", srcset: "" }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "empty-card__body" }, [
-                          _c("div", { staticClass: "empty-card__title" }, [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(del.text) +
-                                "\n            "
-                            )
+                        _c("div", { staticClass: "empty-card w-100" }, [
+                          _c("div", { staticClass: "empty-card__img" }, [
+                            _c("img", {
+                              attrs: { src: del.url, alt: "...", srcset: "" }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "empty-card__body" }, [
+                            _c("div", { staticClass: "empty-card__title" }, [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(del.text) +
+                                  "\n              "
+                              )
+                            ])
                           ])
                         ])
                       ]

@@ -7,7 +7,8 @@
     ]"
   >
     <div :class="isSection ? 'wrap-md-pd center' : 'wrap-md center pt-2 pb-2'">
-      <slot name="breadcrumps"></slot>
+      <div :class="'w-100 center layout-content '+ ($attrs.wrap_class||'')" >
+        <slot name="breadcrumps"></slot>
       <h2 class="title text-center">
         <slot name="title"></slot>
       </h2>
@@ -31,6 +32,7 @@
           </template>
           <slot name="content" v-else></slot>
         </div>
+      </div>
       </div>
     </div>
   </section>

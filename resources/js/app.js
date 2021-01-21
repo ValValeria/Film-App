@@ -12,7 +12,7 @@ import {router} from './routes/routes'
 import App from './RootComponent.vue';
 import {store} from './store/index'
 
-new Vue({
+const app = new Vue({
     vuetify,
     router,
     store,

@@ -164,7 +164,7 @@ export default {
   flex: 1 1 60%;
 }
 
-.empty-card-sm {
+.empty-card-sm{
   padding: 10px;
   text-align: center;
   width: 100%;

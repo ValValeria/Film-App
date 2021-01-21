@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-list-item-group color="primary" class="center flex-row">
-      <v-list-item v-for="link in links" :key="link + Math.random(0, 60)">
+      <v-list-item v-for="link in links" :key="link.name + Math.random(0, 60)">
         <v-list-item-content>
           <v-list-item-title>
             <v-btn text>
@@ -15,19 +15,21 @@
 </template>
 
 <script>
+import {LINKS} from '../constants/route';
+
 export default {
   name: "HeaderLinks",
   data: function () {
     return {
-      links: [
-        { path: "/", name: "Главная" },
-        { path: "/orders-list", name: "Мои заказы" },
-        { path: "/products", name: "Меню" },
-        { path: "/contacts", name: "Связаться с нами" },
-        { path: "/products", name: "О нас" },
-      ],
+      links: [...LINKS]
     };
   },
+  props:{
+    isCol:{
+      type:Boolean,
+      default: false
+    }
+  }
 };
 </script>
 

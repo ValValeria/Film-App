@@ -2,9 +2,9 @@
   <FormLayout>
     <template #title> Обратная связь </template>
     <template #form>
-      <div class="form__area">
-        <v-card flat class="form__content">
-          <v-card-text class="p-4 w-100">
+      <div class="w-100">
+        <v-card flat class="w-100 form__card p-4">
+          <div class="w-100">
             <form class="w-100">
               <v-text-field
                 v-model="name"
@@ -26,17 +26,17 @@
                 prepend-inner-icon="alternate_email"
               ></v-text-field>
               <v-textarea
-              name="input-7-4"
-              label="Ваше сообщение"
-              auto-grow
-              clearable
-              rows="11"
-              clear-icon="mdi-close-circle"
-              ref="textarea"
-              color="grey darken-2"
-              prepend-inner-icon="mdi-comment"
-              v-model="message"
-            ></v-textarea>
+                name="input-7-4"
+                label="Ваше сообщение"
+                auto-grow
+                clearable
+                rows="11"
+                clear-icon="mdi-close-circle"
+                ref="textarea"
+                color="grey darken-2"
+                prepend-inner-icon="mdi-comment"
+                v-model="message"
+              ></v-textarea>
               <v-checkbox
                 v-model="checkbox"
                 :error-messages="checkboxErrors"
@@ -56,7 +56,7 @@
                 </v-btn>
               </div>
             </form>
-          </v-card-text>
+          </div>
         </v-card>
       </div>
     </template>

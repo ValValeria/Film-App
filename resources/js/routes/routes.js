@@ -6,12 +6,22 @@ import {store} from '../store/index';
 import ProductPage from '../pages/ProductPage.vue';
 import ProductsPage from '../pages/ProductsPage.vue';
 import ContactPage from '../pages/ContactPage.vue'
+import AuthPage from '../pages/AuthPage.vue';
+import OrderListPage from '../pages/OrderListPage'
 
 const routes = [
-    {path:"/", component: HomePage},
+    {path:"/", component: HomePage, name:'home'},
     {path:"/product/:id", component: ProductPage},
     {path: "/products", component: ProductsPage },
     {path: "/contacts", component: ContactPage },
+    { path:'/orders-list', component: OrderListPage, beforeEnter:function(to,from,next){
+       if(!store.state.user.isAuth) {
+          return next('/login')
+       }  
+       return next();
+    }},
+    {path:"/login",component: AuthPage, meta: {isLogin:true}},
+    {path:"/signup", component: AuthPage, meta: {isLogin:false}},
     {path: "*", component: NotFoundPage}
 ];
 

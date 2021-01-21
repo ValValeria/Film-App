@@ -6,7 +6,16 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state:{
-        products:[]
+        products:[],
+        user:{
+            isAuth:true,
+            email: '3725@gm.com',
+            password: '122344',
+            id: 1,
+            orders:[
+                { title:'Пицца Испанская',id:2,count:7,price:420,date:'10-12-2020'}
+            ]
+        }
     },
     mutations:{
         addProducts(state,products){
@@ -14,6 +23,9 @@ export const store = new Vuex.Store({
         },
         clearStore(state){
             state.products.splice(0,state.products.length)
+        },
+        authenticate(state,data){
+            Object.assign({},state.user,data);
         }
     },
     getters:{
@@ -28,7 +40,7 @@ export const store = new Vuex.Store({
             }
 
             return elem;
-        }
+        },
     },
     actions:{
         async getProductAsync({commit},obj){

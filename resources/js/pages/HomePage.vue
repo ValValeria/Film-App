@@ -1,7 +1,7 @@
 <template>
   <div class="w-100">
     <BannerComponent />
-    <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
+    <BasicLayout :isSection="true" :isFirstSlide="true" :isGrid="true" class="main-cards">
       <template v-slot:title> Наше меню </template>
       <template #descr> Самое вкусное, самое ароматное </template>
       <template v-slot:content>

@@ -18,7 +18,7 @@ class CreateOrderTable extends Migration
             $table->foreignId("user_id");
             $table->foreignId("product_id");
             $table->integer("quantity");
-            $table->timestamps();
+            $table->enum('status',['active','unactive']);
         });
     }
 

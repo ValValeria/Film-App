@@ -6,8 +6,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminArea\AdminController;
 use App\Http\Controllers\AdminArea\AdminLoginController;
 use App\Http\Controllers\AdminArea\AdminProductController;
-use App\Http\Controllers\AuthArea\AuthController;
 use App\Http\Controllers\AdminArea\AdminOrderController;
+use App\Http\Controllers\AdminArea\UsersController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AddOrderController;
 
 
 
@@ -24,15 +26,19 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
     Route::post('/login', [AdminLoginController::class, 'login']);
 
+    Route::get('/users',UsersController::class);
+
     Route::get('/product/{id}',[ProductController::class,'getProduct'])->whereNumber('id');
     Route::get('/products',[ProductController::class,'getProduct']);
 });
 
-Route::get('/{any}', [HomeController::class,'vueroute'])->where('any', '.*');
-
-Route::prefix("api")->group(function(){
-    Route::post('/login', [AuthController::class,'index']);
-    Route::post('/signup', [AuthController::class, 'index']);
-    Route::get('/addorder/{productId}/{quantity}', [ProductController::class, 'addOrder'])->whereNumber("quantity")->whereNumber("productId")->middleware('auth');
-    Route::get('/orderlist', [ProductController::class, 'getOrderList'])->middleware('auth');
+Route::middleware(["cors"])->group(function () {
+    Route::prefix("api")->group(function () {
+        Route::post('/login', [AuthController::class, 'index'])->name('login');
+        Route::post('/signup', [AuthController::class, 'index']);
+        Route::get('/addorder', [AddOrderController::class, 'addOrder']);
+        Route::get('/orderlist/{id}', [AddOrderController::class, 'viewOrders'])->whereNumber('id');
+    });
 });
+
+Route::get('/{any}', [HomeController::class,'vueroute'])->where('any', '.*');

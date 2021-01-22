@@ -21,19 +21,19 @@
                     <div class="row pt-4 pb-4">
                         <div class="col">
                             <div>
-                                <a href="/admin/delete/{{$data->id}}" class="btn btn-danger">Удалить</a>
+                                <a href="/admin/delete/{{$data->id}}" class="btn btn-danger text-white shadow">Удалить</a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="pl-1">
-                                <button type="submit" class="btn btn-light">Обновить</button>
+                                <button type="submit" class="btn btn-light shadow">Обновить</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="product__title pt-3">
-                <h4>Описание товара</h4>
+                <h4 class="h2">Описание товара</h4>
             </div>
             @if(session('status'))
             <div class="row pt-2">

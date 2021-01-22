@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="wrap-md-pd">
-        <h4 class="text-center title-sm">Ваши товары</h4>
+        <h4 class="text-center h2">Ваши товары</h4>
         <div class="card-container">
         @foreach ($data as $product)
             <div class="card center flex-column shadow">

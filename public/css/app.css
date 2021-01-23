@@ -10988,3 +10988,34 @@ a {
   padding-top: 72px;
 }
 
+.h2 {
+  margin: 0 auto !important;
+  text-transform: uppercase;
+  font-size: 50px !important;
+  line-height: 1.2;
+  word-break: break-word;
+  width: 90%;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.h4 {
+  font-weight: 300;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 20px;
+}
+
+.h3 {
+  font-size: 1.325rem;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.h5 {
+  font-weight: 300;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 14px;
+}
+

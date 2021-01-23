@@ -28,6 +28,18 @@
                   required
                 ></v-text-field>
                 <v-text-field
+                  label="Имя"
+                  class="w-100"
+                  type="text"
+                  counter="30"
+                  clearable
+                  name="username"
+                  :v-model="input.username"
+                  :rules="[rules.username]"
+                  required
+                  v-if="!isLogin"
+                ></v-text-field>
+                <v-text-field
                   label="Пароль"
                   class="w-100"
                   type="password"
@@ -87,12 +99,16 @@ export default {
         checkbox(v) {
           return v || "Вы должны согласиться с нашей политикой";
         },
+        username(v=""){
+          return (v.length > 10 && v.length < 25)||"Имя должно быть больше 10 символов и меньше 25";
+        }
       },
       valid: false,
       input: {
         checkbox: true,
         email: "",
         password: "",
+        username: ''
       },
       isValid: false,
       showSnackBar: false,
@@ -119,13 +135,23 @@ export default {
   methods: {
     async submit($event) {
       if (this.isValid) {
-        const response = await fetch(`/api/${this.isLogin?"login":"signup"}`);
+        const formdata = new FormData();
+
+        Object.entries(this.input).forEach(([key,value])=>{
+             formdata.append(key,value);
+        });
+
+        const response = await fetch(`/api/${this.isLogin?"login":"signup"}`,{
+          method: 'POST',
+          body: formdata
+        });
 
         if(response.ok){
           const data = await response.json();
 
           if(data.status=="user"){
-            this.$store.commit("authenticate",data.userData);
+            this.$store.commit("authenticate",data.data);
+            localStorage.setItem("data", JSON.stringify(data.data));
           } else{
             const errors = data.errors.join('. ');
             this.messageText = errors;

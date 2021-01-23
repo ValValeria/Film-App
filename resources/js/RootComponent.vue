@@ -72,6 +72,37 @@ export default {
   data:function(){
     return ({drawer: false,showMenu:true, links: [...LINKS]});
   },
+  async mounted(){
+    try {
+        const formdata = new FormData();
+
+        const input = JSON.stringify(localStorage.getItem('data'));
+
+        Object.entries(this.input).forEach(([key,value])=>{
+             formdata.append(key,value);
+        });
+
+        const response = await fetch(`/api/login`,{
+          method: 'POST',
+          body: formdata
+        });
+
+        if(response.ok){
+          const data = await response.json();
+
+          if(data.status=="user"){
+            this.$store.commit("authenticate",data.data);
+            localStorage.setItem("data", JSON.stringify(data.data));
+          } else{
+            const errors = data.errors.join('. ');
+            this.messageText = errors;
+            this.showSnackBar = true;
+          }
+        }
+    } catch (error) {
+      console.log('Invalid data')
+    }   
+  }
 };
 </script>
 
@@ -82,7 +113,7 @@ export default {
 }
 .brand-name a {
   color: white !important;
-  font-weight:400;
+  font-weight: 400;
 }
 .wrap-md-pd {
   width: 90%;
@@ -118,7 +149,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 1000;
 }
 
 .navigation-media {
@@ -142,7 +173,6 @@ nav {
   .v-expansion-panels {
     border-radius: 0 !important;
   }
-
 }
 
 @media (max-width: 1000px) {
@@ -152,8 +182,8 @@ nav {
   .nav-not-media {
     display: none;
   }
-  .first-slide{
-    padding-top:72px;
+  .first-slide {
+    padding-top: 72px;
   }
 }
 </style>

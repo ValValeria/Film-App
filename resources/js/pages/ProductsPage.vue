@@ -71,19 +71,6 @@
         </template>
       </BasicLayout>
     </div>
-
-    <div class="first-slide w-100">
-      <v-carousel>
-        <v-carousel-item
-          v-for="(item, i) in images"
-          :key="i"
-          :src="item"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
-          class="bg-dark font-white"
-        ></v-carousel-item>
-      </v-carousel>
-    </div>
   </div>
 </template>
 
@@ -190,7 +177,7 @@ export default {
 
 .products__search {
   position: sticky;
-  top: 1rem;
+  top: 4.5rem;
   left: 0;
   width: 100%;
   z-index: 999;

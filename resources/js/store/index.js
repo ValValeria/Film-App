@@ -8,9 +8,10 @@ export const store = new Vuex.Store({
     state:{
         products:[],
         user:{
-            isAuth:true,
+            isAuth:false,
             email: '3725@gm.com',
             password: '122344',
+            username:"",
             id: 1,
             orders:[
                 { title:'Пицца Испанская',id:2,count:7,price:420,date:'10-12-2020'}
@@ -25,7 +26,13 @@ export const store = new Vuex.Store({
             state.products.splice(0,state.products.length)
         },
         authenticate(state,data){
-            Object.assign({},state.user,data);
+            state.user.email = data.email;
+            state.user.password = data.password;
+            state.user.username = data.username;
+            state.user.isAuth = true;
+        },
+        addOrders(state,data){
+            state.user.orders.push(...data);
         }
     },
     getters:{

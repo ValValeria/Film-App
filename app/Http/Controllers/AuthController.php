@@ -79,6 +79,7 @@ class AuthController extends Controller
 
             Auth::login($this->user->first());
             $this->data["status"] = "user";
+            $this->data["data"] = $this->user->first();
         }
         
         return  $this->data["status"] === "user";

@@ -1,0 +1,13 @@
+Server:
+## Problems
+- fix the button 'Пом-ть статус' on the page, named orders
+- fix the page, named orders, so the admin can view orders by users
+- security 
+  * view users
+  * delete users
+  * view orders
+  * any authenticated user has an access to the admin panel !
+  * add location field to table, named `laravel_products`
+## What to read
+  * https://laravel.com/docs/8.x/queries
+  * security

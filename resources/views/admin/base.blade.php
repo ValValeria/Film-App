@@ -25,6 +25,7 @@
                             </div>
                             <div class="nav__links col d-flex justify-content-start flex-column text-left">
                                 <a href="/admin"> Главная</a>
+                                <a href="/admin/orders">Заказы</a>
                                 <a href="/admin/addproduct">Добавить товар</a>
                                 <a href="/admin/users">Пользователи</a>
                                 <a href="/admin/products">Смотреть товары</a>

@@ -10,8 +10,7 @@ use App\Http\Controllers\AdminArea\AdminOrderController;
 use App\Http\Controllers\AdminArea\UsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AddOrderController;
-
-
+use App\Http\Controllers\ProductSortController;
 
 Route::prefix('admin')->group(function () {
     Route::middleware(['auth'])->group(function(){
@@ -21,23 +20,25 @@ Route::prefix('admin')->group(function () {
        Route::get('/delete/{productId}',[ProductController::class,'deleteProduct'])->whereNumber('id');
        Route::post('/updateproduct/{id}',[AdminProductController::class,'updateProduct'])->whereNumber('id');
        Route::get('/orders',AdminOrderController::class);
+       Route::get('/user/{user}', [AddOrderController::class, 'viewOrders']);
+       Route::get('/users', UsersController::class);
+       Route::get('/change-order-status/{order}',[AddOrderController::class,'changeOrderStatus']);
     });
     
     Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
     Route::post('/login', [AdminLoginController::class, 'login']);
 
-    Route::get('/users',UsersController::class);
-
     Route::get('/product/{id}',[ProductController::class,'getProduct'])->whereNumber('id');
     Route::get('/products',[ProductController::class,'getProduct']);
 });
 
-Route::middleware(["cors"])->group(function () {
+Route::middleware(["cors","json_auth"])->group(function () {
     Route::prefix("api")->group(function () {
-        Route::post('/login', [AuthController::class, 'index'])->name('login');
+        Route::post('/login', [AuthController::class, 'index'])->name('api.login');
         Route::post('/signup', [AuthController::class, 'index']);
         Route::get('/addorder', [AddOrderController::class, 'addOrder']);
-        Route::get('/orderlist/{id}', [AddOrderController::class, 'viewOrders'])->whereNumber('id');
+        Route::get('/view-orders/{user}', [AddOrderController::class, 'viewOrders']);
+        Route::get('/product-sort', ProductSortController::class);
     });
 });
 

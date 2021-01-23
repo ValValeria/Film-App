@@ -4,7 +4,7 @@ namespace App\Http\Controllers\AdminArea;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-
+use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller{
 
@@ -13,9 +13,9 @@ class AdminOrderController extends Controller{
        $this->middleware("auth");
     }
 
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        $orders = Order::all();
-        return view('admin.pages.orders')->with("orders",$orders);
+        $orders = Order::where('status','active')->get();
+        return view('admin.pages.allorders')->with("orders",$orders);
     }
 }

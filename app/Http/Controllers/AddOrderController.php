@@ -2,6 +2,7 @@
 
 namespace  App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,13 +14,12 @@ class AddOrderController extends Controller
 
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function addOrder(Request $request)
     {
-        //$user = $request->user();
-        $user = User::find(2);
+        $user = $request->user();
         $id = intval($request->input('productId', 0));
         $quantity = intval($request->input('quantity'));
 
@@ -33,13 +33,14 @@ class AddOrderController extends Controller
                 if ($order->exists()) {
                     $order = $order->first();
                     $order->quantity = $quantity;
+                    $order->status = "active";
                     $order->save();
                 } else {
                     $user->orders()->create([
                         "product_id" => $product->id,
                         "quantity" => $quantity,
                         "user_id" => $user->id,
-                        "status" => "active"
+                        "created_at" => date('Y-m-d')
                     ]);
                 }
                 $this->response["data"] = "added";
@@ -50,15 +51,23 @@ class AddOrderController extends Controller
         }
     }
 
-    public function viewOrders(Request $request,int $id)
+    public function viewOrders(Request $request, User $user)
     {
-       $user = User::findOrFail($id);
-       $user->orders->load('product');
+        $orders = $user->orders;
+        $orders->load('product');
 
-       if($request->isjson){
-           return json_encode($user, JSON_UNESCAPED_UNICODE);
-       }
+        if ($request->isjson) {
+            $this->response["data"] = $orders->groupBy('status');
+            return json_encode($this->response, JSON_UNESCAPED_UNICODE,JSON_UNESCAPED_SLASHES);
+        }
 
-       return view('admin.pages.userorders');
+        return view('admin.pages.userorders')->with('user', $user);
+    }
+
+    public function changeOrderStatus(Request $request, Order $order)
+    {
+        $order->status = "unactive";
+        $order->save();
+        return back()->with('status', 'updated');
     }
 }

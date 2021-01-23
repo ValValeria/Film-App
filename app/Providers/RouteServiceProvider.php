@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
-
+use App\Models\User;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -52,6 +52,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('productId', function($productId){
             return Product::where('id',$productId)->firstOrFail();
+        });
+
+        Route::bind('user', function ($id) {
+            return User::where('id', $id)->firstOrFail();
         });
     }
 

@@ -29,6 +29,12 @@ class AuthController extends Controller
 
     public function index(Request $request)
     {
+        $this->base_index($request);
+        return response()->json($this->data);
+    }
+
+    public function base_index(Request $request):bool
+    {
         $rules = [
             'password' => "required|max:20|min:10",
             'email' => ["required", "max:20", "min:10", "email:rfc,dns"],
@@ -38,6 +44,12 @@ class AuthController extends Controller
         if ($request->route()->named('login')) {
             $this->isLogin = true;
             $rules = Arr::except($rules, ['username']);
+        }
+
+        $input = $request->all();
+
+        if(!count($input)){
+            $input = json_encode($request->header('Auth'),JSON_UNESCAPED_UNICODE);
         }
 
         $validator = Validator::make($request->all(), $rules);
@@ -68,7 +80,7 @@ class AuthController extends Controller
             Auth::login($this->user->first());
             $this->data["status"] = "user";
         }
-
-        return response()->json($this->data);
+        
+        return  $this->data["status"] === "user";
     }
 }

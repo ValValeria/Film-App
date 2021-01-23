@@ -25,7 +25,9 @@
                     <tr>
                         <th scope="row">1</th>
                         <td>
-                            {{$user->username}}
+                            <a href="/admin/user/{{$user->id}}">
+                                {{$user->username}}
+                            </a>
                         </td>
                         <td>
                             {{$user->email}}

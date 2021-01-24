@@ -1,5 +1,14 @@
 <template>
   <div class="product w-100 first-slide center">
+    <v-snackbar v-model="snackbar">
+      Добавлено в корзину
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
     <BasicLayout :isSection="true" class="main-cards" v-if="isLoaded">
       <template #breadcrumps>
         <div class="breadcrumps wrap-md">
@@ -65,7 +74,13 @@
                       <span>{{ product.weight }} грамм</span>
                     </div>
                     <div class="product__btn">
-                      <v-btn color="bg-red" dark x-large depressed block
+                      <v-btn
+                        color="bg-red"
+                        dark
+                        x-large
+                        depressed
+                        block
+                        @click="addToOrders(product)"
                         >В корзину</v-btn
                       >
                     </div>
@@ -180,6 +195,7 @@ export default {
         "Оливковое масло",
       ],
       selectedItem: 2,
+      snackbar:false
     };
   },
   props: {
@@ -206,6 +222,12 @@ export default {
     BasicLayout,
     GridLayout,
     CardComponent,
+  },
+  methods: {
+    addToOrders(product) {
+      this.$store.commit("addUncheckOrders", [product]);
+      this.snackbar = true;
+    },
   },
 };
 </script>

@@ -19,9 +19,9 @@ const routes = [
           return next('/login')
        }  
        return next();
-    }},
-    {path:"/login",component: AuthPage, meta: {isLogin:true}},
-    {path:"/signup", component: AuthPage, meta: {isLogin:false}},
+    }, name:"admin-panel"},
+    {path:"/login",component: AuthPage, meta: {isLogin:true},name:"login"},
+    {path:"/signup", component: AuthPage, meta: {isLogin:false}, name:'signup'},
     {path: "*", component: NotFoundPage}
 ];
 

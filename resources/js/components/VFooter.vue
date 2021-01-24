@@ -4,7 +4,7 @@
       no-gutters
     >
       <v-col
-        class=" py-4 text-center white--text"
+        class=" py-4 text-center"
         cols="12"
       >
         {{ new Date().getFullYear() }} — <strong>MY</strong>Pizza

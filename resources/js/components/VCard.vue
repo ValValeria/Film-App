@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-bind:class="'mx-auto shadow card-sm'+classes"
+    v-bind:class="'mx-auto shadow card-sm p-2'+classes"
     max-width="344"
   >
     <v-img

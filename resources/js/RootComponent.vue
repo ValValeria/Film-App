@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-system-bar height="72px" class="center bg-dark nav-not-media">
+    <v-system-bar height="72px" class="center nav-not-media only-shadow">
       <div class="wrap-md center flex-row">
         <h1 class="brand-name text-left">
           <router-link to="/">MyPizza</router-link>
@@ -47,7 +47,7 @@
       <router-view></router-view>
     </v-main>
 
-    <v-footer app class="bg-dark">
+    <v-footer app class="footer-wh only-shadow w-100">
       <FooterComponent />
     </v-footer>
   </v-app>
@@ -76,9 +76,9 @@ export default {
     try {
         const formdata = new FormData();
 
-        const input = JSON.stringify(localStorage.getItem('data'));
+        const input = JSON.parse(localStorage.getItem('data'));
 
-        Object.entries(this.input).forEach(([key,value])=>{
+        Object.entries(input).forEach(([key,value])=>{
              formdata.append(key,value);
         });
 
@@ -100,7 +100,7 @@ export default {
           }
         }
     } catch (error) {
-      console.log('Invalid data')
+      console.log('Invalid data '+ error.message )
     }   
   }
 };
@@ -112,8 +112,8 @@ export default {
   --paddingLeft: 66px;
 }
 .brand-name a {
-  color: white !important;
   font-weight: 400;
+  color: rgba(0,0,0,.87) !important;
 }
 .wrap-md-pd {
   width: 90%;
@@ -125,11 +125,15 @@ export default {
 }
 
 .only-shadow {
-  box-shadow: 0 0 20px rgba(73, 77, 86, 0.127);
+  box-shadow: 0 0 20px rgba(73, 77, 86, 0.127) !important;
 }
 
 .v-application--wrap > .v-system-bar {
   padding-left: var(--paddingLeft) !important;
+}
+
+.nav-not-media,.footer-wh{
+ background-color:white !important;
 }
 
 nav {

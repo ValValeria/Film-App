@@ -3,15 +3,20 @@
     <div class="first-slide wrap-md-pd center">
       <div class="wrap-md">
         <div class="form__area center">
-          <div class="form__wrap shadow p-4">
-            <div class="p-4">
-              <h2 class="form__title text-center">
+          <div class="form__container w-100 center">
+            <div class="form__wrap shadow p-4">
+              <div class="p-4">
+                <h2 class="form__title text-center">
                   <slot name="title"></slot>
-              </h2>
-              <div class="form__content w-100">
-                <div class="w-100 center">
-                  <div class="form__items w-100">
-                    <slot name="form"></slot>
+                </h2>
+                <div class="form__subtitle w-100">
+                  <slot name="form__subtitle"></slot>
+                </div>
+                <div class="form__content w-100">
+                  <div class="w-100 center">
+                    <div class="form__items w-100">
+                      <slot name="form"></slot>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -27,21 +32,21 @@
 import BasicLayout from "../layouts/VBasicLayout";
 
 export default {
-   components:{
-       BasicLayout
-   }
-}
+  components: {
+    BasicLayout,
+  },
+};
 </script>
 
 <style scoped>
-.form__wrap{
+.form__wrap {
   max-width: 600px;
   width: 100%;
   padding: 1.6rem;
 }
 
-.form{
-    background: white;
+.form {
+  background: white;
 }
 
 .form__content {
@@ -53,6 +58,15 @@ export default {
   border-radius: 25px !important;
 }
 
+.form__subtitle {
+  margin: 10px 0;
+  margin-top: 30px;
+}
+
+.form__container {
+  padding: 2.5rem 0;
+}
+
 .form__title {
   margin-bottom: 1.54rem !important;
   margin: 0 0 25px;
@@ -61,7 +75,7 @@ export default {
   font-weight: 300;
 }
 
-.form__card{
+.form__card {
   background-color: white;
 }
 

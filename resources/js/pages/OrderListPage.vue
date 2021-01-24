@@ -5,6 +5,7 @@
       :isFirstSlide="true"
       :isFullContent="true"
       class="main-cards admin"
+      v-if="isAuth"
     >
       <template v-slot:title> Ваши заказы </template>
       <template #descr> Самое вкусное, самое ароматное </template>
@@ -29,7 +30,7 @@
                     </v-alert>
                     <v-alert border="right" class="w-100" type="warning" dark>
                       У вас в корзине находиться
-                      {{ user.orders.length }} товаров
+                      {{activeOrders.length }} товаров
                     </v-alert>
                     <v-alert border="right" class="w-100" type="success" dark>
                       Вы являетесь нашим покупателем больше 1 года
@@ -94,7 +95,7 @@
                       </thead>
                       <tbody>
                         <tr
-                          v-for="(item, index) in orders"
+                          v-for="(item, index) in activeOrders"
                           :key="item.title + Math.random()"
                         >
                           <td>
@@ -109,15 +110,15 @@
                             </router-link>
                           </td>
                           <td>{{ item.price }}</td>
-                          <td>{{ item.count }}</td>
+                          <td>{{ item.quantity }}</td>
                           <td>{{ item.date }}</td>
                         </tr>
                       </tbody>
                     </template>
                   </v-simple-table>
                 </v-card-text>
-                <v-card-text class="center justify-content-end w-100">
-                  <v-btn depressed color="error"> Потвердить заказ </v-btn>
+                <v-card-text class="center justify-content-end w-100" v-if="activeOrders.length">
+                  <v-btn depressed color="error" @click="checkOrder()"> Потвердить заказ </v-btn>
                 </v-card-text>
               </v-card>
               <v-card outlined class="mt-4 p-4 w-100">
@@ -139,7 +140,7 @@
                       </thead>
                       <tbody>
                         <tr
-                          v-for="(item, index) in orders"
+                          v-for="(item, index) in unactiveOrders"
                           :key="item.title + Math.random()"
                         >
                           <td>
@@ -167,12 +168,27 @@
         </div>
       </template>
     </BasicLayout>
+    <template v-else>
+      <BasicLayout
+        :isSection="true"
+        :isFirstSlide="true"
+        class="main-cards admin"
+      >
+        <div class="center w-100">
+          <v-progress-circular
+            indeterminate
+            color="amber"
+            :size="140"
+          ></v-progress-circular>
+        </div>
+      </BasicLayout>
+    </template>
   </div>
 </template>
 
 <script>
 import BasicLayout from "../layouts/VBasicLayout";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import GridLayout from "../layouts/GridLayout";
 
 export default {
@@ -180,24 +196,46 @@ export default {
     BasicLayout,
     GridLayout,
   },
-  computed: mapState({
+  computed: {
+    ...mapState({
     orders: (state) => state.user.orders,
     user: (state) => state.user,
-  }),
+    isAuth: (state) => state.user.isAuth,
+    }),
+    ...mapGetters({
+      unactiveOrders:'getActiveOrders',
+      activeOrders:'getUnactiveOrders'
+    })
+  },
   async mounted() {
-    if (this.user.id) {
-      const response = await fetch(`/api/view-orders/${this.user.id}?isjson=true`, {
-        headers: {
-          Auth: localStorage.getItem("data"),
-        },
-      });
+    if (this.user.id && this.isAuth) {
+      const response = await fetch(
+        `/api/view-orders/${this.user.id}?isjson=true`,
+        {
+          headers: {
+            Auth: localStorage.getItem("data"),
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
-        this.$store.state.commit('addOrders',data||[]);
+        this.$store.commit("addOrders", data.data || []);
       }
+    } else {
+      this.$router.push({ name: "login" });
     }
   },
+  watch: {
+    isAuth() {
+      if (!this.isAuth) this.$router.push({ name: "login" });
+    },
+  },
+  methods:{
+    checkOrder(){
+      this.$store.dispatch("addOrderToServer")
+    }
+  }
 };
 </script>
 
@@ -228,7 +266,7 @@ export default {
   flex-direction: row !important;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 900px) {
   .admin__content {
     flex-direction: column !important;
 

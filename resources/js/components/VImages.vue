@@ -7,7 +7,7 @@
             :src="url"
             :lazy-src="url"
             aspect-ratio="1"
-            class="grey darken-4 shadow bg-dark"
+            class="shadow bg-white"
             v-on:click.prevent="
               diaglog = true;
               active = url;

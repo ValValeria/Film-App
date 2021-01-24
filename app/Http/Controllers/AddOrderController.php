@@ -43,7 +43,7 @@ class AddOrderController extends Controller
                         "created_at" => date('Y-m-d')
                     ]);
                 }
-                $this->response["data"] = "added";
+                $this->response["data"] = "ok";
                 $user->refresh();
             }
 
@@ -57,7 +57,7 @@ class AddOrderController extends Controller
         $orders->load('product');
 
         if ($request->isjson) {
-            $this->response["data"] = $orders->groupBy('status');
+            $this->response["data"] = $orders;
             return json_encode($this->response, JSON_UNESCAPED_UNICODE,JSON_UNESCAPED_SLASHES);
         }
 

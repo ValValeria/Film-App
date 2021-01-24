@@ -1,12 +1,12 @@
 <template>
-    <div class="hot-ads bg-dark font-white">
+    <div class="">
       <BasicLayout :isSection="true" :isGrid="true">
         <template v-slot:title> Секрет нашей пиццы</template>
         <template v-slot:descr>
           Почему наша пицца такая вкусная?
         </template>
         <template v-slot:content>
-            <div class="empty-card center bg-dark shadow w-100">
+            <div class="empty-card center  shadow w-100 bg-white  p-4">
                  <div class="img-card-container">
                      <img src="/images/fr.png" alt="">
                  </div>
@@ -14,7 +14,7 @@
                      Только свежие продукты
                 </h4> 
             </div>
-            <div class="empty-card center bg-dark shadow w-100">
+            <div class="empty-card center shadow w-100 bg-white p-4">
                  <div class="img-card-container">
                      <img src="/images/t2.jpg" alt="">
                  </div>
@@ -22,7 +22,7 @@
                      Всегда делаем с любовью
                 </h4> 
             </div>
-            <div class="empty-card center bg-dark shadow w-100">
+            <div class="empty-card center shadow w-100 bg-white p-4">
                  <div class="img-card-container">
                      <img src="/images/rt3.png" alt="">
                  </div>

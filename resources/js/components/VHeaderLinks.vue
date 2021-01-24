@@ -35,6 +35,6 @@ export default {
 
 <style scoped>
 a {
-  color: white !important;
+  color: rgba(0,0,0,.87) !important;
 }
 </style>

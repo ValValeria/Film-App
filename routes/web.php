@@ -35,7 +35,7 @@ Route::prefix('admin')->group(function () {
 Route::middleware(["cors","json_auth"])->group(function () {
     Route::prefix("api")->group(function () {
         Route::post('/login', [AuthController::class, 'index'])->name('api.login');
-        Route::post('/signup', [AuthController::class, 'index']);
+        Route::post('/signin', [AuthController::class, 'index'])->name('api.signup');
         Route::get('/addorder', [AddOrderController::class, 'addOrder']);
         Route::get('/view-orders/{user}', [AddOrderController::class, 'viewOrders']);
         Route::get('/product-sort', ProductSortController::class);

@@ -1,7 +1,8 @@
 <template>
   <div class="w-100">
     <BannerComponent />
-    <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
+ 
+  <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
       <template v-slot:title> Наше меню </template>
       <template #descr> Самое вкусное, самое ароматное </template>
       <template v-slot:content>
@@ -30,8 +31,6 @@
       </template>
     </BasicLayout>
 
-    <PizzaHistoryComponent/>
-
     <BasicLayout :isSection="true" :isGrid="true">
       <template v-slot:title> Почему мы ? </template>
       <template v-slot:descr>
@@ -47,35 +46,20 @@
             +{{ ad.num }}
           </v-card-text>
           <v-card-title>
-            <h5 class="text-center headline-sm  pl-2 pr-2">
+            <h5 class="text-center headline-sm pl-2 pr-2">
               {{ ad.title }}
             </h5>
           </v-card-title>
-          <v-card-text class="text-center  pl-2 pr-2">
+          <v-card-text class="text-center pl-2 pr-2">
             {{ ad.l_descr }}
           </v-card-text>
         </v-card>
       </template>
     </BasicLayout>
-    
-    <div class="hot-ads bg-dark font-white">
-      <BasicLayout :isSection="true">
-        <template v-slot:title> Горячие предложения </template>
-        <template v-slot:descr>
-          Специальные предложения только для вас
-        </template>
-        <template v-slot:content>
-          <ImagesComponent :urls="urls"/>
-        </template>
-      </BasicLayout>
-    </div>
 
-    <BasicLayout
-      :isSection="true"
-      :isGrid="true"
-      class="main-cards"
-      :isFirstSlide="true"
-    >
+    <PizzaHistoryComponent />
+
+    <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
       <template v-slot:title>Наши идеи</template>
       <template #descr> Интересные для вас предложения</template>
       <template v-slot:content>
@@ -85,12 +69,12 @@
       </template>
     </BasicLayout>
 
-    <div class="hot-ads bg-dark font-white"> 
-    <BasicLayout :isSection="true">
-      <template v-slot:title> Нас легко найти </template>
-      <template v-slot:descr> Мы находимся в самом центре Киева </template>
-      <template v-slot:content> </template>
-    </BasicLayout>
+    <div class="hot-ads">
+      <BasicLayout :isSection="true">
+        <template v-slot:title> Нас легко найти </template>
+        <template v-slot:descr> Мы находимся в самом центре Киева </template>
+        <template v-slot:content> </template>
+      </BasicLayout>
     </div>
   </div>
 </template>
@@ -101,8 +85,8 @@ import BasicLayout from "../layouts/VBasicLayout";
 import CardComponent from "../components/VCard";
 import { mapState } from "vuex";
 import Coursel from "../components/VCoursel";
-import PizzaHistoryComponent from '../components/VPizzaHistory'
-import ImagesComponent from  '../components/VImages';
+import PizzaHistoryComponent from "../components/VPizzaHistory";
+import ImagesComponent from "../components/VImages";
 import AdComponent from "../components/VAd";
 
 export default {
@@ -126,10 +110,7 @@ export default {
           l_descr: `Мы работаем уже больше 8 лет и за это время мы показали себя с лучшей стороны`,
         },
       ],
-      urls:[
-        '/images/img1.png',
-        '/images/img2.jpg'
-      ]
+      urls: ["/images/img1.png", "/images/img2.jpg"],
     };
   },
   components: {
@@ -139,7 +120,7 @@ export default {
     Coursel,
     PizzaHistoryComponent,
     ImagesComponent,
-    AdComponent
+    AdComponent,
   },
   computed: mapState({
     items: (state) => state.products,
@@ -149,15 +130,14 @@ export default {
 
 
 <style lang="scss">
-
-.headline-sm{
+.headline-sm {
   text-transform: uppercase;
   text-align: center !important;
   width: 100%;
   font-weight: 400;
   word-break: break-word;
   letter-spacing: 1px;
-  font-size:1.325rem;
+  font-size: 1.325rem;
   word-break: break-word;
 }
 
@@ -170,6 +150,32 @@ export default {
   margin-right: 10px;
 }
 
+.about-us__content{
+  background-image: url(/images/about-top.jpg) ;
+  background-size:cover;
+  background-attachment: fixed;
+  background-position: center;
+  position: relative;
+}
+
+.about-us__text{
+  position: relative;
+  z-index:2;
+}
+
+.about-us__content::after{
+  content:"";
+  display:block;
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: #000;
+    opacity: 0.5;
+}
+
+
 .ad {
   height: 100%;
   max-width: 400px;
@@ -180,17 +186,16 @@ export default {
   max-width: 100%;
 }
 
-.hot-ads{
+.hot-ads {
   background-image: url(/images/bg.png);
   background-size: 300px;
   background-repeat: repeat;
   background-attachment: fixed;
 }
-
 </style>
 
 <style lang="scss">
-.v-main{
-  padding:0 !important;
+.v-main {
+  padding: 0 !important;
 }
 </style>

@@ -21,7 +21,9 @@ class AuthController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
-                return redirect('/');
+                $this->data["status"] = "user";
+                $this->data["data"] = Auth::user();;
+                return response()->json($this->data);
             }
             return $next($request);
         });
@@ -41,7 +43,7 @@ class AuthController extends Controller
             'username' => 'required|min:10|max:30'
         ];
 
-        if ($request->route()->named('login')) {
+        if ($request->route()->named('api.login')) {
             $this->isLogin = true;
             $rules = Arr::except($rules, ['username']);
         }

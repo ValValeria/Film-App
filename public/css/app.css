@@ -10909,6 +10909,10 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
+body {
+  color: rgba(0, 0, 0, 0.87);
+}
+
 .center {
   display: flex;
   flex-direction: column;
@@ -10999,23 +11003,36 @@ a {
   margin-bottom: 20px;
 }
 
-.h4 {
-  font-weight: 300;
-  text-align: center;
-  line-height: 1.2;
-  font-size: 20px;
-}
-
 .h3 {
-  font-size: 1.325rem;
-  word-break: break-word;
-  line-height: 1.2;
+  margin-bottom: 1.54rem !important;
+  margin: 0 0 25px;
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 300;
 }
 
 .h5 {
   font-weight: 300;
   text-align: center;
   line-height: 1.2;
-  font-size: 14px;
+  font-size: 20px;
+}
+
+.h4 {
+  font-size: 1.325rem;
+  word-break: break-word;
+  line-height: 1.2;
+  font-weight: 300;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.h6 {
+  font-weight: 300;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 16px;
 }
 

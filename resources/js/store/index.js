@@ -14,7 +14,9 @@ export const store = new Vuex.Store({
             username:"",
             id: 1,
             orders:[
-                { title:'Пицца Испанская',id:2,count:7,price:420,date:'10-12-2020'}
+            ],
+            uncheckedOrders:[
+
             ]
         }
     },
@@ -33,6 +35,19 @@ export const store = new Vuex.Store({
         },
         addOrders(state,data){
             state.user.orders.push(...data);
+        },
+        clearOrders(state){
+            state.user.orders.splice(0,state.user.orders.length);
+        },
+        addUncheckOrders(state,data){
+            state.user.uncheckedOrders.push(...data);
+        },
+        clearUncheckOrders(state,id){
+            if(!id){
+                state.user.uncheckedOrders.splice(0, state.user.uncheckedOrders.length);      
+            }else{
+                state.user.uncheckedOrders.splice(id,0);
+            }   
         }
     },
     getters:{
@@ -48,6 +63,12 @@ export const store = new Vuex.Store({
 
             return elem;
         },
+        getActiveOrders(state){
+            return state.user.orders.filter(v=>v.status=="active");
+        },
+        getUnactiveOrders(state) {
+            return state.user.orders.filter(v => v.status == "unactive");
+        }
     },
     actions:{
         async getProductAsync({commit},obj){
@@ -68,7 +89,36 @@ export const store = new Vuex.Store({
                 const json = await response.json();
                 commit('addProducts', json["data"]);
             }
-        }
+        },
 
+        async getOrders({commit,state}){
+            if(state.user.isAuth){
+                const response = await fetch(`/view-orders/${state.user.id}/?isjson=true`);
+
+                if (response.ok) {
+                    const json = await response.json();
+                    commit('clearOrders');
+                    commit('addOrders', json["data"]);
+                }
+            }
+        },
+        async addOrderToServer({ commit, state },) {
+            if (state.user.isAuth) {
+
+                const orders = [...state.user.uncheckedOrders]
+                orders.forEach(async(v) => {
+                    const response = await fetch(`/addorder/?productId=${v.id}&quantity=1`);
+
+                    if(response.ok){
+                        const data = await response.json();
+
+                        if(data.status=="ok"){
+                            commit("clearUncheckOrders", v.id);
+                            commit("addOrders",[v]);
+                        }
+                    }
+                });
+            }
+        }
     }
 });

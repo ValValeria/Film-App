@@ -17,7 +17,9 @@ class JsonAuth
      */
     public function handle(Request $request, Closure $next)
     { 
-        (new AuthController())->base_index($request);
+        if(!$request->route()->named('api.login') && !$request->route()->named('api.signup')){
+            (new AuthController())->base_index($request);
+        }
         return $next($request);
     }
 }

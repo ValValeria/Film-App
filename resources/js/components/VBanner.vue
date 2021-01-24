@@ -2,13 +2,13 @@
   <section class="section center first-slide position-relative">
     <div class="banner">
       <div class="banner__items center flex-row">
-        <div class="banner__item hot-ads bg-dark"></div>
+        <div class="banner__item hot-ads"></div>
       </div>
     </div>
     <div class="section__content center w-100 position-relative">
-      <div class="wrap-md-pd font-white center">
+      <div class="wrap-md-pd  center">
         <h6 id="title" class="text-center">Всё самое вкусное</h6>
-        <p class="description">Пицца, салаты и не только</p>
+        <p class="h5 text-center" style="font-weight:400">Пицца, салаты и не только</p>
         <v-btn depressed x-large elevation="2"  raised class="bg-red text-white mt-3"
           >Смотреть меню</v-btn>
       </div>

@@ -13,9 +13,15 @@ class AdminOrderController extends Controller{
        $this->middleware("auth");
     }
 
-    public function __invoke(Request $request)
+    public function activeOrders(Request $request)
     {
-        $orders = Order::where('status','active')->get();
+        $orders = Order::where('status','active')->orderBy('date')->get();
         return view('admin.pages.allorders')->with("orders",$orders);
+    }
+
+    public function unactiveOrders(Request $request)
+    {
+        $orders = Order::where('status', 'unactive')->orderBy('date')->get();
+        return view('admin.pages.unactiveorders')->with("orders", $orders);
     }
 }

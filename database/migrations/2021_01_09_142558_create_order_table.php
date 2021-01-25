@@ -19,6 +19,7 @@ class CreateOrderTable extends Migration
             $table->foreignId("product_id");
             $table->integer("quantity");
             $table->enum('status',['active','unactive']);
+            $table->char('location',100);
             $table->string("created_at",50);
         });
     }

@@ -20,6 +20,7 @@ class CreateProductTable extends Migration
             $table->string('long_description',300);
             $table->string('image');
             $table->string('price');
+            $table->json("ingredients");
             $table->string('weight');
             $table->enum('category',["пицца","салаты"]);
         });

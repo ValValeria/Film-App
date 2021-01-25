@@ -10,18 +10,21 @@ use App\Http\Controllers\AdminArea\AdminOrderController;
 use App\Http\Controllers\AdminArea\UsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AddOrderController;
+use App\Http\Controllers\AdminArea\LogoutController;
 use App\Http\Controllers\ProductSortController;
 
 Route::prefix('admin')->group(function () {
-    Route::middleware(['auth'])->group(function(){
+    Route::middleware(['auth', 'only_admin'])->group(function(){
        Route::get('/', [AdminController::class, 'index'])->name('home');
        Route::get('/addproduct', [AdminProductController::class, 'index']);
        Route::post('/addproduct', [AdminProductController::class, 'addProduct']);
        Route::get('/delete/{productId}',[ProductController::class,'deleteProduct'])->whereNumber('id');
        Route::post('/updateproduct/{id}',[AdminProductController::class,'updateProduct'])->whereNumber('id');
-       Route::get('/orders',AdminOrderController::class);
+       Route::get('/orders',[AdminOrderController::class, 'activeOrders']);
+       Route::get('/unactive-orders', [AdminOrderController::class, 'unactiveOrders']);
        Route::get('/user/{user}', [AddOrderController::class, 'viewOrders']);
        Route::get('/users', UsersController::class);
+       Route::get('/logout',LogoutController::class);
        Route::get('/change-order-status/{order}',[AddOrderController::class,'changeOrderStatus']);
     });
     

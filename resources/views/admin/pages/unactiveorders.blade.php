@@ -9,10 +9,10 @@
             <div class="card w-100 card-section">
                 <div class="card-body">
                     <h1 class="h3 text-center">
-                        Активные заказы
+                        Неактивные заказы
                     </h1>
                     <h4 class="h4 text-center p-4">
-                        <a href="/admin/unactive-orders">Посмотреть неактивные заказы. У вас их {{$orders->count()}}</a>
+                        <a href="/admin/orders">Посмотреть активные заказы. У вас их {{$orders->count()}}</a>
                     </h4>
                     <table class="table">
                         <thead>

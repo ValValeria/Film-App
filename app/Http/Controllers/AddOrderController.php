@@ -6,7 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Gate;
 
 class AddOrderController extends Controller
 {
@@ -19,6 +19,10 @@ class AddOrderController extends Controller
 
     public function addOrder(Request $request)
     {
+        if ($request->user()->cannot('addOrder')) {
+            return abort(403);
+        }
+
         $user = $request->user();
         $id = intval($request->input('productId', 0));
         $quantity = intval($request->input('quantity'));
@@ -53,12 +57,14 @@ class AddOrderController extends Controller
 
     public function viewOrders(Request $request, User $user)
     {
+        Gate::authorize("isadmin");
+
         $orders = $user->orders;
         $orders->load('product');
 
         if ($request->isjson) {
             $this->response["data"] = $orders;
-            return json_encode($this->response, JSON_UNESCAPED_UNICODE,JSON_UNESCAPED_SLASHES);
+            return json_encode($this->response, JSON_UNESCAPED_UNICODE, JSON_UNESCAPED_SLASHES);
         }
 
         return view('admin.pages.userorders')->with('user', $user);
@@ -66,6 +72,7 @@ class AddOrderController extends Controller
 
     public function changeOrderStatus(Request $request, Order $order)
     {
+        Gate::authorize("isadmin");
         $order->status = "unactive";
         $order->save();
         return back()->with('status', 'updated');

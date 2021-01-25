@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -25,14 +26,13 @@ class ProductController extends Controller
          $data = Product::paginate(4);
          $view = 'admin.pages.products';
 
-         if(!Auth::check() && !$isJson){
-            return redirect()->route('login');
+         if (!Gate::allows('isadmin')) {
+            abort(403);
          }
+
       } else if (is_int(intval($id))) {
          $data = Product::findOrFail($id);
-      } else {
-         return redirect('/admin');
-      }
+      } 
 
       return $isJson ? response(json_encode($data, JSON_UNESCAPED_UNICODE), 200)
          : view($view)
@@ -41,28 +41,14 @@ class ProductController extends Controller
 
    public function deleteProduct(Request $request, Product $product)
    {
-      $product->delete();
-      return redirect('/admin');
+      if($request->user->cannot("delete",$product)){
+         abort(403);
+      }else{
+         $product->delete();
+         return redirect('/admin');
+      }
    }
    
-
-   public function addOrder(Request $request, Product $productId, int $quantity)
-   {
-      $all_orders = $request->user()->orders();
-      $orders = $all_orders->where('product_id', $productId->id);
-      $data = ["product_id" => $productId->id, "quantity" => $quantity];
-
-      if ($orders->doesntExist()) {
-         $all_orders->create($data);
-      } else {
-         $order = $orders->first();
-         $order->quantity = $quantity;
-         $order->save();
-      }
-
-      return response()->json(["status" => "added"]);
-   }
-
    public function getOrderList(Request $request)
    {
       $this->user = Auth::user();

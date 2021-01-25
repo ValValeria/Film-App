@@ -114,7 +114,7 @@ export const store = new Vuex.Store({
 
                         if(data.status=="ok"){
                             commit("clearUncheckOrders", v.id);
-                            commit("addOrders",[v]);
+                            commit("addUncheckedOrders",[v]);
                         }
                     }
                 });

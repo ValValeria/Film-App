@@ -16,6 +16,7 @@
                     </ol>
                 </nav>
             </div>
+            @if(Auth::user()->can('view',$data))
             <div class="product__actions w-100">
                 <div class="container center justify-content-end">
                     <div class="row pt-4 pb-4">
@@ -32,6 +33,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="product__title pt-3">
                 <h4 class="h2">Описание товара</h4>
             </div>
@@ -117,6 +119,26 @@
                                         </textarea>
                                     </div>
                                 </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row pt-4">
+                    <div class="col">
+                        <div class="product__full-descr card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h5 class="text-sm"> Состав</h5>
+                                </div>
+                                <div class="product__textarea inner-shadow">
+                                    <div>
+                                        <textarea class="form-control-plaintext" name="ingredients" cols="30" rows="2">
+                                        </textarea>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

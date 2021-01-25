@@ -20,6 +20,12 @@
                 </div>
             </div>
             <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Состав</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  hint="Назвиния продуктов отделяем ';'" name="ingredients">
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Полное описание</label>
                 <div class="col-sm-10">
                     <textarea type="text" class="form-control" name="long_description"></textarea>
@@ -47,7 +53,7 @@
                 <button type="submit" class="btn btn-dark mb-3 col-sm-2">Отправить</button>
             </div>
             <div class="row">
-                 @if ($errors->any())
+                @if ($errors->any())
                 <ul class="list-group">
                     @foreach ($errors->all() as $error)
                     <li class="list-group-item warn">{{ $error }}</li>

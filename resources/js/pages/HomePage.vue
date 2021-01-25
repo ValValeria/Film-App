@@ -1,8 +1,8 @@
 <template>
   <div class="w-100">
     <BannerComponent />
- 
-  <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
+
+    <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
       <template v-slot:title> Наше меню </template>
       <template #descr> Самое вкусное, самое ароматное </template>
       <template v-slot:content>
@@ -150,31 +150,30 @@ export default {
   margin-right: 10px;
 }
 
-.about-us__content{
-  background-image: url(/images/about-top.jpg) ;
-  background-size:cover;
+.about-us__content {
+  background-image: url(/images/about-top.jpg);
+  background-size: cover;
   background-attachment: fixed;
   background-position: center;
   position: relative;
 }
 
-.about-us__text{
+.about-us__text {
   position: relative;
-  z-index:2;
+  z-index: 2;
 }
 
-.about-us__content::after{
-  content:"";
-  display:block;
+.about-us__content::after {
+  content: "";
+  display: block;
   position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: #000;
-    opacity: 0.5;
+  opacity: 0.5;
 }
-
 
 .ad {
   height: 100%;

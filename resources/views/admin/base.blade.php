@@ -15,7 +15,7 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row">
+        <div class="container-wrap">
             <div class="nav__area col-3">
                 <nav class="navbar navbar-dark bg-dark d-flex align-items-start">
                     <div class="container-fluid wrap-md-pd">

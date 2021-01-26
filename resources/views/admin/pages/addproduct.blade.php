@@ -22,15 +22,17 @@
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Состав</label>
                 <div class="col-sm-10 text-left">
-                    <input type="text" class="form-control mb-2" id="text">
-                    <button class="btn btn-primary" id="btn">Добавить продукт</button>
-                </div>
-                <div class="col-sm-10 center flex-column align-items-start mt-2" style="padding-left:7rem;">
-                    <div class="form-check m-1" hidden id="checkbox">
-                        <input class="form-check-input" name="ingredients[]" type="checkbox" value="" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
+                    <div class="w-100">
+                        <input type="text" class="form-control mb-2" id="text">
+                        <button class="btn btn-primary" id="btn1">Добавить продукт</button>
+                    </div>
+                    <div class="col-sm-10 center flex-column align-items-start mt-2">
+                        <div class="form-check m-1" hidden id="checkbox">
+                            <input class="form-check-input" type="checkbox" value="" checked>
+                            <label class="form-check-label" for="flexCheckChecked">
 
-                        </label>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,18 +83,5 @@
     </div>
 </div>
 
-<script>
-    const checkbox = document.querySelector('#checkbox');
-    const button = document.querySelector('#btn');
-    const text = document.querySelector('#text');
-
-    button.addEventListener("click", ($event) => {
-        $event.preventDefault();
-        $event.stopPropagation();
-        const clone = checkbox.cloneNode(true);
-        clone.hidden = false;
-        clone.querySelector('.form-check-label').textContent = text.value;
-        checkbox.parentElement.append(clone);
-    })
-</script>
+<script src="/js/checkbox.js"></script>
 @endsection

@@ -25,34 +25,59 @@ class ProductController extends Controller
       if (Str::contains($request->url(), 'products')) {
          $data = Product::paginate(4);
          $view = 'admin.pages.products';
-
-         if (!Gate::allows('isadmin')) {
-            abort(403);
-         }
-
       } else if (is_int(intval($id))) {
          $data = Product::findOrFail($id);
-      } 
+      }
 
-      return $isJson ? response(json_encode($data, JSON_UNESCAPED_UNICODE), 200)
-         : view($view)
-         ->with('data', $data);
+      if ($isJson) {
+         return response(json_encode($data, JSON_UNESCAPED_UNICODE), 200);
+      } else if (Gate::allows('isadmin')) {
+         return view($view)
+            ->with('data', $data);
+      } else {
+         return redirect()->route('login');
+      }
    }
 
    public function deleteProduct(Request $request, Product $product)
    {
-      if($request->user->cannot("delete",$product)){
+      if ($request->user->cannot("delete", $product)) {
          abort(403);
-      }else{
+      } else {
          $product->delete();
          return redirect('/admin');
       }
    }
-   
+
    public function getOrderList(Request $request)
    {
       $this->user = Auth::user();
       $order_list = $this->user->orders();
       return $order_list->toJson();
+   }
+
+   public function getIngredients()
+   {
+      $result = Product::all()->pluck("ingredients");
+      $data = [];
+
+      foreach ($result as $value) {
+         $arr = json_decode($value,JSON_UNESCAPED_UNICODE);
+         $data = array_merge($data,$arr);
+      }
+
+      return $data;
+   }
+
+   public function getData()
+   {
+      $data = [
+         "ingredients" => $this->getIngredients(),
+         "max_price" => Product::all()->max('price'),
+         "min_price" => Product::all()->min('price'),
+         "max_weight" => Product::all()->max('weight'),
+         "min_weight" => Product::all()->max('weight'),
+      ];
+      return response(json_encode($data,JSON_UNESCAPED_UNICODE))->header('Content-Type','application/json');
    }
 }

@@ -22,7 +22,11 @@ trait Validate{
           'image'=> !$imageNeed?'image':'required|image',
           'price' => 'required|numeric',
           'weight'=>'numeric',
-          'ingredients'=>'required'
+          'ingredients'=>['required',function($attr,$value,$fail){
+              return collect($value)->every(function($val){
+                 return gettype($val)=="string";
+              });
+          }]
        ]);
 
        if ($validator->fails()) {

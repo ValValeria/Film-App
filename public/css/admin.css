@@ -1,137 +1,148 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --color: #212832;
 }
 
-body{
-    min-height:100vh;
-    width:100vw;
+body {
+    min-height: 100vh;
+    width: 100vw;
     overflow-x: hidden;
     color: var(--color);
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
-.nav__area{
-    height:100vh;
+.nav__area {
+    height: 100vh;
     position: sticky;
-    left:0;
-    top:0;
-    padding:0;
+    left: 0;
+    top: 0;
+    padding: 0;
 }
 
-.nav__area nav{
-    height:100%;
+.nav__area nav {
+    height: 100%;
 }
 
 .nav__area .navbar-brand {
     text-transform: uppercase;
-    text-align:center;
-    width:100%;
+    text-align: center;
+    width: 100%;
     line-height: normal;
     font-size: 2.25rem;
     font-weight: 500;
     color: white;
 }
 
-
-.nav__links a{
+.nav__links a {
     text-align: left;
     text-decoration: none;
     padding: 10px 0;
-    padding-left:10px;
+    padding-left: 10px;
 }
 
-.avatar{
-        border-radius: 50% !important;
+.avatar {
+    border-radius: 50% !important;
     overflow: hidden;
     width: 50px;
     height: 50px;
 }
 
-h5{
+h5 {
     font-weight: 400 !important;
 }
 
-h4{
+h4 {
     font-weight: 300 !important;
 }
 
-.card-container{
+.card-container {
     display: grid;
     grid-auto-rows: auto;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 10px;
-    padding-top:1rem;
+    padding-top: 1rem;
 }
 
-.card-section{
+.card-section {
     margin: 2rem 0 !important;
 }
 
-.inner-shadow{
-     box-shadow: inset 2px 2px 5px #babecc,
-              inset -5px -5px 10px #ffffff73 !important;
+.card-body-row {
+    display: flex;
 }
 
-.text-sm{
+.card-body-row label,
+.card-body-row div {
+    flex: 1 1 33%;
+}
+
+.inner-shadow {
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73 !important;
+}
+
+.text-sm {
     font-size: 26px;
     font-weight: 560 !important;
-    text-align:center;
+    text-align: center;
 }
 
-.h1,.h2,.h3,.h4,.p{
-    font-family: 'Montserrat', sans-serif;
-    font-weight:400;
+.h1,
+.h2,
+.h3,
+.h4,
+.p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
     line-height: 1.2;
 }
 
-.h1{
-    font-size:48px;
+.h1 {
+    font-size: 48px;
     margin-bottom: 25px;
 }
 
-.h2{
-    font-size:36px;
+.h2 {
+    font-size: 36px;
     margin-bottom: 25px;
 }
 
-.text-white{
-    color:white !important;
+.text-white {
+    color: white !important;
 }
 
-.h3{
+.h3 {
     font-size: 24px;
     margin-bottom: 25px;
 }
 
-.h4,.p{
+.h4,
+.p {
     font-size: 14px;
     line-height: 1.3 !important;
 }
 
-textarea{
+textarea {
     outline: none;
 }
 
-.card-image-top{
+.card-image-top {
     height: 250px;
     width: 250px;
     object-fit: contain;
 }
 
-.headline{
-     font-size: 34px;
+.headline {
+    font-size: 34px;
 }
 
-.font-upper{
+.font-upper {
     font-weight: 300;
     text-transform: uppercase;
     text-align: center;
@@ -139,50 +150,49 @@ textarea{
     letter-spacing: 1px;
 }
 
-.nav__links{
-    padding-top:2rem;
+.nav__links {
+    padding-top: 2rem;
 }
 
-.wrap-md-pd{
+.wrap-md-pd {
     padding: 3rem 0;
-    width:90%;
-    margin:0 auto;
+    width: 90%;
+    margin: 0 auto;
 }
 
-.wrap-md{
-    width:90%;
-    margin:0 auto;
+.wrap-md {
+    width: 90%;
+    margin: 0 auto;
 }
 
-
-.login__form{
-   max-width:400px;
-   text-align:left;
-   padding-top:2rem;
+.login__form {
+    max-width: 400px;
+    text-align: left;
+    padding-top: 2rem;
 }
 
-.center{
-    display:flex;
+.center {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-
-.product__title h4, .product__title{
+.product__title h4,
+.product__title {
     font-size: 37px;
     padding: 1.5rem 0;
     line-height: 1.2;
 }
 
-.nav__area{
+.nav__area {
     box-shadow: 0.15rem 0 1.75rem 0 rgba(33, 40, 50, 0.15);
 }
 
-.nav__area nav{
-    background-image: linear-gradient(135deg,#FFCFC5 0%, rgba(105, 0, 199, 0.8) 100%);
+.nav__area nav {
+    background-image: linear-gradient(135deg, #ffcfc5 0%, rgba(105, 0, 199, 0.8) 100%);
 }
 
-.login__form-area{
+.login__form-area {
     width: 80%;
     max-width: 500px;
     padding: 2rem;
@@ -190,32 +200,36 @@ textarea{
     margin-top: 2rem;
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--color) !important;
 }
 
-.shadow{
+.shadow {
     box-shadow: 0.15rem 0 1.75rem 0 rgba(33, 40, 50, 0.15);
 }
 
-.nav__links a{
+.nav__links a {
     color: white !important;
     font-weight: 400;
-    font-size: 22px
+    font-size: 22px;
 }
 
+.card-title .text-sm{
+    margin-bottom: 2rem;
+}
 
-.greeting,.admin-info{
+.greeting,
+.admin-info {
     margin: 2rem 0 !important;
 }
 
-.text-primary{
+.text-primary {
     color: var(--color) !important;
 }
 
-.title-sm{
-        display: flex;
+.title-sm {
+    display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 0.5625rem;
@@ -227,19 +241,54 @@ a{
     line-height: 1.2;
 }
 
-.profile-info{
+.profile-info {
     position: sticky;
-    left:0;
-    width:100%;
-    top:0;
-    z-index:99;
+    left: 0;
+    width: 100%;
+    top: 0;
+    z-index: 99;
 }
 
-.content{
+.content {
     position: relative;
+    padding: 0;
+}
+
+.card {
+    padding: 2rem;
+}
+
+.container-wrap{
+    display:flex;
+    justify-content: center;
+    width:100%;
+}
+
+.container-wrap .nav__area{
+    flex: 1 1 30%;
+    width:30%;
+}
+
+body > .container-fluid{
     padding:0;
 }
 
-.card{
-    padding:2rem;
+.container-wrap .content{
+    flex:1 1 70%;
+    width:70%;
+}
+
+@media (max-width: 1150px) {
+    .product__content > div:nth-child(1) {
+        flex-direction: column;
+    }
+
+    .product__content > div:nth-child(1) .carousel {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .nav__links a{
+       font-size:17px;
+    }
 }

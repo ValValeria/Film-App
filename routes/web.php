@@ -46,8 +46,9 @@ Route::middleware(["cors","json_auth"])->group(function () {
             Route::get('/view-orders/{user}', [AddOrderController::class, 'viewOrders']);
             Route::get('/view-messages/{user}',MessagesController::class);
         });
-
+        
         Route::get('/product-sort', ProductSortController::class);
+        Route::get('/get-ingredients', [ProductController::class, 'getData']);
     });
 });
 

@@ -38,8 +38,8 @@
                 <h4 class="h2">Описание товара</h4>
             </div>
             @if(session('status'))
-            <div class="row pt-2">
-                <div class="alert alert-success" role="alert">
+            <div class="row pt-2 w-100">
+                <div class="alert alert-success w-100" role="alert">
                     Ваш пост был обновлён. <a href="/product/{{$data->id}}" class="alert-link">Ссылка на пост</a>
                 </div>
             </div>
@@ -64,18 +64,18 @@
                                 <div class="card-title pb-1">
                                     <input type="text" name="short_description" id="" class="form-control-plaintext text-center" value="{{$data->short_description}}">
                                 </div>
-                                <div class="row ">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label">
+                                <div class="row card-body-row w-100">
+                                    <label for="staticEmail" class="col-3 col-form-label">
                                         <strong>Цена</strong>
                                     </label>
-                                    <div class="col-sm-4">
+                                    <div class="col-4">
                                         <input type="number" name="price" class="form-control-plaintext" value="{{$data->price}}">
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-3">
                                         <input type="text" readonly class="form-control-plaintext" value="грн">
                                     </div>
                                 </div>
-                                <div class="row ">
+                                <div class="row card-body-row">
                                     <label for="staticEmail" class="col-sm-3 col-form-label">
                                         <strong>Вес</strong>
                                     </label>
@@ -86,20 +86,20 @@
                                         <input type="text" readonly class="form-control-plaintext" value="грамм">
                                     </div>
                                 </div>
-                                <div class="row pt-3 center">
-                                    <div class="col-8 align-self-center">
+                                <div class="pt-3 centerflex-column w-100">
+                                    <div class="w-100 mb-1">
                                         <a href="/product/{{$data->id}}" class="btn btn-block btn-warning w-100">
                                             Смотреть на сайте
                                         </a>
                                     </div>
-                                </div>
-                                <div class="row pt-3 center">
-                                    <div class="col-8 align-self-center" id="download">
+
+                                    <div class="w-100" id="download">
                                         <button class="btn btn-block btn-dark w-100">
                                             Обновить картинку
                                         </button>
                                     </div>
                                 </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -108,13 +108,13 @@
                 <div class="row pt-4">
                     <div class="col">
                         <div class="product__full-descr card">
-                            <div class="card-body">
+                            <div class="card-body w-100">
                                 <div class="card-title">
                                     <h5 class="text-sm"> Полное oписание</h5>
                                 </div>
-                                <div class="product__textarea inner-shadow">
-                                    <div>
-                                        <textarea class="form-control-plaintext" name="long_description" cols="30" rows="2">
+                                <div class="product__textarea w-100">
+                                    <div class="w-100">
+                                        <textarea class="form-control p-2" name="long_description" cols="30" rows="2">
                                         {{$data->long_description}}
                                         </textarea>
                                     </div>
@@ -136,15 +136,23 @@
                                     <div>
                                         <div class="row center">
                                             <input type="text" class="form-control ml-2" id="text">
-                                            <button class="btn btn-primary mt-2" id="btn">Добавить продукт</button>
+                                            <button class="btn btn-primary mt-2" id="btn1">Обновить состав</button>
                                         </div>
+
                                         <div class="row  mt-2">
                                             <div class="form-check m-1" hidden id="checkbox">
-                                                <input class="form-check-input" name="ingredients[]" type="checkbox" value="" checked>
+                                                <input class="form-check-input" type="checkbox" value="" checked>
                                                 <label class="form-check-label" for="flexCheckChecked">
-
                                                 </label>
                                             </div>
+                                            @foreach(json_decode($data->ingredients) as $ingredient)
+                                            <div class="form-check m-1" id="checkbox">
+                                                <input class="form-check-input" type="checkbox" value="{{$ingredient}}" checked>
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    {{$ingredient}}
+                                                </label>
+                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -184,18 +192,5 @@
     };
 </script>
 
-<script>
-    const checkbox = document.querySelector('#checkbox');
-    const button = document.querySelector('#btn');
-    const text = document.querySelector('#text');
-
-    button.addEventListener("click", ($event) => {
-        $event.preventDefault();
-        $event.stopPropagation();
-        const clone = checkbox.cloneNode(true);
-        clone.hidden = false;
-        clone.querySelector('.form-check-label').textContent = text.value;
-        checkbox.parentElement.append(clone);
-    })
-</script>
+<script src="/js/checkbox.js"></script>
 @endsection

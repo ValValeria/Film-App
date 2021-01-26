@@ -40,6 +40,9 @@ class ProductSortController extends Controller
                         $product = $product->whereBetween('weight',[intval($min_weight), intval($max_weight)]);
                         break;
 
+                    case 'ingredients':
+                        $ingredients = $request->query('ingredients',[]);
+                        $product = $product->whereJsonContains('ingredients',$ingredients);
                     default:
                         break;
                 }

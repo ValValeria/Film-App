@@ -69,12 +69,4 @@ class AddOrderController extends Controller
 
         return view('admin.pages.userorders')->with('user', $user);
     }
-
-    public function changeOrderStatus(Request $request, Order $order)
-    {
-        Gate::authorize("isadmin");
-        $order->status = "unactive";
-        $order->save();
-        return back()->with('status', 'updated');
-    }
 }

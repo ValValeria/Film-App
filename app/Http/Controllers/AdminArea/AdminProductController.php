@@ -4,8 +4,6 @@ namespace App\Http\Controllers\AdminArea;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Rules\AuthRule;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,7 +12,7 @@ trait Validate{
    public function validateData(Request $request, $callback, $url="",$imageNeed=true)
     {
        $data = $request->only(['title','short_description',
-                               'long_description','image',
+                               'long_description','image','ingredients',
                                'price']); 
 
        $validator = Validator::make($data,[
@@ -23,7 +21,8 @@ trait Validate{
           'long_description'=>'required|min:10|max:200',
           'image'=> !$imageNeed?'image':'required|image',
           'price' => 'required|numeric',
-          'weight'=>'numeric'
+          'weight'=>'numeric',
+          'ingredients'=>'required'
        ]);
 
        if ($validator->fails()) {
@@ -56,7 +55,8 @@ class AdminProductController extends Controller{
 
            if ($request->hasFile('image')) {
                $file = $request->file('image');
-               $data['image'] = Storage::disk('public')->putFileAs('images', $file, $file->getClientOriginalName());
+               $data['ingredients'] = json_encode($request->ingredients, JSON_UNESCAPED_UNICODE);
+               $data['image'] = $file->storeAs('images', $file->getClientOriginalName(),'public');
            } else{
                unset($data['image']);
            }
@@ -71,12 +71,9 @@ class AdminProductController extends Controller{
 
     public function addProduct(Request $request)
     {
-       $response = $this->validateData($request, function(){
+       $response = $this->validateData($request, function($request){
            $file = $request->file('image');
-           $path = Storage::disk('public')->putFileAs('images',
-                                       $file,
-                                       $file->getClientOriginalName());
-
+           $path = $file->storeAs('images', $file->getClientOriginalName()+$request->user()->id,'public');
            $product = new Product();
            $product->image = $path;
            $product->short_description = $request->short_description;
@@ -84,6 +81,7 @@ class AdminProductController extends Controller{
            $product->title = $request->title;
            $product->price = $request->price;
            $product->weight = $request->input('weight','400');
+           $product->ingredients = json_encode($request->input('ingredients',[]), JSON_UNESCAPED_UNICODE);
            $product->save();
 
            return redirect($request->path())->with("status",'added');
@@ -92,4 +90,3 @@ class AdminProductController extends Controller{
        return $response;
     }
 }
-?>

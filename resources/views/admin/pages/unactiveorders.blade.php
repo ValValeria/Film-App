@@ -12,7 +12,7 @@
                         Неактивные заказы
                     </h1>
                     <h4 class="h4 text-center p-4">
-                        <a href="/admin/orders">Посмотреть активные заказы. У вас их {{$orders->count()}}</a>
+                        <a href="/admin/orders">Посмотреть активные заказы. У вас их {{$count}}</a>
                     </h4>
                     <table class="table">
                         <thead>

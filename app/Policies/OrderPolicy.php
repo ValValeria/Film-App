@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Optional;
 
 class OrderPolicy
 {
@@ -39,8 +40,13 @@ class OrderPolicy
         return $user->id == $order->user->id;
     }
 
-    public function addOrder(User $user, Order $order)
+    public function addOrder(User $user)
     {
         return $user->status!="admin";
+    }
+
+    public function update(User $user, ?Order $order)
+    {
+        return $user->id == optional($order)->user->id;
     }
 }

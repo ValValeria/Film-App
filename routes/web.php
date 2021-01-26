@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminArea\UsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AddOrderController;
 use App\Http\Controllers\AdminArea\LogoutController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ProductSortController;
 
 Route::prefix('admin')->group(function () {
@@ -25,7 +26,7 @@ Route::prefix('admin')->group(function () {
        Route::get('/user/{user}', [AddOrderController::class, 'viewOrders']);
        Route::get('/users', UsersController::class);
        Route::get('/logout',LogoutController::class);
-       Route::get('/change-order-status/{order}',[AddOrderController::class,'changeOrderStatus']);
+       Route::post('/change-order-status',[AdminOrderController::class,'changeOrderStatus']);
     });
     
     Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
@@ -39,8 +40,13 @@ Route::middleware(["cors","json_auth"])->group(function () {
     Route::prefix("api")->group(function () {
         Route::post('/login', [AuthController::class, 'index'])->name('api.login');
         Route::post('/signin', [AuthController::class, 'index'])->name('api.signup');
-        Route::get('/addorder', [AddOrderController::class, 'addOrder']);
-        Route::get('/view-orders/{user}', [AddOrderController::class, 'viewOrders']);
+
+        Route::middleware(['auth'])->group(function(){
+            Route::get('/addorder', [AddOrderController::class, 'addOrder']);
+            Route::get('/view-orders/{user}', [AddOrderController::class, 'viewOrders']);
+            Route::get('/view-messages/{user}',MessagesController::class);
+        });
+
         Route::get('/product-sort', ProductSortController::class);
     });
 });

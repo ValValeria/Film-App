@@ -132,10 +132,20 @@
                                 <div class="card-title">
                                     <h5 class="text-sm"> Состав</h5>
                                 </div>
-                                <div class="product__textarea inner-shadow">
+                                <div class="product__textarea">
                                     <div>
-                                        <textarea class="form-control-plaintext" name="ingredients" cols="30" rows="2">
-                                        </textarea>
+                                        <div class="row center">
+                                            <input type="text" class="form-control ml-2" id="text">
+                                            <button class="btn btn-primary mt-2" id="btn">Добавить продукт</button>
+                                        </div>
+                                        <div class="row  mt-2">
+                                            <div class="form-check m-1" hidden id="checkbox">
+                                                <input class="form-check-input" name="ingredients[]" type="checkbox" value="" checked>
+                                                <label class="form-check-label" for="flexCheckChecked">
+
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -172,5 +182,20 @@
             btn.classList.add('btn-light')
         })
     };
+</script>
+
+<script>
+    const checkbox = document.querySelector('#checkbox');
+    const button = document.querySelector('#btn');
+    const text = document.querySelector('#text');
+
+    button.addEventListener("click", ($event) => {
+        $event.preventDefault();
+        $event.stopPropagation();
+        const clone = checkbox.cloneNode(true);
+        clone.hidden = false;
+        clone.querySelector('.form-check-label').textContent = text.value;
+        checkbox.parentElement.append(clone);
+    })
 </script>
 @endsection

@@ -3,10 +3,11 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Policies\OrderPolicy;
+use App\Policies\MessagePolicy;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Message;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         'App\Models\Order'=>'App\Policies\OrderPolicy',
         'App\Models\Product' => 'App\Policies\ProductPolicy',
+        Message::class=>MessagePolicy::class
     ];
 
     /**
@@ -35,6 +37,12 @@ class AuthServiceProvider extends ServiceProvider
                             ? Response::allow()
                             : Response::deny(json_encode(["errors"=>["You are not the admin"]]));
                                             
+        });
+
+        Gate::define("view-messages", function (User $user, User $user2) {
+            return $user->id == $user2->id
+                ? Response::allow()
+                : Response::deny(json_encode(["errors" => ["You are allowed"]]));
         });
     }
 }

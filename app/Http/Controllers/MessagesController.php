@@ -14,9 +14,9 @@ class MessagesController extends Controller
     public function __invoke(User $user)
     {
         if (Gate::allows("view-messages", $user)) {
-            $messages = Message::all();
+            $messages = Message::where('status','un_read');
             
-            Message::where('status','un_read')->update(["status"=>"read"]);
+            $messages->update(["status"=>"read"]);
             
             return response(json_encode(["data"=>$messages]),JSON_UNESCAPED_UNICODE);
         } else {

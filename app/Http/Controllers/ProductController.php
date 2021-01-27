@@ -53,7 +53,13 @@ class ProductController extends Controller
    {
       $this->user = Auth::user();
       $order_list = $this->user->orders();
-      return $order_list->toJson();
+      $data = [];
+
+      foreach($order_list->get() as $order){
+         $data[]=["title"=>$order->product->title,"quantity"=>$order->quantity,"product_id"=>$order->product->id,"price"=>$order->product->price];
+      }
+
+      return ["data"=>$data];
    }
 
    public function getIngredients()

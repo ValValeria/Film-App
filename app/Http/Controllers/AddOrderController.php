@@ -19,10 +19,6 @@ class AddOrderController extends Controller
 
     public function addOrder(Request $request)
     {
-        if ($request->user()->cannot('addOrder')) {
-            return abort(403);
-        }
-
         $user = $request->user();
         $id = intval($request->input('productId', 0));
         $quantity = intval($request->input('quantity'));
@@ -44,10 +40,11 @@ class AddOrderController extends Controller
                         "product_id" => $product->id,
                         "quantity" => $quantity,
                         "user_id" => $user->id,
-                        "created_at" => date('Y-m-d')
+                        "created_at" => date('Y-m-d'),
+                        "location"=>$request->input('location','')
                     ]);
                 }
-                $this->response["data"] = "ok";
+                $this->response["status"] = "ok";
                 $user->refresh();
             }
 

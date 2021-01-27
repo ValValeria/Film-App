@@ -73,6 +73,19 @@
                       /
                       <span>{{ product.weight }} грамм</span>
                     </div>
+                    <div class="product__count justify-content-start">
+                      <div class="w-100">
+                        <v-text-field
+                          v-model="count"
+                          label="Количество"
+                          outlined
+                          type="number"
+                          clearable
+                          hint="Укажите желаемое количество."
+                          persistent-hint
+                        ></v-text-field>
+                      </div>
+                    </div>
                     <div class="product__btn">
                       <v-btn
                         color="bg-red"
@@ -109,7 +122,30 @@
                         <div class="product__expension-text">Состав</div>
                       </v-expansion-panel-header>
                       <v-expansion-panel-content>
-                        <div class="product__expension-text"></div>
+                        <div class="product__expension-text">
+                          <div
+                            v-if="product.ingredients"
+                            class="product__ingredients"
+                          >
+                            <div
+                              class=""
+                              v-for="ingredient in JSON.parse(
+                                product.ingredients
+                              )"
+                              :key="ingredient"
+                              style="justify-self: start"
+                            >
+                              <v-checkbox
+                                :label="ingredient"
+                                color="orange"
+                                value="orange"
+                                hide-details
+                                :v-model="true"
+                              ></v-checkbox>
+                            </div>
+                          </div>
+                          <div v-else>Не указано</div>
+                        </div>
                       </v-expansion-panel-content>
                     </v-expansion-panel>
                   </v-expansion-panels>
@@ -195,7 +231,8 @@ export default {
         "Оливковое масло",
       ],
       selectedItem: 2,
-      snackbar:false
+      snackbar: false,
+      count:1
     };
   },
   props: {
@@ -225,7 +262,9 @@ export default {
   },
   methods: {
     addToOrders(product) {
-      this.$store.commit("addUncheckOrders", [product]);
+      const date = new Date();
+      const strDate = `${date.getHours()}:${date.getMinutes()} ${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+      this.$store.commit("addUncheckOrders", [{...product,quantity:this.count,date: strDate}]);
       this.snackbar = true;
     },
   },
@@ -246,6 +285,14 @@ export default {
 .product__info {
   width: 100%;
   grid-column: span 2;
+}
+
+.product__count{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:11px;
 }
 
 .product__info {
@@ -274,6 +321,13 @@ export default {
 .product__available {
   color: #00bb16;
   font-size: 16px;
+  font-weight: 400;
+  /* font-family: 'GothamPro', 'geometria', Arial, Helvetica, sans-serif; */
+  line-height: 30px;
+}
+
+.product__count{
+    font-size: 16px;
   font-weight: 400;
   /* font-family: 'GothamPro', 'geometria', Arial, Helvetica, sans-serif; */
   line-height: 30px;
@@ -320,6 +374,17 @@ export default {
 
 .breadcrumps {
   margin-bottom: 2.5rem;
+}
+
+.product__ingredients {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  > div {
+    flex: 1 1 20%;
+    min-width: 120px;
+  }
 }
 
 @media screen and (min-width: 1000px) {

@@ -50,7 +50,13 @@
         <div class="w-100">
           <v-card flat class="w-100 form__card p-4">
             <div class="w-100">
-              <form class="w-100" @submit.prevent id="form" :v-model="isValid" ref="form">
+              <form
+                class="w-100"
+                @submit.prevent
+                id="form"
+                :v-model="isValid"
+                ref="form"
+              >
                 <v-text-field
                   label="Имейл"
                   class="w-100"
@@ -115,7 +121,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 import FormLayout from "../layouts/FormLayout";
 
 export default {
@@ -161,11 +167,14 @@ export default {
       return this.$route.matched.some((v) => v.meta.isLogin);
     },
     ...mapState({
-      isAuth:(state)=>state.user.isAuth
-    })
+      isAuth: (state) => {
+        const status = state.user.isAuth;
+        return status;
+      },
+    }),
   },
   methods: {
-    async submit($event) {      
+    async submit($event) {
       let isValid = this.email.length && this.password.length;
 
       if (!this.isLogin) {
@@ -175,11 +184,11 @@ export default {
       if (isValid) {
         const formdata = new FormData();
 
-        formdata.append('email',this.email);
-        formdata.append('password',this.password);
-       
-        if(!this.isLogin){
-          formdata.append('username',this.username);
+        formdata.append("email", this.email);
+        formdata.append("password", this.password);
+
+        if (!this.isLogin) {
+          formdata.append("username", this.username);
         }
 
         const response = await fetch(
@@ -196,7 +205,7 @@ export default {
           if (data.status == "user") {
             this.$store.commit("authenticate", data.data);
             localStorage.setItem("data", JSON.stringify(data.data));
-            this.$router.push({name:"admin-panel"});
+            this.$router.push({ name: "admin-panel" });
           } else {
             const errors = Object.values(data.errors).join(". ");
             this.messageText = errors;
@@ -210,9 +219,11 @@ export default {
     },
   },
   watch:{
-     isAuth(){
-        if(this.isAuth) this.$router.push({name:"admin-panel"})
-     }
+    isAuth(value){
+      if(value){
+           this.$router.push({name:"admin"});       
+      }
+    }
   }
 };
 </script>

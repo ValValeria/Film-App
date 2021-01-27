@@ -177,7 +177,7 @@ export default {
 
 .products__search {
   position: sticky;
-  top: 4.5rem;
+  top: 6rem;
   left: 0;
   width: 100%;
   z-index: 999;

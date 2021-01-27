@@ -14,12 +14,7 @@ const routes = [
     {path:"/product/:id", component: ProductPage},
     {path: "/products", component: ProductsPage },
     {path: "/contacts", component: ContactPage },
-    { path:'/orders-list', component: OrderListPage, beforeEnter:function(to,from,next){
-       if(!store.state.user.isAuth) {
-          return next('/login')
-       }  
-       return next();
-    }, name:"admin-panel"},
+    { path:'/orders-list', component: OrderListPage, name:"admin"},
     {path:"/login",component: AuthPage, meta: {isLogin:true},name:"login"},
     {path:"/signup", component: AuthPage, meta: {isLogin:false}, name:'signup'},
     {path: "*", component: NotFoundPage}

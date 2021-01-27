@@ -30,7 +30,7 @@
                     </v-alert>
                     <v-alert border="right" class="w-100" type="warning" dark>
                       У вас в корзине находиться
-                      {{activeOrders.length }} товаров
+                      {{ product_list.length }} товаров
                     </v-alert>
                     <v-alert border="right" class="w-100" type="success" dark>
                       Вы являетесь нашим покупателем больше 1 года
@@ -95,7 +95,7 @@
                       </thead>
                       <tbody>
                         <tr
-                          v-for="(item, index) in activeOrders"
+                          v-for="(item, index) in product_list"
                           :key="item.title + Math.random()"
                         >
                           <td>
@@ -103,7 +103,7 @@
                           </td>
                           <td>
                             <router-link
-                              :to="'/product/' + item.id"
+                              :to="'/product/' + item.product_id"
                               style="color: #212121"
                             >
                               {{ item.title }}
@@ -117,13 +117,32 @@
                     </template>
                   </v-simple-table>
                 </v-card-text>
-                <v-card-text class="center justify-content-end w-100" v-if="activeOrders.length">
-                  <v-btn depressed color="error" @click="checkOrder()"> Потвердить заказ </v-btn>
+                <v-card-text
+                 v-if="product_list.length"
+                >
+                <v-text-field
+                v-model="location"
+                persistent-hint
+                hint="Укажите ваш правильный адрес"
+                outlined
+                >
+                 <template #label>
+                   Ваш адрес
+                 </template>
+                </v-text-field>
+                </v-card-text>
+                <v-card-text
+                  class="center justify-content-end w-100"
+                  v-if="product_list.length"
+                >
+                  <v-btn depressed color="error" @click="checkOrder()">
+                    Потвердить заказ
+                  </v-btn>
                 </v-card-text>
               </v-card>
               <v-card outlined class="mt-4 p-4 w-100">
                 <v-card-title class="w-100 center"
-                  >Купленные товары</v-card-title
+                  >Приготовленные заказы</v-card-title
                 >
                 <v-card-text>
                   <v-simple-table>
@@ -148,7 +167,48 @@
                           </td>
                           <td>
                             <router-link
-                              :to="'/product/' + item.id"
+                              :to="'/product/' + item.product_id"
+                              style="color: #212121"
+                            >
+                              {{ item.title }}
+                            </router-link>
+                          </td>
+                          <td>{{ item.price }}</td>
+                          <td>{{ item.count }}</td>
+                          <td>{{ item.date }}</td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
+                </v-card-text>
+              </v-card>
+              <v-card outlined class="mt-4 p-4 w-100">
+                <v-card-title class="w-100 center"
+                  >Заказы, которые ещё готовяться</v-card-title
+                >
+                <v-card-text>
+                  <v-simple-table>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">№</th>
+                          <th class="text-left">Название</th>
+                          <th class="text-left">Цена</th>
+                          <th class="text-left">Количество</th>
+                          <th class="text-left">Дата</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(item, index) in activeOrders"
+                          :key="item.title + Math.random()"
+                        >
+                          <td>
+                            {{ index + 1 }}
+                          </td>
+                          <td>
+                            <router-link
+                              :to="'/product/' + item.product_id"
                               style="color: #212121"
                             >
                               {{ item.title }}
@@ -190,22 +250,26 @@
 import BasicLayout from "../layouts/VBasicLayout";
 import { mapGetters, mapState } from "vuex";
 import GridLayout from "../layouts/GridLayout";
+import { store } from '../store';
 
 export default {
   components: {
     BasicLayout,
     GridLayout,
   },
+  data:function(){
+   return {location:""};
+  },
   computed: {
     ...mapState({
-    orders: (state) => state.user.orders,
-    user: (state) => state.user,
-    isAuth: (state) => state.user.isAuth,
+      user: (state) => state.user,
+      isAuth: (state) => state.user.isAuth,
+      product_list: (state) => state.user.uncheckedOrders,
     }),
     ...mapGetters({
-      unactiveOrders:'getActiveOrders',
-      activeOrders:'getUnactiveOrders'
-    })
+      unactiveOrders: "getUnactiveOrders",
+      activeOrders: "getActiveOrders",
+    }),
   },
   async mounted() {
     if (this.user.id && this.isAuth) {
@@ -221,21 +285,17 @@ export default {
       if (response.ok) {
         const data = await response.json();
         this.$store.commit("addOrders", data.data || []);
+        console.log(data.data)
       }
     } else {
       this.$router.push({ name: "login" });
     }
   },
-  watch: {
-    isAuth() {
-      if (!this.isAuth) this.$router.push({ name: "login" });
+  methods: {
+    checkOrder() {
+      this.$store.dispatch("addOrderToServer",{location:this.location});
     },
   },
-  methods:{
-    checkOrder(){
-      this.$store.dispatch("addOrderToServer")
-    }
-  }
 };
 </script>
 

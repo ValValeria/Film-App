@@ -91,12 +91,11 @@ export default {
           const data = await response.json();
 
           if(data.status=="user"){
-            this.$store.commit("authenticate",data.data);
+            this.$store.commit("authenticate",{
+              data:data.data
+            });
             localStorage.setItem("data", JSON.stringify(data.data));
-          } else{
-            const errors = data.errors.join('. ');
-            this.messageText = errors;
-            this.showSnackBar = true;
+            console.log("Status: user")
           }
         }
     } catch (error) {

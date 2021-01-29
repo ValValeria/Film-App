@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\AdminArea\LogoutController;
 use App\Http\Controllers\AuthController;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JsonAuth
 {
@@ -17,7 +19,7 @@ class JsonAuth
      */
     public function handle(Request $request, Closure $next)
     { 
-        if(!$request->route()->named('api.login') && !$request->route()->named('api.signup')){
+        if(!$request->is("admin/*") && $request->hasHeader("Auth")){
             (new AuthController())->base_index($request);
         }
         return $next($request);

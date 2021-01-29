@@ -5,17 +5,21 @@
         <h1 class="brand-name text-left">
           <router-link to="/">MyPizza</router-link>
         </h1>
-        <HeaderLinks />
+        <HeaderLinks v-on:log-out="logout()" />
       </div>
     </v-system-bar>
 
     <div class="navigation-media">
       <v-expansion-panels>
         <v-expansion-panel class="center">
-          <v-expansion-panel-header expand-icon="list">
+          <v-expansion-panel-header
+            expand-icon="list"
+            class="navigation-media__main position-relative"
+          >
             <h1 class="brand-name text-left">
               <router-link to="/">MyPizza</router-link>
             </h1>
+            <ProfileIconComponent class="navigation-media__avatar" />
           </v-expansion-panel-header>
           <v-expansion-panel-content class="w-100">
             <div class="navigation-media__content">
@@ -25,6 +29,11 @@
                     {{ obj.name }}
                   </v-btn>
                 </router-link>
+              </div>
+              <div class="w-100 mb-1">
+                <v-btn text class="w-100" v-if="isAuth" v-on:click="logout">
+                  Выйти
+                </v-btn>
               </div>
             </div>
           </v-expansion-panel-content>
@@ -59,7 +68,11 @@ import BannerComponent from './components/VBanner';
 import FooterComponent from './components/VFooter';
 import HeaderLinks from './components/VHeaderLinks';
 import TabsComponent from './components/VTabs';
-import {LINKS} from './constants/route'
+import ProfileIconComponent from './components/VProfileIcon'
+import {LINKS} from './constants/route';
+import {mapState} from 'vuex';
+import Vue from 'vue'
+
 
 export default {
   components:{
@@ -67,41 +80,65 @@ export default {
     BannerComponent,
     FooterComponent,
     HeaderLinks,
-    TabsComponent
+    TabsComponent,
+    ProfileIconComponent
   },
+  computed:mapState({
+    isAuth:state=>state.user.isAuth,
+    uncheckedOrders: state=>state.user.uncheckedOrders
+  }),
   data:function(){
-    return ({drawer: false,showMenu:true, links: [...LINKS]});
+    return ({drawer: false,showMenu:true, links: [...LINKS],showAvatar:true});
+  },
+  beforeMount() {
+    window.onresize = () => {
+      if (window.matchMedia("(max-width: 1160px)").matches) {
+          this.showAvatar = false;
+      } else {
+          this.showAvatar = true;
+      }
+    };
   },
   async mounted(){
     try {
-        const formdata = new FormData();
-
-        const input = JSON.parse(localStorage.getItem('data'));
-
-        Object.entries(input).forEach(([key,value])=>{
-             formdata.append(key,value);
-        });
+        if(!localStorage.getItem("data").length) return ;
 
         const response = await fetch(`/api/login`,{
           method: 'POST',
-          body: formdata
+          headers:{
+            "Auth":localStorage.getItem('data')
+          }
         });
 
         if(response.ok){
           const data = await response.json();
 
           if(data.status=="user"){
-            this.$store.commit("authenticate",{
-              data:data.data
-            });
-            localStorage.setItem("data", JSON.stringify(data.data));
+            this.$store.commit("authenticate",data.data);
             console.log("Status: user")
+
+            window.onbeforeunload = ()=>{
+                if(uncheckedOrders.length>0){
+                  localStorage.setItem("uncheckedOrders",JSON.stringify(this.uncheckedOrders,null,3));
+                }
+                return true; 
+            }
+            
+            if(localStorage.getItem('uncheckedOrders')){
+              const uncheckedOrders = JSON.parse(localStorage.getItem("uncheckedOrders"));
+              this.$store.commit("addUncheckOrders", uncheckedOrders);
+            }
           }
         }
     } catch (error) {
       console.log('Invalid data '+ error.message )
     }   
-  }
+  },
+  methods:{
+    logout(){
+      this.$store.commit("logout");
+    }
+  },
 };
 </script>
 
@@ -112,7 +149,7 @@ export default {
 }
 .brand-name a {
   font-weight: 400;
-  color: rgba(0,0,0,.87) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 .wrap-md-pd {
   width: 90%;
@@ -131,8 +168,9 @@ export default {
   padding-left: var(--paddingLeft) !important;
 }
 
-.nav-not-media,.footer-wh{
- background-color:white !important;
+.nav-not-media,
+.footer-wh {
+  background-color: white !important;
 }
 
 nav {
@@ -178,7 +216,14 @@ nav {
   }
 }
 
-@media (max-width: 1000px) {
+.navigation-media__main .navigation-media__avatar {
+  right: 4rem;
+  top: 20px;
+  max-width: 40px;
+  position: absolute;
+}
+
+@media (max-width: 1160px) {
   .navigation-media {
     display: block;
   }
@@ -187,6 +232,12 @@ nav {
   }
   .first-slide {
     padding-top: 72px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .wrap-md-pd {
+    padding: 4.5rem 0 !important;
   }
 }
 </style>

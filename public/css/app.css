@@ -11036,3 +11036,21 @@ a {
   font-size: 16px;
 }
 
+/* полоса прокрутки (скроллбар) */
+
+::-webkit-scrollbar {
+  width: 24px;
+  /* ширина для вертикального скролла */
+  height: 8px;
+  /* высота для горизонтального скролла */
+  background-color: #e8ebeb;
+  box-shadow: 0 0 20px rgba(73, 77, 86, 0.127021) !important;
+}
+
+/* ползунок скроллбара */
+
+::-webkit-scrollbar-thumb {
+  background-color: #404040;
+  border-radius: 9em;
+}
+

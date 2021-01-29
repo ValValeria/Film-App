@@ -77,7 +77,4 @@ export default {
   padding: 2.5rem 1.6rem;
 }
 
-.product__ads-bg{
-  
-}
 </style>

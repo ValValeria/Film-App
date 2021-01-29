@@ -22,8 +22,8 @@ class AuthController extends Controller
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
                 $this->data["status"] = "user";
-                $this->data["data"] = Auth::user();;
-                return response()->json($this->data);
+                $this->data["data"] = Auth::user();
+                return response(json_encode($this->data,JSON_UNESCAPED_UNICODE));
             }
             return $next($request);
         });
@@ -48,22 +48,24 @@ class AuthController extends Controller
             $rules = Arr::except($rules, ['username']);
         }
 
-        $input = $request->all();
+        $input = $request->only(['email','password','username']);
 
-        if(!count($input)){
-            $input = json_encode($request->header('Auth'),JSON_UNESCAPED_UNICODE);
+        if($request->hasHeader("Auth")){
+            $input = json_decode($request->header('Auth'),JSON_UNESCAPED_UNICODE);
         }
 
-        $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($input, $rules);
 
-        $validator->after(function ($validator) use ($request) {
-            $this->user = User::where('email', $request->email)->where('password', $request->password);
+        $validator->after(function ($validator) use ($input) {
+            if(!count($validator->errors()->all())){
+                $this->user = User::where('email', $input['email'])->where('password', $input['password'])->first();
 
-            if (!count($validator->errors())) {
-                if (!$this->user->exists() && $this->isLogin) {
-                    $validator->errors()->add('email', 'Вас нет в нашей базе данных');
-                } elseif ($this->user->exists() && !$this->isLogin) {
-                    $validator->errors()->add('email', 'Похоже, вы уже есть в нашей базе данных');
+                if (!count($validator->errors())) {
+                    if (!$this->user && $this->isLogin) {
+                        $validator->errors()->add('email', 'Вас нет в нашей базе данных');
+                    } elseif ($this->user && !$this->isLogin) {
+                        $validator->errors()->add('email', 'Похоже, вы уже есть в нашей базе данных');
+                    }
                 }
             }
         });
@@ -79,9 +81,9 @@ class AuthController extends Controller
                 $this->user->save();
             }
 
-            Auth::login($this->user->first());
+            Auth::login($this->user);
             $this->data["status"] = "user";
-            $this->data["data"] = $this->user->first();
+            $this->data["data"] = $this->user;
         }
         
         return  $this->data["status"] === "user";

@@ -21,16 +21,17 @@
     </v-card-text>
 
     <v-card-actions class="center pb-4" v-if="showAction">
+       <router-link :to="'/product/'+id" class="text-white">
       <v-btn
         color="bg-red"
         dark
         large
         depressed
+        class="font-white"
       >
-       <router-link :to="'/product/'+id" class="text-white">
                Подробнее
-       </router-link>
       </v-btn>
+       </router-link>
     </v-card-actions>
   </v-card>
 </template>

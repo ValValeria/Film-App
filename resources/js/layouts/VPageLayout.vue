@@ -1,5 +1,5 @@
 <template>
-  <div class="product w-100 first-slide center">
+  <div class="product w-100 center">
     <v-snackbar v-model="snackbar">
       Добавлено в корзину
 
@@ -140,7 +140,7 @@
                                 color="orange"
                                 value="orange"
                                 hide-details
-                                :v-model="true"
+                                checked
                               ></v-checkbox>
                             </div>
                           </div>
@@ -263,8 +263,8 @@ export default {
   methods: {
     addToOrders(product) {
       const date = new Date();
-      const strDate = `${date.getHours()}:${date.getMinutes()} ${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
-      this.$store.commit("addUncheckOrders", [{...product,quantity:this.count,date: strDate}]);
+      const dateString = date.toLocaleString();
+      this.$store.commit("addUncheckOrders", [{...product,quantity:this.count,date: dateString}]);
       this.snackbar = true;
     },
   },
@@ -390,6 +390,12 @@ export default {
 @media screen and (min-width: 1000px) {
   .product__tab-item {
     min-height: 280px;
+  }
+}
+
+@media screen and (max-width:1000px){
+  .product__main-content{
+    grid-template-columns: 1fr;
   }
 }
 </style>

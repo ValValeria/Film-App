@@ -204,8 +204,6 @@ export default {
 
           if (data.status == "user") {
             this.$store.commit("authenticate", data.data);
-            localStorage.setItem("data", JSON.stringify(data.data));
-            this.$router.push({ name: "admin-panel" });
           } else {
             const errors = Object.values(data.errors).join(". ");
             this.messageText = errors;
@@ -221,7 +219,7 @@ export default {
   watch:{
     isAuth(value){
       if(value){
-           this.$router.push({name:"admin"});       
+        this.$router.push({path:"/"})
       }
     }
   }

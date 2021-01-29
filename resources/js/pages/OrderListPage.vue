@@ -272,9 +272,9 @@ export default {
     }),
   },
   async mounted() {
-    if (this.user.id && this.isAuth) {
+    if (typeof parseInt(this.user.id,10)=="number" && this.isAuth) {
       const response = await fetch(
-        `/api/view-orders/${this.user.id}?isjson=true`,
+        `/api/view-orders/?isjson=true`,
         {
           headers: {
             Auth: localStorage.getItem("data"),

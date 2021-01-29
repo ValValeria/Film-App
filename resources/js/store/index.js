@@ -24,12 +24,21 @@ export const store = new Vuex.Store({
         clearStore(state) {
             state.products.splice(0, state.products.length);
         },
-        authenticate(state, {data}) {
+        authenticate(state, data) {
             state.user.email = data.email;
             state.user.password = data.password;
             state.user.username = data.username;
             state.user.isAuth = true;
             state.user.id = data.id;
+            localStorage.setItem("data", JSON.stringify(data));
+        },
+        logout(state){
+            state.user.email = "";
+            state.user.password = "";
+            state.user.username = "";
+            state.user.isAuth = false;
+            state.user.id = 0;
+            localStorage.removeItem("data");
         },
         addOrders(state, data) {
             state.user.orders.push(...data);
@@ -38,13 +47,20 @@ export const store = new Vuex.Store({
             state.user.orders.splice(0, state.user.orders.length);
         },
         addUncheckOrders(state, data) {
-            state.user.uncheckedOrders.push(...data);
+            const ids = state.user.uncheckedOrders.map(v=>v.id);
+
+            for (const item of data) {
+                 if(ids.includes(item.id)){
+                     state.user.uncheckedOrders.splice(ids.findIndex(v=>Number(v.id)==Number(item.id)),1);
+                 }
+                 state.user.uncheckedOrders.push(item);
+            }
         },
         clearUncheckOrders(state, id) {
             if (!id) {
                 state.user.uncheckedOrders.splice(0, state.user.uncheckedOrders.length);
             } else {
-                state.user.uncheckedOrders.splice(id, 0);
+                state.user.uncheckedOrders.splice(id, 1);
             }
         }
     },
@@ -99,14 +115,14 @@ export const store = new Vuex.Store({
                 }
             }
         },
-        async addOrderToServer({ commit, state },location) {
+        async addOrderToServer({ commit, state }, location) {
             if (state.user.isAuth) {
 
-                const orders = [...state.user.uncheckedOrders.map(v=>Object.assign(v,{location:location}))];
+                const orders = [...state.user.uncheckedOrders.map(v => Object.assign(v, { location: location }))];
                 orders.forEach(async (v) => {
-                    const response = await fetch(`/api/addorder/?productId=${v.id}&quantity=${v.quantity}&isjson=true`,{
-                        headers:{
-                            Auth:localStorage.getItem('data')
+                    const response = await fetch(`/api/addorder/?productId=${v.id}&quantity=${v.quantity}&isjson=true`, {
+                        headers: {
+                            Auth: localStorage.getItem('data')
                         }
                     });
 

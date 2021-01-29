@@ -56,7 +56,7 @@ class ProductController extends Controller
       $data = [];
 
       foreach($order_list->get() as $order){
-         $data[]=["title"=>$order->product->title,"quantity"=>$order->quantity,"product_id"=>$order->product->id,"price"=>$order->product->price];
+         $data[]=["title"=>$order->product->title,"quantity"=>$order->quantity,"product_id"=>$order->product->id,"price"=>$order->product->price,"status"=>$order->status];
       }
 
       return ["data"=>$data];

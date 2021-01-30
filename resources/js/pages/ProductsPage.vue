@@ -11,7 +11,7 @@
       <template #descr> Самое вкусное, самое ароматное </template>
       <template #content>
         <div class="products__area center">
-          <div class="products__search" v-if="products.length">
+          <div class="products__search" v-on:click="isTouched=true">
             <FilterComponent />
           </div>
           <div class="products__content">
@@ -32,6 +32,7 @@
                 <template v-else>
                   <v-row>
                     <div class="w-100 center">
+                      
                       <v-progress-circular
                         indeterminate
                         color="amber"
@@ -117,7 +118,8 @@ export default {
         text:"Салаты и закуски",
         url:"/images/salad_2.svg"
       },
-      ]
+      ],
+      isTouched:true
       }
   },
   components:{

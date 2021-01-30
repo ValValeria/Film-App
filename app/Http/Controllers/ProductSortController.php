@@ -42,13 +42,23 @@ class ProductSortController extends Controller
 
                     case 'ingredients':
                         $ingredients = $request->query('ingredients',[]);
-                        $product = $product->whereJsonContains('ingredients',$ingredients);
+                        $data = [];
+
+                        foreach($product as $pr){
+                            $json = $ingredients;
+                            $ingr = json_decode($pr->ingredients,JSON_UNESCAPED_SLASHES);  
+                            
+                            if(count(array_intersect($json,$ingr))){
+                               array_push($data,$pr);
+                            }
+                        }
+                        $product = collect($data);
                     default:
                         break;
                 }
             }
         }
 
-        return json_encode(["data"=>$product], JSON_UNESCAPED_UNICODE);
+        return response(json_encode(["data"=>$product], JSON_UNESCAPED_UNICODE),200)->header('Content-Type','application/json');
     }
 }

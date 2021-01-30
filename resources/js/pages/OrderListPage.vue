@@ -110,7 +110,20 @@
                             </router-link>
                           </td>
                           <td>{{ item.price }}</td>
-                          <td>{{ item.quantity }}</td>
+                          <td>
+                            <v-text-field 
+                            type="number" 
+                            outlined
+                            counter="2"
+                            :value="item.quantity"
+                            dense
+                            color="orange"
+                            style="max-width:100px"
+                            v-on:change="changeNum(item.id,$event.target.value)"
+                            >
+                              {{ item.quantity }}
+                            </v-text-field>
+                          </td>
                           <td>{{ item.date }}</td>
                         </tr>
                       </tbody>
@@ -174,7 +187,7 @@
                             </router-link>
                           </td>
                           <td>{{ item.price }}</td>
-                          <td>{{ item.count }}</td>
+                          <td>{{ item.quantity.slice(1,-1) }}</td>
                           <td>{{ item.date }}</td>
                         </tr>
                       </tbody>
@@ -215,8 +228,8 @@
                             </router-link>
                           </td>
                           <td>{{ item.price }}</td>
-                          <td>{{ item.count }}</td>
-                          <td>{{ item.date }}</td>
+                          <td>{{ item.quantity }}</td>
+                          <td>{{ item.date.slice(1,-1) }}</td>
                         </tr>
                       </tbody>
                     </template>
@@ -295,6 +308,12 @@ export default {
     checkOrder() {
       this.$store.dispatch("addOrderToServer",{location:this.location});
     },
+    changeNum(id,quantity){
+      this.$store.commit('changeOrderQuantity',{
+        id:id,
+        quantity:+quantity
+      })
+    }
   },
 };
 </script>

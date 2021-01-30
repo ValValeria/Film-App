@@ -24,7 +24,7 @@ export default {
   }),
   methods:{
     click(){
-      $router.push({name:"admin"})
+      this.$router.push({name:"admin"})
     }
   }
 };

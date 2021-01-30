@@ -27,6 +27,8 @@
     },
     "dependencies": {
         "deepmerge": "^4.2.2",
+        "rxjs": "^6.6.3",
+        "rxjs-compat": "^6.6.3",
         "vue-router": "^3.4.9",
         "vuelidate": "^0.7.6",
         "vuetify": "^2.3.21",

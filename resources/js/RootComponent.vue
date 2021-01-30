@@ -71,7 +71,7 @@ import TabsComponent from './components/VTabs';
 import ProfileIconComponent from './components/VProfileIcon'
 import {LINKS} from './constants/route';
 import {mapState} from 'vuex';
-import Vue from 'vue'
+import Vue from 'vue';
 
 
 export default {
@@ -99,6 +99,11 @@ export default {
       }
     };
   },
+  created(){
+    window.onbeforeunload = ()=>{
+      localStorage.setItem("uncheckedOrders",JSON.stringify(this.uncheckedOrders,null,3));
+    }
+  },
   async mounted(){
     try {
         if(!localStorage.getItem("data").length) return ;
@@ -115,15 +120,7 @@ export default {
 
           if(data.status=="user"){
             this.$store.commit("authenticate",data.data);
-            console.log("Status: user")
 
-            window.onbeforeunload = ()=>{
-                if(uncheckedOrders.length>0){
-                  localStorage.setItem("uncheckedOrders",JSON.stringify(this.uncheckedOrders,null,3));
-                }
-                return true; 
-            }
-            
             if(localStorage.getItem('uncheckedOrders')){
               const uncheckedOrders = JSON.parse(localStorage.getItem("uncheckedOrders"));
               this.$store.commit("addUncheckOrders", uncheckedOrders);

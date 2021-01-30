@@ -10,7 +10,11 @@ use Illuminate\Http\Response;
 
 class MessagesController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function __invoke(User $user)
     {
         if (Gate::allows("view-messages", $user)) {

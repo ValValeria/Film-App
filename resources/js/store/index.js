@@ -15,9 +15,25 @@ export const store = new Vuex.Store({
             id: 0,
             orders: [],
             uncheckedOrders: []
+        },
+        sortData:{
+            ingredients:[],
+            max_price:0,
+            min_price:0,
+            max_weight:0,
+            min_weight:0,
+            categories:[]
         }
     },
     mutations: {
+        changeOrderQuantity(state, { id, quantity}){
+            const uncheckedOrders = state.user.uncheckedOrders;
+            const product = uncheckedOrders.find(v=>Number(id)==Number(v.id));
+
+            if(product){
+               product.quantity = quantity;
+            }
+        },
         addProducts(state, products) {
             state.products.push(...products);
         },
@@ -62,6 +78,9 @@ export const store = new Vuex.Store({
             } else {
                 state.user.uncheckedOrders.splice(id, 1);
             }
+        },
+        addAdditionalData(state, data){
+            state.sortData = data;
         }
     },
     getters: {
@@ -82,9 +101,41 @@ export const store = new Vuex.Store({
         },
         getUnactiveOrders(state) {
             return state.user.orders.filter(v => v.status == "unactive");
-        }
+        },
     },
     actions: {
+        async getSortedProducts({commit},data){
+           const params = new URLSearchParams();
+
+           Object.entries(data||{}).forEach(([prop,value])=>{
+                 params.append('sortBy',prop);
+                 if(!Array.isArray(value)){
+                    params.append(prop,value);
+                 }else{
+                    value.forEach(v=>{
+                        params.append(`${prop}[]`,v);
+                    });
+                 }
+           });
+
+            const response = await fetch(`/api/product-sort/?${params.toString()}`);
+
+            if(response.ok){
+                commit('clearStore');
+
+                const data = await response.json();
+                commit('addProducts',data.data);
+            }
+        },
+        async getAdditionalData({commit}){
+            const response = await fetch('/api/get-ingredients'); 
+
+            if(response.ok){
+                const data = await response.json();
+
+                commit('addAdditionalData',data.data);
+            }
+        },
         async getProductAsync({ commit }, obj) {
             const response = await fetch(`/admin/product/${obj.id}/?isjson=true`);
 

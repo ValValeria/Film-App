@@ -3,5 +3,4 @@ export const LINKS = [
     { path: "/orders-list", name: "Мои заказы" },
     { path: "/products", name: "Меню" },
     { path: "/contacts", name: "Связаться с нами" },
-    { path: "/about-us", name: "О нас" },
 ];

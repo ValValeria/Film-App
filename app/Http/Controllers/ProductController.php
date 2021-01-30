@@ -17,6 +17,7 @@ class ProductController extends Controller
    const IS_JSON = 'isjson';
    private User $user;
 
+
    public function getProduct(Request $request, $id = null)
    {
       $isJson = $request->query(self::IS_JSON);
@@ -49,17 +50,21 @@ class ProductController extends Controller
       }
    }
 
-   public function getOrderList(Request $request)
+   public function getOrderList()
    {
+      if(!Auth::check()){
+         abort(403);
+      }
+
       $this->user = Auth::user();
       $order_list = $this->user->orders();
       $data = [];
 
-      foreach($order_list->get() as $order){
-         $data[]=["title"=>$order->product->title,"quantity"=>$order->quantity,"product_id"=>$order->product->id,"price"=>$order->product->price,"status"=>$order->status];
+      foreach ($order_list->get() as $order) {
+         $data[] = ["title" => $order->product->title, "quantity" => $order->quantity, "product_id" => $order->product->id, "price" => $order->product->price, "status" => $order->status, "date" => $order->created_at];
       }
 
-      return ["data"=>$data];
+      return ["data" => $data];
    }
 
    public function getIngredients()
@@ -72,18 +77,19 @@ class ProductController extends Controller
          $data = array_merge($data,$arr);
       }
 
-      return $data;
+      return collect($data);
    }
 
    public function getData()
    {
       $data = [
-         "ingredients" => $this->getIngredients(),
+         "ingredients" => $this->getIngredients()->unique(),
          "max_price" => Product::all()->max('price'),
          "min_price" => Product::all()->min('price'),
          "max_weight" => Product::all()->max('weight'),
          "min_weight" => Product::all()->max('weight'),
+         "categories"=>Product::all()->pluck("category")->unique()
       ];
-      return response(json_encode($data,JSON_UNESCAPED_UNICODE))->header('Content-Type','application/json');
+      return response(json_encode(["data"=>$data],JSON_UNESCAPED_UNICODE))->header('Content-Type','application/json');
    }
 }

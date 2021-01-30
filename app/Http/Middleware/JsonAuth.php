@@ -19,9 +19,9 @@ class JsonAuth
      */
     public function handle(Request $request, Closure $next)
     { 
-        if(!$request->is("admin/*") && $request->hasHeader("Auth")){
+        if($request->hasHeader("Auth")){
             (new AuthController())->base_index($request);
-        }
+        } 
         return $next($request);
     }
 }

@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            if (Auth::check()) {
+            if (Auth::check() && !$request->is("admin/*")) {
                 $this->data["status"] = "user";
                 $this->data["data"] = Auth::user();
                 return response(json_encode($this->data,JSON_UNESCAPED_UNICODE));

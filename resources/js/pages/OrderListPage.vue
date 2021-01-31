@@ -95,11 +95,17 @@
                       </thead>
                       <tbody>
                         <tr
-                          v-for="(item, index) in product_list"
+                          v-for="item in product_list"
                           :key="item.title + Math.random()"
                         >
-                          <td>
-                            {{ index + 1 }}
+                          <td class="center text-center">
+                            <v-checkbox
+                              color="orange"
+                              value="orange"
+                              hide-details
+                              v-on:change="selectItems(item.id)"
+                              class="mt-0"
+                            ></v-checkbox>
                           </td>
                           <td>
                             <router-link
@@ -111,17 +117,18 @@
                           </td>
                           <td>{{ item.price }}</td>
                           <td>
-                            <v-text-field 
-                            type="number" 
-                            outlined
-                            counter="2"
-                            :value="item.quantity"
-                            dense
-                            color="orange"
-                            style="max-width:100px"
-                            v-on:change="changeNum(item.id,$event.target.value)"
+                            <v-text-field
+                              type="number"
+                              outlined
+                              dense
+                              color="orange"
+                              style="max-width: 100px"
+                              v-on:change="
+                                changeNum(item.id, $event.target.value)
+                              "
+                              :value="item.quantity"
+                              counter="2"
                             >
-                              {{ item.quantity }}
                             </v-text-field>
                           </td>
                           <td>{{ item.date }}</td>
@@ -130,27 +137,33 @@
                     </template>
                   </v-simple-table>
                 </v-card-text>
-                <v-card-text
-                 v-if="product_list.length"
-                >
-                <v-text-field
-                v-model="location"
-                persistent-hint
-                hint="Укажите ваш правильный адрес"
-                outlined
-                >
-                 <template #label>
-                   Ваш адрес
-                 </template>
-                </v-text-field>
+                <v-card-text v-if="product_list.length">
+                  <v-text-field
+                    v-model="location"
+                    persistent-hint
+                    hint="Укажите ваш правильный адрес"
+                    outlined
+                  >
+                    <template #label> Ваш адрес </template>
+                  </v-text-field>
                 </v-card-text>
                 <v-card-text
                   class="center justify-content-end w-100"
                   v-if="product_list.length"
                 >
-                  <v-btn depressed color="error" @click="checkOrder()">
-                    Потвердить заказ
-                  </v-btn>
+                  <div class="admin__btns">
+                    <v-btn depressed color="orange" @click="checkOrder()">
+                      Потвердить заказ
+                    </v-btn>
+                    <v-btn
+                      depressed
+                      color="error"
+                      @click="deleteUncheckedOrders()"
+                      v-if="selectedItems.length"
+                    >
+                      Удалить {{ selectedItems.length }} тв.
+                    </v-btn>
+                  </div>
                 </v-card-text>
               </v-card>
               <v-card outlined class="mt-4 p-4 w-100">
@@ -187,7 +200,7 @@
                             </router-link>
                           </td>
                           <td>{{ item.price }}</td>
-                          <td>{{ item.quantity.slice(1,-1) }}</td>
+                          <td>{{ item.quantity.slice(1, -1) }}</td>
                           <td>{{ item.date }}</td>
                         </tr>
                       </tbody>
@@ -229,7 +242,7 @@
                           </td>
                           <td>{{ item.price }}</td>
                           <td>{{ item.quantity }}</td>
-                          <td>{{ item.date.slice(1,-1) }}</td>
+                          <td>{{ item.date.slice(1, -1) }}</td>
                         </tr>
                       </tbody>
                     </template>
@@ -263,15 +276,14 @@
 import BasicLayout from "../layouts/VBasicLayout";
 import { mapGetters, mapState } from "vuex";
 import GridLayout from "../layouts/GridLayout";
-import { store } from '../store';
 
 export default {
   components: {
     BasicLayout,
     GridLayout,
   },
-  data:function(){
-   return {location:""};
+  data: function () {
+    return { location: "", selectedItems: [] };
   },
   computed: {
     ...mapState({
@@ -285,20 +297,17 @@ export default {
     }),
   },
   async mounted() {
-    if (typeof parseInt(this.user.id,10)=="number" && this.isAuth) {
-      const response = await fetch(
-        `/api/view-orders/?isjson=true`,
-        {
-          headers: {
-            Auth: localStorage.getItem("data"),
-          },
-        }
-      );
+    if (typeof parseInt(this.user.id, 10) == "number" && this.isAuth) {
+      const response = await fetch(`/api/view-orders/?isjson=true`, {
+        headers: {
+          Auth: localStorage.getItem("data"),
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
+        this.$store.commit("clearOrders");
         this.$store.commit("addOrders", data.data || []);
-        console.log(data.data)
       }
     } else {
       this.$router.push({ name: "login" });
@@ -306,14 +315,29 @@ export default {
   },
   methods: {
     checkOrder() {
-      this.$store.dispatch("addOrderToServer",{location:this.location});
+      this.$store.dispatch("addOrderToServer", { location: this.location });
     },
-    changeNum(id,quantity){
-      this.$store.commit('changeOrderQuantity',{
-        id:id,
-        quantity:+quantity
-      })
-    }
+    changeNum(id, quantity) {
+      this.$store.commit("changeOrderQuantity", {
+        id: id,
+        quantity: +quantity,
+      });
+    },
+    selectItems(id) {
+      const order = this.$store.state.user.uncheckedOrders.find(
+        (v) => v.id == id
+      );
+      const index = this.selectedItems.findIndex((v) => v == order);
+
+      if (index == -1) {
+        this.selectedItems.push(order);
+      } else {
+        this.selectedItems.splice(index, 1);
+      }
+    },
+    deleteUncheckedOrders() {
+      this.$store.commit("deleteUncheckedOrders", this.selectedItems);
+    },
   },
 };
 </script>
@@ -321,6 +345,17 @@ export default {
 <style lang="scss">
 .admin__info {
   flex: 1 1 30%;
+}
+
+.admin__btns {
+  max-width: 300px;
+
+  button {
+    width: 100%;
+    margin-bottom: 8px;
+    transition-property: width;
+    transition-duration: 1s;
+  }
 }
 
 .admin__orders {

@@ -24,7 +24,7 @@
                 <div class="col-sm-10 text-left">
                     <div class="w-100">
                         <input type="text" class="form-control mb-2" id="text">
-                        <button class="btn btn-primary" id="btn1">Добавить продукт</button>
+                        <button class="btn btn-dark" id="btn1">Добавить продукт</button>
                     </div>
                     <div class="col-sm-10 center flex-column align-items-start mt-2">
                         <div class="form-check m-1" hidden id="checkbox">

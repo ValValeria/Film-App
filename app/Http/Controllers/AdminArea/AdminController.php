@@ -7,11 +7,6 @@ use App\Models\Product;
 
 class AdminController extends Controller{
 
-    public function __construct()
-    {
-    
-    }
-
     public function index()
     {
         return view('admin.pages.home')->with('count',Product::all()->count());

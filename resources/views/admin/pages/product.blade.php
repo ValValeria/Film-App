@@ -99,7 +99,7 @@
                                         </button>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -145,6 +145,7 @@
                                                 <label class="form-check-label" for="flexCheckChecked">
                                                 </label>
                                             </div>
+                                            @if(json_decode($data->ingredients))
                                             @foreach(json_decode($data->ingredients) as $ingredient)
                                             <div class="form-check m-1" id="checkbox">
                                                 <input class="form-check-input" type="checkbox" value="{{$ingredient}}" checked>
@@ -153,6 +154,7 @@
                                                 </label>
                                             </div>
                                             @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -163,11 +165,11 @@
                 </div>
 
 
-                <div class="row p-1 pt-2">
+                <div class="row p-1 pt-2 w-100">
                     @if ($errors->any())
-                    <ul class="list-group">
+                    <ul class="list-group w-100">
                         @foreach ($errors->all() as $error)
-                        <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+                        <li class="list-group-item list-group-item-danger w-100">{{ $error }}</li>
                         @endforeach
                     </ul>
                     @endif

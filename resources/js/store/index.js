@@ -22,10 +22,25 @@ export const store = new Vuex.Store({
             min_price:0,
             max_weight:0,
             min_weight:0,
-            categories:[]
+            categories:[],
+        },
+        isSortTouched:false,
+        pagination: {
+            per_page: 4,
+            page: 1,
+            total_amount: 0
         }
     },
     mutations: {
+        deleteUncheckedOrders(state, orders){
+           orders.forEach(v=>{
+               const uncheckedOrders = state.user.uncheckedOrders;
+
+               if(uncheckedOrders.includes(v)){
+                   uncheckedOrders.splice(uncheckedOrders.indexOf(v),1)
+               }
+           })
+        },
         changeOrderQuantity(state, { id, quantity}){
             const uncheckedOrders = state.user.uncheckedOrders;
             const product = uncheckedOrders.find(v=>Number(id)==Number(v.id));
@@ -34,8 +49,18 @@ export const store = new Vuex.Store({
                product.quantity = quantity;
             }
         },
-        addProducts(state, products) {
-            state.products.push(...products);
+        addProducts(state, obj) {
+            const data = obj.data;
+
+            data.forEach(v=>{
+                const id = v.id;
+                const index = state.products.findIndex(v=>v.id==id);
+
+                if(index==-1){
+                    state.products.push(v)
+                }
+            });
+            state.pagination.total_amount = obj.total;
         },
         clearStore(state) {
             state.products.splice(0, state.products.length);
@@ -81,6 +106,12 @@ export const store = new Vuex.Store({
         },
         addAdditionalData(state, data){
             state.sortData = data;
+        },
+        isSortTouched(state,data){
+            state.isSortTouched = data;
+        },
+        changePage(state,page){
+            state.pagination.page = page;
         }
     },
     getters: {
@@ -106,7 +137,7 @@ export const store = new Vuex.Store({
     actions: {
         async getSortedProducts({commit},data){
            const params = new URLSearchParams();
-
+           commit('isSortTouched',true);
            Object.entries(data||{}).forEach(([prop,value])=>{
                  params.append('sortBy',prop);
                  if(!Array.isArray(value)){
@@ -147,12 +178,13 @@ export const store = new Vuex.Store({
             }
         },
 
-        async getProducts({ commit }, page = 1) {
+        async getProducts({ commit,state }) {
+            const page = state.pagination.page;
             const response = await fetch(`/admin/products/?page=${page}&isjson=true`);
 
             if (response.ok) {
                 const json = await response.json();
-                commit('addProducts', json["data"]);
+                commit('addProducts', json);
             }
         },
         async getOrders({ commit, state }) {

@@ -11,13 +11,20 @@
       <template #descr> Самое вкусное, самое ароматное </template>
       <template #content>
         <div class="products__area center">
-          <div class="products__search" v-on:click="isTouched=true">
+          <div class="products__search">
             <FilterComponent />
           </div>
-          <div class="products__content">
-            <GridLayout>
+          <div class="products__content center w-100">
+            <div class="alert-card w-100" hidden>
+              <v-alert type="warning">
+                В среднем на один заказ уходит <strong>27 минут</strong> и
+                <strong>15 минут</strong> на доставку в зависимости от места
+                назначения
+              </v-alert>
+            </div>
+            <GridLayout class="products__result">
               <template #content>
-                <template v-if="products.length">
+                <template v-if="(products||[]).length">
                   <CardComponent
                     v-for="item in products"
                     :key="item + Math.random()"
@@ -28,11 +35,11 @@
                     :id="item.id"
                     classes="card-ad all-width"
                   />
+                  <PaginationComponent class="products__pagination"/>
                 </template>
-                <template v-else>
+                <template v-if="!(products||[]).length && !isSortTouched">
                   <v-row>
                     <div class="w-100 center">
-                      
                       <v-progress-circular
                         indeterminate
                         color="amber"
@@ -40,38 +47,38 @@
                     </div>
                   </v-row>
                 </template>
+                <template v-if="isSortTouched">
+                  <div class="products__result-404 center">
+                    <h5 class="h4 text-center">
+                      Извините, но у нас нет блюд, которые подходят под ваши
+                      критерии
+                    </h5>
+                    <v-img
+                      src="/images/search.webp"
+                      max-width="500"
+                      max-height="300"
+                    >
+                      <template v-slot:placeholder>
+                        <v-row
+                          class="fill-height ma-0"
+                          align="center"
+                          justify="center"
+                        >
+                          <v-progress-circular
+                            indeterminate
+                            color="grey lighten-5"
+                          ></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
+                  </div>
+                </template>
               </template>
             </GridLayout>
           </div>
         </div>
       </template>
     </BasicLayout>
-
-    <div>
-      <BasicLayout
-        :isSection="true"
-        :isGrid="true"
-        :isFullContent="true"
-        class="section_white"
-      >
-        <template #title> Доставка </template>
-        <template #descr> у нас вы можете заказать </template>
-        <template #content>
-          <div class="empty-card-sm" v-for="del in delivery" :key="del.text">
-            <div class="empty-card w-100">
-              <div class="empty-card__img">
-                <img :src="del.url" alt="..." srcset="" />
-              </div>
-              <div class="empty-card__body">
-                <div class="empty-card__title">
-                  {{ del.text }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </template>
-      </BasicLayout>
-    </div>
   </div>
 </template>
 
@@ -79,7 +86,10 @@
 import BasicLayout from '../layouts/VBasicLayout';
 import GridLayout from '../layouts/GridLayout';
 import FilterComponent from '../components/VFilter';
-import CardComponent from '../components/VCard'
+import CardComponent from '../components/VCard';
+import {mapState} from 'vuex';
+import PaginationComponent from '../components/VPagination'
+import {chunk} from 'lodash';
 
 export default {
   data:function () {
@@ -101,25 +111,8 @@ export default {
         "align-items":"start"
       },
       images:["/images/slide1.jpeg","/images/slide2.jpeg"],
-      delivery:[
-      {
-        text:"Пицца",
-        url:"/images/pizza_2.svg"
-      },
-      {
-        text:"Десерты",
-        url:"/images/cake_2.svg"
-      },
-      {
-        text:"Суши и сеты",
-        url:"/images/sushi_2.svg"
-      },
-      {
-        text:"Салаты и закуски",
-        url:"/images/salad_2.svg"
-      },
-      ],
-      isTouched:true
+      isTouched:true,
+      per_page: 2
       }
   },
   components:{
@@ -127,11 +120,17 @@ export default {
       GridLayout,
       FilterComponent,
       CardComponent,
+      PaginationComponent
   },
   computed:{
-      products:function(){
-          return this.$store.state.products;
-      }
+      ...mapState({
+        isSortTouched:state=>state.isSortTouched,
+        products:state=>{
+          const result = chunk(state.products||[],state.pagination.per_page);
+          if(result.length) return result[state.pagination.page-1];
+          return result||[];
+        }
+      })
   },
   beforeRouteEnter(to,from,next){
       next(vm=>{
@@ -148,12 +147,23 @@ export default {
   align-items: flex-start !important;
 }
 
+.products__result-404{
+    width: 60% !important;
+    padding-top: 3rem;
+}
+
 .products__content {
   width: 60%;
   flex: 1 1 60%;
 }
 
-.empty-card-sm{
+.products__result {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+  align-content: center;
+  justify-content: center;
+}
+
+.empty-card-sm {
   padding: 10px;
   text-align: center;
   width: 100%;
@@ -178,7 +188,6 @@ export default {
 }
 
 .products__search {
-  position: sticky;
   top: 6rem;
   left: 0;
   width: 100%;
@@ -198,6 +207,10 @@ export default {
   position: relative;
   z-index: 1;
   width: 100%;
+}
+
+.products__pagination{
+  grid-column: 1/-1;
 }
 
 @media screen and (max-width: 900px) {

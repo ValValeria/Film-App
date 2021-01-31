@@ -10,14 +10,20 @@
           show-arrows
           v-model="activeItem"
         >
-          <v-tab> Категории </v-tab>
-          <v-tab>Цена</v-tab>
+          <v-tab>Поиск по названию</v-tab>
+          <v-tab>Категории</v-tab>
           <v-tab>Вес</v-tab>
+          <v-tab>Цена</v-tab>
           <v-tab>Другие опции</v-tab>
           <v-tab>Хочу с </v-tab>
         </v-tabs>
 
         <v-tabs-items v-model="activeItem">
+          <v-tab-item>
+            <div class="product__search-category center flex-row">
+              
+            </div>
+          </v-tab-item>
           <v-tab-item>
             <div class="product__search-category">
               <v-overflow-btn
@@ -25,7 +31,7 @@
                 :items="categories"
                 label="Доступные категории"
                 item-value="text"
-                v-on:change="sort('category',$event)"
+                v-on:change="sort('category', $event)"
               ></v-overflow-btn>
             </div>
           </v-tab-item>
@@ -38,7 +44,7 @@
                     step="50"
                     min="50"
                     :max="max_weight"
-                    v-on:change="sort('weight',$event)"
+                    v-on:change="sort('weight', $event)"
                   ></v-slider>
                 </div>
                 <v-subheader class="w-100 text-center">
@@ -56,7 +62,7 @@
                     step="50"
                     min="50"
                     :max="max_price"
-                    v-on:change="sort('price',$event)"
+                    v-on:change="sort('price', $event)"
                   ></v-slider>
                 </div>
                 <v-subheader class="w-100 text-center">
@@ -98,7 +104,10 @@
             <div class="product__igredients flex-wrap">
               <div v-for="food in ingredients" :key="food" class="center">
                 <v-checkbox
-                  v-on:change="foodToIncludes.push(food);sort('ingredients',foodToIncludes)"
+                  v-on:change="
+                    foodToIncludes.push(food);
+                    sort('ingredients', foodToIncludes);
+                  "
                   :label="food"
                   color="error"
                   value="warning"
@@ -125,7 +134,7 @@ export default {
       activeItem: 0,
       activePrice: 200,
       activeWeight: 250,
-      sortQuery:{}
+      sortQuery: {},
     };
   },
   computed: mapState({
@@ -139,34 +148,40 @@ export default {
   mounted() {
     this.$store.dispatch("getAdditionalData");
   },
-  methods:{
-    sort(type,$event){
-      this.sortQuery[type]=$event;
-      this.$store.dispatch("getSortedProducts",this.sortQuery)
-    }
-  }
+  methods: {
+    sort(type, $event) {
+      this.sortQuery[type] = $event;
+      this.$store.commit("changePage", 1);
+      this.$store.dispatch("getSortedProducts", this.sortQuery);
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 .product__search-category {
   padding: 10px 20px;
+  margin: 0 auto;
+  margin-top: 20px;
+  max-width: 900px;
+  width: 100%;
+  margin-top: 20px;
 }
 
-.product__igredients > div{
+.product__igredients > div {
   flex: 1 1 33%;
 }
 
-.product__igredients{
-  display:flex;
+.product__igredients {
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding:1rem 0;
+  padding: 1rem 0;
 }
 
-@media screen and (max-width:800px){
-  .product__igredients{
-    flex-wrap:wrap;
+@media screen and (max-width: 800px) {
+  .product__igredients {
+    flex-wrap: wrap;
   }
 }
 </style>

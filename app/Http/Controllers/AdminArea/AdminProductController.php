@@ -22,7 +22,7 @@ trait Validate{
           'image'=> !$imageNeed?'image':'required|image',
           'price' => 'required|numeric',
           'weight'=>'numeric',
-          'ingredients'=>['required',function($attr,$value,$fail){
+          'ingredients'=>[function($attr,$value,$fail){
               return collect($value)->every(function($val){
                  return gettype($val)=="string";
               });
@@ -35,7 +35,7 @@ trait Validate{
                         ->withInput();
        } else{
            if(is_callable($callback)){
-            return $callback();
+            return call_user_func($callback);
            }
        }
     }
@@ -75,9 +75,9 @@ class AdminProductController extends Controller{
 
     public function addProduct(Request $request)
     {
-       $response = $this->validateData($request, function($request){
+       $response = $this->validateData($request, function() use ($request){
            $file = $request->file('image');
-           $path = $file->storeAs('images', $file->getClientOriginalName()+$request->user()->id,'public');
+           $path = $file->storeAs('images', $request->user()->id.$file->getClientOriginalName(),'public');
            $product = new Product();
            $product->image = $path;
            $product->short_description = $request->short_description;

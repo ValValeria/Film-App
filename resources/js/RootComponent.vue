@@ -53,7 +53,7 @@
     </v-navigation-drawer>
 
     <v-main>
-      <router-view></router-view>
+        <router-view></router-view>
     </v-main>
 
     <v-footer app class="footer-wh only-shadow w-100">
@@ -142,7 +142,7 @@ export default {
 
 <style lang="scss">
 :root {
-  --paddingLeft: 66px;
+  --paddingLeft: 56px;
 }
 .brand-name a {
   font-weight: 400;
@@ -153,8 +153,10 @@ export default {
   margin: 0 auto;
   padding: 7.5rem 0 !important;
 }
+
 .v-main {
-  padding-left: var(--paddingLeft) !important;
+  margin-left: var(--paddingLeft) !important;
+  width: calc(100% - var(--paddingLeft));
 }
 
 .only-shadow {
@@ -176,14 +178,16 @@ nav {
   height: 100%;
   max-height: 100% !important;
 }
-.v-main {
-  padding-left: 66px !important;
+
+.v-footer {
+  width: calc(100% - var(--paddingLeft)) !important;
+  margin-left: var(--paddingLeft);
 }
 
 .navigation-media,
 .nav-not-media {
-  margin-left: 66px;
-  width: calc(100% - 66px) !important;
+  margin-left: var(--paddingLeft);
+  width: calc(100% - var(--paddingLeft)) !important;
   position: fixed;
   top: 0;
   left: 0;

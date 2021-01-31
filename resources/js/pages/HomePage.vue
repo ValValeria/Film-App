@@ -59,6 +59,27 @@
 
     <PizzaHistoryComponent />
 
+    <div>
+      <BasicLayout :isSection="true" :isGrid="true" class="section_white">
+        <template #title> Доставка </template>
+        <template #descr> у нас вы можете заказать </template>
+        <template #content>
+          <div class="empty-card-sm" v-for="del in delivery" :key="del.text">
+            <div class="empty-card w-100">
+              <div class="empty-card__img">
+                <img :src="del.url" alt="..." srcset="" />
+              </div>
+              <div class="empty-card__body">
+                <div class="empty-card__title">
+                  {{ del.text }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </BasicLayout>
+    </div>
+
     <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
       <template v-slot:title>Наши идеи</template>
       <template #descr> Интересные для вас предложения</template>
@@ -68,14 +89,6 @@
         <AdComponent :image="'/images/banner-img2.png'" />
       </template>
     </BasicLayout>
-
-    <div class="hot-ads">
-      <BasicLayout :isSection="true">
-        <template v-slot:title> Нас легко найти </template>
-        <template v-slot:descr> Мы находимся в самом центре Киева </template>
-        <template v-slot:content> </template>
-      </BasicLayout>
-    </div>
   </div>
 </template>
 
@@ -111,6 +124,24 @@ export default {
         },
       ],
       urls: ["/images/img1.png", "/images/img2.jpg"],
+      delivery: [
+        {
+          text: "Пицца",
+          url: "/images/pizza_2.svg",
+        },
+        {
+          text: "Десерты",
+          url: "/images/cake_2.svg",
+        },
+        {
+          text: "Суши и сеты",
+          url: "/images/sushi_2.svg",
+        },
+        {
+          text: "Салаты и закуски",
+          url: "/images/salad_2.svg",
+        },
+      ],
     };
   },
   components: {
@@ -125,6 +156,9 @@ export default {
   computed: mapState({
     items: (state) => state.products,
   }),
+  mounted(){
+    this.$store.dispatch('getProducts')
+  }
 };
 </script>
 

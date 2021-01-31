@@ -73,7 +73,7 @@ class ProductController extends Controller
       $data = [];
 
       foreach ($result as $value) {
-         $arr = json_decode($value,JSON_UNESCAPED_UNICODE);
+         $arr = json_decode($value,JSON_UNESCAPED_UNICODE)??[];
          $data = array_merge($data,$arr);
       }
 

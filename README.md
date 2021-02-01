@@ -14,11 +14,8 @@ Also there is the admin panel, which is available only for super user (`http://1
 ![Alt text](./screenshots/screen.png)
 > The admin panel for a user
 
-![Alt text](./screenshots/screen.png)
-> The list of products
-
 ![Alt text](./screenshots/screen1.png)
-> The admin panel for a user
+> The list of products
 
 ![Alt text](./screenshots/screen2.png)
 > Product description
@@ -27,7 +24,7 @@ Also there is the admin panel, which is available only for super user (`http://1
 > Home page
 
 ![Alt text](./screenshots/screen4.png)
-> Login page for the suoer admin
+> Login page for the super admin
 
 ## How to run the app
 Firstly, you need create .env file and fill in your database settings. Then open terminal or type

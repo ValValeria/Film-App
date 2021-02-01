@@ -1,9 +1,11 @@
 <template>
-  <div :class="'product__ad w-100 ' + $attrs.class">
-    <v-card :class="'product__ad-card shadow ' + $attrs.classInner" outlined>
-      <v-img :src="image" alt="..." ></v-img>
-      <v-card-text>
-        <div class="product__ad-item">
+  <div :class="'product__ad w-100  center' + ($attrs.class?$attrs.class:'')">
+    <v-card :class="'product__ad-card shadow center d-flex' + ($attrs.classInner?$attrs.classInner:'')" outlined>
+      <div v-if="image">
+         <v-img :src="image" alt="..."></v-img>
+      </div>
+      <v-card-text class="center d-flex">
+        <div class="product__ad-item center">
           <div class="product__ad-title">
             <span class="product__ad-title3">
                 <slot name="title3">
@@ -25,9 +27,6 @@
               <slot name="subtitle">
                   две пиццы в одной
               </slot>
-          </div>
-          <div class="product__ad-button">
-            <router-link to="/">Узнать больше</router-link>
           </div>
         </div>
       </v-card-text>
@@ -91,17 +90,17 @@ export default {
 
     span{
       display:block;
-      line-height: 1.2;
+      line-height: 1.3;
     }
 
     span:nth-child(1){
       font-size: 30px;
-      line-height: 32px;
+      line-height: 1.3;
     }
 
     span:nth-child(2), span:nth-child(3){
       font-size: 20px;
-     line-height: 20px;
+     line-height: 1.3;
     }
 
     .product__ad-subtitle{
@@ -110,7 +109,7 @@ export default {
     color: #fff;
     font-size: 24px;
     font-weight: 700;
-    line-height: 29px;
+    line-height: 1.3;
     text-transform: uppercase;
     }
 }

@@ -22,9 +22,21 @@ class ProductController extends Controller
    {
       $isJson = $request->query(self::IS_JSON);
       $view = 'admin.pages.product';
+      $search = $request->query('search');
 
       if (Str::contains($request->url(), 'products')) {
-         $data = Product::paginate(4);
+         $per_page = $request->query('per_page','7');
+
+         if(!$search){
+            $data = Product::paginate(intval($per_page));
+         }else{
+            $data = Product::query()->where('title', 'like', "%$search%")
+                                    ->orWhere('category', 'like', "%$search%")
+                                    ->orWhere('short_description', 'like', "%$search%")
+                                    ->orWhere('long_description', 'like', "%$search%");
+            $data = $data->paginate($per_page);                       
+         }
+
          $view = 'admin.pages.products';
       } else if (is_int(intval($id))) {
          $data = Product::findOrFail($id);

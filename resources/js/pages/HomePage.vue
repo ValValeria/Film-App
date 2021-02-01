@@ -23,7 +23,7 @@
             <div class="w-100 center">
               <v-progress-circular
                 indeterminate
-                color="amber"
+                color="error"
               ></v-progress-circular>
             </div>
           </v-row>
@@ -81,12 +81,34 @@
     </div>
 
     <BasicLayout :isSection="true" :isGrid="true" class="main-cards">
-      <template v-slot:title>Наши идеи</template>
+      <template v-slot:title>Наши акции</template>
       <template #descr> Интересные для вас предложения</template>
       <template v-slot:content>
-        <AdComponent :image="'/images/banner-img2.png'" />
-        <AdComponent :image="'/images/banner-img2.png'" />
-        <AdComponent :image="'/images/banner-img2.png'" />
+        <AdComponent
+          :image="'/images/banner-img2.png'"
+          classInner="ad"
+          class="center"
+        />
+        <AdComponent
+          :image="'/images/banner-img1.png'"
+          classInner="ad"
+          class="center"
+        >
+          <template #title3> сделай </template>
+          <template #title4> пиццу </template>
+          <template #title5> сам </template>
+          <template #subtitle> за 5 минут </template>
+        </AdComponent>
+        <AdComponent
+          :image="'/images/banner-img2.png'"
+          classInner="ad"
+          class="center"
+        >
+          <template #title3> скидка </template>
+          <template #title4> на доставку </template>
+          <template #title5> при заказе </template>
+          <template #subtitle> от 100 грн </template>
+        </AdComponent>
       </template>
     </BasicLayout>
   </div>
@@ -126,7 +148,7 @@ export default {
       urls: ["/images/img1.png", "/images/img2.jpg"],
       delivery: [
         {
-          text: "Пицца",
+          text: "Пиццy",
           url: "/images/pizza_2.svg",
         },
         {
@@ -134,11 +156,7 @@ export default {
           url: "/images/cake_2.svg",
         },
         {
-          text: "Суши и сеты",
-          url: "/images/sushi_2.svg",
-        },
-        {
-          text: "Салаты и закуски",
+          text: "Салаты",
           url: "/images/salad_2.svg",
         },
       ],
@@ -154,11 +172,11 @@ export default {
     AdComponent,
   },
   computed: mapState({
-    items: (state) => state.products,
+    items: (state) => state.products.slice(0, 3),
   }),
-  mounted(){
-    this.$store.dispatch('getProducts')
-  }
+  mounted() {
+    this.$store.dispatch("getProducts");
+  },
 };
 </script>
 
@@ -173,6 +191,21 @@ export default {
   letter-spacing: 1px;
   font-size: 1.325rem;
   word-break: break-word;
+}
+
+.delivery-ad {
+  background-image: url(/images/banner-courier.jpg) !important;
+}
+
+.delivery-ad,
+.ad {
+  height: 100% !important;
+  width: 100% !important;
+  max-width: 346px !important;
+}
+
+.product__ad {
+  max-width: 100% !important;
 }
 
 .ad__number {

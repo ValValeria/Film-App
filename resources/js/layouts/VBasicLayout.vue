@@ -120,4 +120,10 @@ export default {
     flex-direction: column;
   }
 }
+
+@media(max-width:580px){
+ .title{
+   font-size:40px !important;
+ }
+}
 </style>

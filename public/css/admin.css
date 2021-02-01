@@ -190,7 +190,7 @@ textarea {
 }
 
 .nav__area nav {
-    background-image: linear-gradient(135deg, #ffcfc5 0%, rgba(105, 0, 199, 0.8) 100%);
+    background-image: linear-gradient(135deg,#DEDDF0 0%, #606C88 0%, #3F4C6B 100%,#09203F 100%);
 }
 
 .login__form-area {

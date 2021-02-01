@@ -3,7 +3,6 @@
     :length="length"
     v-model="page"
     v-if="length"
-    circle
     :total-visible="5"
     color="error"
     class="pt-2"

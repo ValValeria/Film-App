@@ -48,9 +48,9 @@ export default {
     product: function () {
       return this.$store.getters.getProduct(this.id) || {};
     },
-    ...mapState({
-      products:state=>state.products.slice(0,3)
-    })
+    products:function(){
+      return this.$store.state.products.filter(v=>v.id!=this.id).slice(0,3);
+    }
   },
   components: {
     ProductLayout,

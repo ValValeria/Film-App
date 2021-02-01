@@ -5,7 +5,17 @@
     <div class="wrap-md-pd">
         <h4 class="text-center h2">Ваши товары</h4>
 
-        <div class="center flex-column">
+        <div class="center flex-column w-100">
+            <div class="card w-100">
+                <form class="card-body center flex-row" method="GET">
+                    <div class="col-auto" style="flex: 1 1 80%;">
+                        <input type="text" name="search" class="form-control w-100" id="inputPassword2" value="{{old('search')}}">
+                    </div>
+                    <div class="col-auto" style="flex: 1 1 20%;">
+                        <button type="submit" class="btn btn-dark w-100">Найти</button>
+                    </div>
+                </form>
+            </div>
             <div class="card w-100 card-section">
                 <div class="card-body">
 

@@ -1,5 +1,5 @@
 <template>
-  <v-avatar color="orange" size="40" v-if="isAuth" v-on:click="click" >
+  <v-avatar color="error" size="40" v-if="isAuth" v-on:click.prevent.stop="click" >
     <span class="white--text headline">{{ firstletter }}</span>
   </v-avatar>
 </template>

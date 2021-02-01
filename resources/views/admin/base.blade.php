@@ -16,6 +16,7 @@
 <body>
     <div class="container-fluid">
         <div class="container-wrap">
+            @if(Auth::check() && Gate::allows('isadmin'))
             <div class="nav__area col-3">
                 <nav class="navbar navbar-dark bg-dark d-flex align-items-start">
                     <div class="container-fluid wrap-md-pd">
@@ -37,6 +38,7 @@
                     </div>
                 </nav>
             </div>
+            @endif
             <div class="content col-9">
                 @auth
                 <div class="profile-info  d-flex flex-column p-0 w-100">

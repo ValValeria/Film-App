@@ -64,4 +64,11 @@ export default {
   font-size: 20px;
   font-weight: 300;
 }
+
+
+@media(max-width:580px){
+ #title{
+   font-size:60px  !important;
+ }
+}
 </style>

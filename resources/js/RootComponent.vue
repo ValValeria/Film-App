@@ -16,7 +16,7 @@
             expand-icon="list"
             class="navigation-media__main position-relative"
           >
-            <h1 class="brand-name text-left">
+            <h1 class="brand-name text-left" v-on:click.prevent.stop>
               <router-link to="/">MyPizza</router-link>
             </h1>
             <ProfileIconComponent class="navigation-media__avatar" />
@@ -49,11 +49,11 @@
       dense
       style="z-index: 99999"
     >
-      <TabsComponent />
+      <TabsComponent v-on:click="navigate($event)" />
     </v-navigation-drawer>
 
     <v-main>
-        <router-view></router-view>
+      <router-view></router-view>
     </v-main>
 
     <v-footer app class="footer-wh only-shadow w-100">
@@ -134,6 +134,11 @@ export default {
   methods:{
     logout(){
       this.$store.commit("logout");
+    },
+    navigate(name){
+      if(!location.pathname=="/products"){
+         this.$router.push("/products")
+      }
     }
   },
 };
@@ -239,6 +244,22 @@ nav {
 @media (max-width: 1000px) {
   .wrap-md-pd {
     padding: 4.5rem 0 !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .wrap-md-pd,
+  .wrap-md {
+    width: 80%;
+  }
+  #title {
+    font-size: 60px;
+  }
+  .card-ad,
+  .ad,
+  .empty-card,
+  .product__ad {
+    max-width: 300px !important;
   }
 }
 </style>

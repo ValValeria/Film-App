@@ -16,51 +16,61 @@ export const store = new Vuex.Store({
             orders: [],
             uncheckedOrders: []
         },
-        sortData:{
-            ingredients:[],
-            max_price:0,
-            min_price:0,
-            max_weight:0,
-            min_weight:0,
-            categories:[],
+        sortData: {
+            ingredients: [],
+            max_price: 0,
+            min_price: 0,
+            max_weight: 0,
+            min_weight: 0,
+            categories: [],
         },
-        isSortTouched:false,
+        isSortTouched: false,
         pagination: {
             per_page: 4,
             page: 1,
-            total_amount: 0
-        }
+            total_amount: 0,
+            loading: false,
+        },
+        word: ''
     },
     mutations: {
-        deleteUncheckedOrders(state, orders){
-           orders.forEach(v=>{
-               const uncheckedOrders = state.user.uncheckedOrders;
-
-               if(uncheckedOrders.includes(v)){
-                   uncheckedOrders.splice(uncheckedOrders.indexOf(v),1)
-               }
-           })
+        updateWord(state,word){
+          state.word = word;
         },
-        changeOrderQuantity(state, { id, quantity}){
-            const uncheckedOrders = state.user.uncheckedOrders;
-            const product = uncheckedOrders.find(v=>Number(id)==Number(v.id));
+        updateLoadingState(state, bool) {
+            state.pagination.loading = bool;
+        },
+        deleteUncheckedOrders(state, orders) {
+            orders.forEach(v => {
+                const uncheckedOrders = state.user.uncheckedOrders;
 
-            if(product){
-               product.quantity = quantity;
+                if (uncheckedOrders.includes(v)) {
+                    uncheckedOrders.splice(uncheckedOrders.indexOf(v), 1);
+                }
+            });
+        },
+        changeOrderQuantity(state, { id, quantity }) {
+            const uncheckedOrders = state.user.uncheckedOrders;
+            const product = uncheckedOrders.find(v => Number(id) == Number(v.id));
+
+            if (product) {
+                product.quantity = quantity;
             }
         },
         addProducts(state, obj) {
-            const data = obj.data;
+            const data = obj.data || [];
 
-            data.forEach(v=>{
-                const id = v.id;
-                const index = state.products.findIndex(v=>v.id==id);
+            if(Array.isArray(data)){
+                data.forEach(v => {
+                    const id = v.id;
+                    const index = state.products.findIndex(v => v.id == id);
 
-                if(index==-1){
-                    state.products.push(v)
-                }
-            });
-            state.pagination.total_amount = obj.total;
+                    if (index == -1) {
+                        state.products.push(v);
+                    }
+                });
+                state.pagination.total_amount = obj.total;
+            }
         },
         clearStore(state) {
             state.products.splice(0, state.products.length);
@@ -73,7 +83,7 @@ export const store = new Vuex.Store({
             state.user.id = data.id;
             localStorage.setItem("data", JSON.stringify(data));
         },
-        logout(state){
+        logout(state) {
             state.user.email = "";
             state.user.password = "";
             state.user.username = "";
@@ -88,13 +98,13 @@ export const store = new Vuex.Store({
             state.user.orders.splice(0, state.user.orders.length);
         },
         addUncheckOrders(state, data) {
-            const ids = state.user.uncheckedOrders.map(v=>v.id);
+            const ids = state.user.uncheckedOrders.map(v => v.id);
 
             for (const item of data) {
-                 if(ids.includes(item.id)){
-                     state.user.uncheckedOrders.splice(ids.findIndex(v=>Number(v.id)==Number(item.id)),1);
-                 }
-                 state.user.uncheckedOrders.push(item);
+                if (ids.includes(item.id)) {
+                    state.user.uncheckedOrders.splice(ids.findIndex(v => Number(v.id) == Number(item.id)), 1);
+                }
+                state.user.uncheckedOrders.push(item);
             }
         },
         clearUncheckOrders(state, id) {
@@ -104,13 +114,13 @@ export const store = new Vuex.Store({
                 state.user.uncheckedOrders.splice(id, 1);
             }
         },
-        addAdditionalData(state, data){
+        addAdditionalData(state, data) {
             state.sortData = data;
         },
-        isSortTouched(state,data){
+        isSortTouched(state, data) {
             state.isSortTouched = data;
         },
-        changePage(state,page){
+        changePage(state, page) {
             state.pagination.page = page;
         }
     },
@@ -135,36 +145,37 @@ export const store = new Vuex.Store({
         },
     },
     actions: {
-        async getSortedProducts({commit},data){
-           const params = new URLSearchParams();
-           commit('isSortTouched',true);
-           Object.entries(data||{}).forEach(([prop,value])=>{
-                 params.append('sortBy',prop);
-                 if(!Array.isArray(value)){
-                    params.append(prop,value);
-                 }else{
-                    value.forEach(v=>{
-                        params.append(`${prop}[]`,v);
+        async getSortedProducts({ commit }, data) {
+            const params = new URLSearchParams();
+            commit('isSortTouched', true);
+            commit('updateLoadingState', true);
+            commit('clearStore');
+            Object.entries(data || {}).forEach(([prop, value]) => {
+                params.append('sortBy', prop);
+                if (!Array.isArray(value)) {
+                    params.append(prop, value);
+                } else {
+                    value.forEach(v => {
+                        params.append(`${prop}[]`, v);
                     });
-                 }
-           });
+                }
+            });
 
             const response = await fetch(`/api/product-sort/?${params.toString()}`);
 
-            if(response.ok){
-                commit('clearStore');
-
+            if (response.ok) {
+                commit('updateLoadingState', false);
                 const data = await response.json();
-                commit('addProducts',data.data);
+                commit('addProducts', data);
             }
         },
-        async getAdditionalData({commit}){
-            const response = await fetch('/api/get-ingredients'); 
+        async getAdditionalData({ commit }) {
+            const response = await fetch('/api/get-ingredients');
 
-            if(response.ok){
+            if (response.ok) {
                 const data = await response.json();
 
-                commit('addAdditionalData',data.data);
+                commit('addAdditionalData', data.data);
             }
         },
         async getProductAsync({ commit }, obj) {
@@ -172,15 +183,16 @@ export const store = new Vuex.Store({
 
             if (response.ok) {
                 const data = await response.json();
-                commit('addProducts', [data]);
+                commit('addProducts', { data: data });
             } else {
                 router.replace('/');
             }
         },
 
-        async getProducts({ commit,state }) {
+        async getProducts({ commit, state }) {
             const page = state.pagination.page;
-            const response = await fetch(`/admin/products/?page=${page}&isjson=true`);
+            const per_page = state.pagination.per_page;
+            const response = await fetch(`/admin/products/?page=${page}&isjson=true&per_page=${per_page}`);
 
             if (response.ok) {
                 const json = await response.json();

@@ -37,17 +37,17 @@
                   />
                   <PaginationComponent class="products__pagination"/>
                 </template>
-                <template v-if="!(products||[]).length && !isSortTouched">
+                <template v-if="(!(products||[]).length && !isSortTouched)|| isLoading">
                   <v-row>
                     <div class="w-100 center">
                       <v-progress-circular
                         indeterminate
-                        color="amber"
+                        color="error"
                       ></v-progress-circular>
                     </div>
                   </v-row>
                 </template>
-                <template v-if="isSortTouched">
+                <template v-if="isSortTouched && !(products||[]).length && !isLoading">
                   <div class="products__result-404 center">
                     <h5 class="h4 text-center">
                       Извините, но у нас нет блюд, которые подходят под ваши
@@ -129,7 +129,8 @@ export default {
           const result = chunk(state.products||[],state.pagination.per_page);
           if(result.length) return result[state.pagination.page-1];
           return result||[];
-        }
+        },
+        isLoading:state=>state.pagination.loading
       })
   },
   beforeRouteEnter(to,from,next){

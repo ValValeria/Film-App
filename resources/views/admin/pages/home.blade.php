@@ -29,7 +29,7 @@
                     <div class="row row-cols-1">
                         <div class="col align-self-start">
                             <div class="text-left alert w-100 alert-warning alert-dismissible fade show h4" role="alert">
-                                <strong>You have more than </strong> {{$count}} products
+                                 You have more than  {{$product_count}} products
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="col">
                             <li class="text-left list-group-item list-group-item h4">
-                                <strong>You have more than </strong> 10 users
+                                You have more than  {{$user_count}} users
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

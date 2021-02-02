@@ -14,7 +14,6 @@
           <v-tab>Категории</v-tab>
           <v-tab>Вес</v-tab>
           <v-tab>Цена</v-tab>
-          <v-tab>Другие опции</v-tab>
           <v-tab>Хочу с </v-tab>
         </v-tabs>
 
@@ -102,36 +101,6 @@
               </div>
             </div>
           </v-tab-item>
-          <v-tab-item>
-            <div class="product__search-category center flex-row">
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>
-                    <v-checkbox
-                      v-model="sortByAsc"
-                      label="От дорогих к дешевым"
-                      color="orange"
-                      value="warning"
-                      hide-details
-                    ></v-checkbox>
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>
-                    <v-checkbox
-                      v-model="sortByDesc"
-                      label="От дешевых к дорогим товарам"
-                      color="orange"
-                      value="warning"
-                      hide-details
-                    ></v-checkbox>
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </div>
-          </v-tab-item>
 
           <v-tab-item>
             <div class="product__search-category center flex-row">
@@ -189,7 +158,7 @@ export default {
   },
   methods: {
     sort(type, $event) {
-      this.sortQuery[type] = $event.toLowerCase();
+      this.sortQuery[type] = $event;
       this.$store.commit("changePage", 1);
       this.$store.dispatch("getSortedProducts", this.sortQuery);
     },
@@ -228,6 +197,7 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 1rem 0;
+  width:100%;
 }
 
 @media screen and (max-width: 800px) {

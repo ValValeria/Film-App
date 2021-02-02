@@ -13,8 +13,8 @@
     box-sizing: border-box;
 }
 
-body{
-    color: rgba(0,0,0,.87);
+body {
+    color: rgba(0, 0, 0, 0.87);
 }
 
 .center {
@@ -128,8 +128,8 @@ a {
     font-weight: 300;
 }
 
-.bg-white{
-    background-color:white;
+.bg-white {
+    background-color: white;
 }
 
 .h6 {
@@ -138,7 +138,6 @@ a {
     line-height: 1.2;
     font-size: 16px;
 }
-
 
 /* полоса прокрутки (скроллбар) */
 ::-webkit-scrollbar {
@@ -152,4 +151,10 @@ a {
 ::-webkit-scrollbar-thumb {
     background-color: #404040;
     border-radius: 9em;
+}
+
+@media (max-width: 700px) {
+    ::-webkit-scrollbar {
+        width: 14px; /* ширина для вертикального скролла */
+    }
 }

@@ -183,6 +183,7 @@
                             :descr="item.long_description"
                             :subtitle="item.short_description"
                             :id="item.id"
+                            :price="item.price"
                             classes="card-ad all-width"
                           />
                         </template>
@@ -232,7 +233,7 @@ export default {
       ],
       selectedItem: 2,
       snackbar: false,
-      count:1
+      count: 1,
     };
   },
   props: {
@@ -264,7 +265,9 @@ export default {
     addToOrders(product) {
       const date = new Date();
       const dateString = date.toLocaleString();
-      this.$store.commit("addUncheckOrders", [{...product,quantity:this.count,date: dateString}]);
+      this.$store.commit("addUncheckOrders", [
+        { ...product, quantity: this.count, date: dateString },
+      ]);
       this.snackbar = true;
     },
   },
@@ -287,12 +290,12 @@ export default {
   grid-column: span 2;
 }
 
-.product__count{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom:11px;
+.product__count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 11px;
 }
 
 .product__info {
@@ -326,8 +329,8 @@ export default {
   line-height: 30px;
 }
 
-.product__count{
-    font-size: 16px;
+.product__count {
+  font-size: 16px;
   font-weight: 400;
   /* font-family: 'GothamPro', 'geometria', Arial, Helvetica, sans-serif; */
   line-height: 30px;
@@ -380,6 +383,7 @@ export default {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  width:100%  !important;
 
   > div {
     flex: 1 1 20%;
@@ -393,8 +397,8 @@ export default {
   }
 }
 
-@media screen and (max-width:1000px){
-  .product__main-content{
+@media screen and (max-width: 1000px) {
+  .product__main-content {
     grid-template-columns: 1fr;
   }
 }

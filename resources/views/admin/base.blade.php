@@ -30,9 +30,8 @@
                                 <a href="/admin/addproduct">Добавить товар</a>
                                 <a href="/admin/users">Пользователи</a>
                                 <a href="/admin/products">Смотреть товары</a>
-                                @if(Auth::check())
+                                <a href="/admin/letters">Жалобы</a>
                                 <a href="/admin/logout">Выйти</a>
-                                @endif
                             </div>
                         </div>
                     </div>

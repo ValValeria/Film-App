@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="wrap-md-pd">
-        <h4 class="text-center h2">Ваши заказы</h4>
+        <h4 class="section__title text-center h2">Ваши заказы</h4>
 
         <div class="center flex-column">
             <div class="card w-100 card-section">
@@ -16,7 +16,7 @@
                     </h4>
                     @if(session('status'))
                     <div class="pt-2 pb-2 center w-100">
-                            <div class="alert alert-success shadow w-100">Вы успешно обновили {{session('count_update')}} заказ/ов</div>
+                        <div class="alert alert-success shadow w-100">Вы успешно обновили {{session('count_update')}} заказ/ов</div>
                     </div>
                     @endif
                     <form method="post" action="/admin/change-order-status">

@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminArea\AdminOrderController;
 use App\Http\Controllers\AdminArea\UsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AddOrderController;
+use App\Http\Controllers\AdminArea\AdminMessagesController;
 use App\Http\Controllers\AdminArea\LogoutController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ProductSortController;
@@ -26,6 +27,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/user/{user}', [AddOrderController::class, 'viewOrders']);
         Route::get('/users', UsersController::class);
         Route::get('/logout', LogoutController::class);
+        Route::get('/letters',[AdminMessagesController::class,'viewLetters'])->name('letters');
+        Route::get('/delete-letters', [AdminMessagesController::class, 'deleteLetters']);
+        Route::get('/delete-letter/{letter}', [AdminMessagesController::class, 'deleteLetter'])->whereNumber('letter');
+        Route::get('/letter/{letter}', [AdminMessagesController::class, 'viewLetter'])->whereNumber('letter');
         Route::post('/change-order-status', [AdminOrderController::class, 'changeOrderStatus']);
     });
 
@@ -44,6 +49,7 @@ Route::middleware(["cors", "json_auth"])->group(function () {
         Route::get('/addorder', [AddOrderController::class, 'addOrder']);
         Route::get('/view-orders', [ProductController::class, 'getOrderList']);
         Route::get('/view-messages/{user}', MessagesController::class);
+        Route::post('/errors',[AdminMessagesController::class,'addLetter']);
 
         Route::get('/product-sort', ProductSortController::class);
         Route::get('/get-ingredients', [ProductController::class, 'getData']);

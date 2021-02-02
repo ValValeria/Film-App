@@ -3,7 +3,7 @@
 @section('content')
 <div class="product container-fluid">
     <div class="wrap-md-pd">
-        <h5 class="text-center title-sm">Добавить новый товар</h5>
+        <h5 class="text-center h2 section__title">Добавить новый товар</h5>
     </div>
     <div class="product__form">
         <form method="POST" enctype="multipart/form-data">

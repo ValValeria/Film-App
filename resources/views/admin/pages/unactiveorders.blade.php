@@ -1,9 +1,9 @@
 @extends('admin.base')
 
 @section('content')
-<div class="container">
+<div class="section container">
     <div class="wrap-md-pd">
-        <h4 class="text-center h2">Ваши заказы</h4>
+        <h4 class="section__title text-center h2">Ваши заказы</h4>
 
         <div class="center flex-column">
             <div class="card w-100 card-section">

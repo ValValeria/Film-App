@@ -24,7 +24,7 @@
             </div>
             <GridLayout class="products__result">
               <template #content>
-                <template v-if="(products||[]).length">
+                <template v-if="(products || []).length">
                   <CardComponent
                     v-for="item in products"
                     :key="item + Math.random()"
@@ -32,12 +32,17 @@
                     :title="item.title"
                     :descr="item.long_description"
                     :subtitle="item.short_description"
+                    :price="item.price"
                     :id="item.id"
                     classes="card-ad all-width"
                   />
-                  <PaginationComponent class="products__pagination"/>
+                  <PaginationComponent class="products__pagination" />
                 </template>
-                <template v-if="(!(products||[]).length && !isSortTouched)|| isLoading">
+                <template
+                  v-if="
+                    (!(products || []).length && !isSortTouched) || isLoading
+                  "
+                >
                   <v-row>
                     <div class="w-100 center">
                       <v-progress-circular
@@ -47,7 +52,9 @@
                     </div>
                   </v-row>
                 </template>
-                <template v-if="isSortTouched && !(products||[]).length && !isLoading">
+                <template
+                  v-if="isSortTouched && !(products || []).length && !isLoading"
+                >
                   <div class="products__result-404 center">
                     <h5 class="h4 text-center">
                       Извините, но у нас нет блюд, которые подходят под ваши
@@ -148,9 +155,9 @@ export default {
   align-items: flex-start !important;
 }
 
-.products__result-404{
-    width: 60% !important;
-    padding-top: 3rem;
+.products__result-404 {
+  width: 60% !important;
+  padding-top: 3rem;
 }
 
 .products__content {
@@ -210,7 +217,7 @@ export default {
   width: 100%;
 }
 
-.products__pagination{
+.products__pagination {
   grid-column: 1/-1;
 }
 

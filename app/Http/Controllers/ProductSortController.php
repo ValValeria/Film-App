@@ -51,7 +51,7 @@ class ProductSortController extends Controller
 
                         foreach ($product as $pr) {
                             $json = $ingredients;
-                            $ingr = json_decode($pr->ingredients, JSON_UNESCAPED_SLASHES);
+                            $ingr = json_decode($pr->ingredients, JSON_UNESCAPED_SLASHES)??[];
 
                             if (count(array_intersect($json, $ingr))) {
                                 array_push($data, $pr);

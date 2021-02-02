@@ -15,6 +15,7 @@
             :descr="item.long_description"
             :subtitle="item.short_description"
             :id="item.id"
+            :price="item.price"
             classes="card-ad all-width"
           />
         </template>

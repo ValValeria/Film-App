@@ -11054,3 +11054,10 @@ a {
   border-radius: 9em;
 }
 
+@media (max-width: 700px) {
+  ::-webkit-scrollbar {
+    width: 14px;
+    /* ширина для вертикального скролла */
+  }
+}
+

@@ -35,7 +35,7 @@
             </div>
             @endif
             <div class="product__title pt-3">
-                <h4 class="h2">Описание товара</h4>
+                <h4 class="section__title h2">Описание товара</h4>
             </div>
             @if(session('status'))
             <div class="row pt-2 w-100">

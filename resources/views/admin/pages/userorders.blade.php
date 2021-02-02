@@ -1,9 +1,9 @@
 @extends('admin.base')
 
 @section('content')
-<div class="container">
+<div class="section container">
     <div class="wrap-md-pd">
-        <h4 class="text-center h2">Пользователь</h4>
+        <h4 class="section__title text-center h2">Пользователь</h4>
         <div class="text-right w-100 card-section">
             <div class="card">
                 <div class="card-body">
@@ -33,7 +33,7 @@
         <div class="user__analise card-section">
             <div class="card">
                 <div class="card-title h3 center">
-                     Информация о пользователе
+                    Информация о пользователе
                 </div>
                 <div class="card-body">
                     <ul class="list-group">

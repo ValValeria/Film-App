@@ -10,7 +10,15 @@
       </template>
     </v-snackbar>
     <div class="position-relative">
-      <v-btn class="card-sm__fab mx-2" fab dark color="error " small v-on:click="addProduct()" v-if="isAuth">
+      <v-btn
+        class="card-sm__fab mx-2"
+        fab
+        dark
+        color="error "
+        small
+        v-on:click="addProduct()"
+        v-if="isAuth"
+      >
         <v-icon dark> mdi-plus </v-icon>
       </v-btn>
       <v-img :src="image" height="200px" class="mt-2">
@@ -35,18 +43,21 @@
       {{ subtitle }}
     </v-card-text>
 
-    <v-card-actions class="center pb-4" v-if="showAction">
+    <v-card-actions class="center flex-row pb-4" v-if="showAction">
       <router-link :to="'/product/' + id" class="text-white">
         <v-btn color="bg-red" dark large depressed class="font-white">
           Подробнее
         </v-btn>
       </router-link>
+      <div v-if="showAction && price" class="center ml-1">
+        <v-btn text color="error" large> {{ price }} ₴ </v-btn>
+      </div>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
   name: "Card",
   props: {
@@ -60,7 +71,10 @@ export default {
       default: "",
       required: false,
     },
-
+    price: {
+      type: String,
+      required: false,
+    },
     showAction: {
       type: Boolean,
       default: true,
@@ -68,7 +82,7 @@ export default {
     },
   },
   data: function () {
-    return { show: false ,snackbar:false};
+    return { show: false, snackbar: false };
   },
   computed: {
     image: function () {
@@ -76,18 +90,20 @@ export default {
       return image;
     },
     ...mapState({
-      isAuth:state=>state.user.isAuth
-    })
+      isAuth: (state) => state.user.isAuth,
+    }),
   },
-  methods:{
-    addProduct(){
+  methods: {
+    addProduct() {
       const date = new Date();
-      const product = this.$store.state.products.find(v=>v.id==this.id);
+      const product = this.$store.state.products.find((v) => v.id == this.id);
       const dateString = date.toLocaleString();
-      this.$store.commit("addUncheckOrders", [{...product,quantity:1,date: dateString}]);
+      this.$store.commit("addUncheckOrders", [
+        { ...product, quantity: 1, date: dateString },
+      ]);
       this.snackbar = true;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -96,11 +112,11 @@ export default {
   background-size: contain !important;
 }
 
-.card-sm__fab{
+.card-sm__fab {
   position: absolute;
-  right:20px;
-  bottom:5px;
-  z-index:2;
+  right: 20px;
+  bottom: 5px;
+  z-index: 2;
 }
 
 .shadow {

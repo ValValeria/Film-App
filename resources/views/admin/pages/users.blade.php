@@ -1,13 +1,19 @@
 @extends('admin.base')
 
 @section('content')
-<div class="container">
+<div class="section container">
     <div class="wrap-md-pd">
-        <h4 class="text-center h2">Пользователи</h4>
+        <h4 class="section__title text-center h2">Пользователи</h4>
         <div class="text-right w-100">
+            @if(!isset($_GET['onlyusers']))
             <a href="/admin/users/?onlyusers=true" type="button" class="btn btn-light">
                 Показать пользователей с заказами
             </a>
+            @else
+            <a href="/admin/users/" type="button" class="btn btn-light">
+                Показать всех пользователей
+            </a>
+            @endif
         </div>
         <div class="card-container">
             <table class="table">
@@ -21,9 +27,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
+                    @foreach($users as $key=>$user)
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">{{$key+1}}</th>
                         <td>
                             <a href="/admin/user/{{$user->id}}">
                                 {{$user->username}}
@@ -46,7 +52,9 @@
                 </tbody>
             </table>
         </div>
-        {{ $users->links() }}
+        <div class="w-100 center">
+            {{ $users->links() }}
+        </div>
     </div>
 </div>
 @endsection

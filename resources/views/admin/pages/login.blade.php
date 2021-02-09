@@ -15,7 +15,7 @@
             <h5 class="login__title headline">Войти</h5>
             @if(!Auth::check())
             <div class="pt-2">
-                <form class="login__form wrap-md" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form class="login__form wrap-md" method="POST">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Имейл </label>
                         <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ old('email') }}">

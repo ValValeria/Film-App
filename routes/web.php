@@ -15,30 +15,33 @@ use App\Http\Controllers\AdminArea\LogoutController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ProductSortController;
 
-Route::prefix('admin')->group(function () {
-    Route::middleware(['auth', 'only_admin'])->group(function () {
-        Route::get('/', [AdminController::class, 'index'])->name('home');
-        Route::get('/addproduct', [AdminProductController::class, 'index']);
-        Route::post('/addproduct', [AdminProductController::class, 'addProduct']);
-        Route::get('/delete/{productId}', [ProductController::class, 'deleteProduct'])->whereNumber('id');
-        Route::post('/updateproduct/{id}', [AdminProductController::class, 'updateProduct'])->whereNumber('id');
-        Route::get('/orders', [AdminOrderController::class, 'activeOrders']);
-        Route::get('/unactive-orders', [AdminOrderController::class, 'unactiveOrders']);
-        Route::get('/user/{user}', [AddOrderController::class, 'viewOrders']);
-        Route::get('/users', UsersController::class);
-        Route::get('/logout', LogoutController::class);
-        Route::get('/letters',[AdminMessagesController::class,'viewLetters'])->name('letters');
-        Route::get('/delete-letters', [AdminMessagesController::class, 'deleteLetters']);
-        Route::get('/delete-letter/{letter}', [AdminMessagesController::class, 'deleteLetter'])->whereNumber('letter');
-        Route::get('/letter/{letter}', [AdminMessagesController::class, 'viewLetter'])->whereNumber('letter');
-        Route::post('/change-order-status', [AdminOrderController::class, 'changeOrderStatus']);
+
+Route::middleware(['cors'])->group(function(){
+    Route::prefix('admin')->group(function () {
+        Route::middleware(['auth', 'only_admin'])->group(function () {
+            Route::get('/', [AdminController::class, 'index'])->name('home');
+            Route::get('/addproduct', [AdminProductController::class, 'index']);
+            Route::post('/addproduct', [AdminProductController::class, 'addProduct']);
+            Route::get('/delete/{productId}', [ProductController::class, 'deleteProduct'])->whereNumber('id');
+            Route::post('/updateproduct/{id}', [AdminProductController::class, 'updateProduct'])->whereNumber('id');
+            Route::get('/orders', [AdminOrderController::class, 'activeOrders']);
+            Route::get('/unactive-orders', [AdminOrderController::class, 'unactiveOrders']);
+            Route::get('/user/{user}', [AddOrderController::class, 'viewOrders']);
+            Route::get('/users', UsersController::class);
+            Route::get('/logout', LogoutController::class);
+            Route::get('/letters', [AdminMessagesController::class, 'viewLetters'])->name('letters');
+            Route::get('/delete-letters', [AdminMessagesController::class, 'deleteLetters']);
+            Route::get('/delete-letter/{letter}', [AdminMessagesController::class, 'deleteLetter'])->whereNumber('letter');
+            Route::get('/letter/{letter}', [AdminMessagesController::class, 'viewLetter'])->whereNumber('letter');
+            Route::post('/change-order-status', [AdminOrderController::class, 'changeOrderStatus']);
+        });
+
+        Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
+        Route::post('/login', [AdminLoginController::class, 'login']);
+
+        Route::get('/product/{id}', [ProductController::class, 'getProduct'])->whereNumber('id');
+        Route::get('/products', [ProductController::class, 'getProduct']);
     });
-
-    Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
-    Route::post('/login', [AdminLoginController::class, 'login']);
-
-    Route::get('/product/{id}', [ProductController::class, 'getProduct'])->whereNumber('id');
-    Route::get('/products', [ProductController::class, 'getProduct']);
 });
 
 Route::middleware(["cors", "json_auth"])->group(function () {

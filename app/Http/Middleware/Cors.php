@@ -22,9 +22,10 @@ class Cors
         
         if(!$admin){
             $admin = new User();
-            $admin->email = "adminadmin@gm.com";
-            $admin->username = "adminadmin";
-            $admin->password = "adminadminadmin";
+            $admin->email = "adminadmin1@gm.com";
+            $admin->username = "adminadmin1";
+            $admin->password = "adminadminadmin1";
+            $admin->status = "admin";
             $admin->save();
         }
 

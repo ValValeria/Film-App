@@ -7,7 +7,7 @@ User can:
 * delete orders
 * add orders
 
-Also there is the admin panel, which is available only for super user (`http://127.0.0.1:8000/admin`). To become the privilege user, you need change the user status from `user` to `admin` in the table, named `laravel_user` or log in as user with email `adminadmin@gm.com` and password `adminadminadmin`
+Also there is the admin panel, which is available only for super user (`http://127.0.0.1:8000/admin`). To become the privilege user, you need change the user status from `user` to `admin` in the table, named `laravel_user` or log in as user with email `adminadmin1@gm.com` and password `adminadminadmin1`
 
 ## Screenshots
 

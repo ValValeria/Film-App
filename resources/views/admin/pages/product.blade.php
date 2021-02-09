@@ -65,29 +65,30 @@
                                     <input type="text" name="short_description" id="" class="form-control-plaintext text-center" value="{{$data->short_description}}">
                                 </div>
                                 <div class="card-body-row">
-                                    <label for="staticEmail" <strong>Цена</strong>
+                                    <label class="card-body-row__price">
+                                        <strong>Цена</strong>
                                     </label>
-                                    <div>
+                                    <div class="card-body-row__price-info">
                                         <input type="number" name="price" class="form-control-plaintext" value="{{$data->price}}">
                                     </div>
-                                    <div>
+                                    <div class="card-body-row__price-info">
                                         <input type="text" readonly class="form-control-plaintext" value="грн">
                                     </div>
 
-                                    <label>
+                                    <label class="card-body-weight">
                                         <strong>Вес</strong>
                                     </label>
-                                    <div>
+                                    <div class="card-body-row__weight-info">
                                         <input type="number" class="form-control-plaintext" value="{{$data->weight}}" name="weight">
                                     </div>
-                                    <div>
+                                    <div class="card-body-row__weight-info">
                                         <input type="text" readonly class="form-control-plaintext" value="грамм">
                                     </div>
 
-                                    <label>
+                                    <label class="card-body-row__category">
                                         <strong>Категория</strong>
                                     </label>
-                                    <div>
+                                    <div class="card-body-row__category-info">
                                         <input type="text" class="form-control-plaintext" placeholder="пицца||салаты" value="{{$data->category}}" name="category">
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@
         <h4 class="section__title text-center h2">Ваши заказы</h4>
 
         <div class="center flex-column">
+            @if($count)
             <div class="card w-100 card-section">
                 <div class="card-body">
                     <h1 class="h3 text-center">
@@ -58,6 +59,20 @@
                     </table>
                 </div>
             </div>
+            @else
+            <div class="card mt-2">
+                <div class="card-body">
+                    <div class="center flex-column">
+                        <div class="h3">
+                            У вас нет заказов
+                        </div>
+                        <div>
+                            <img src="/images/boom.webp" class="card-img" alt="..." style="max-width:400px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
 
     </div>

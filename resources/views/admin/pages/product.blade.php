@@ -91,7 +91,7 @@
                                         <strong>Категория</strong>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="number" class="form-control-plaintext" value="{{$data->category}}" name="weight">
+                                        <input type="text" class="form-control-plaintext" placeholder="пицца||салаты" value="{{$data->category}}" name="category">
                                     </div>
                                 </div>
                                 <div class="pt-3 centerflex-column w-100">

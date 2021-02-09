@@ -4,6 +4,7 @@
 <div class="section container">
     <div class="wrap-md-pd">
         <h4 class="section__title text-center h2">Пользователи</h4>
+        @if(count($users))
         <div class="text-right w-100">
             @if(!isset($_GET['onlyusers']))
             <a href="/admin/users/?onlyusers=true" type="button" class="btn btn-light">
@@ -55,6 +56,20 @@
         <div class="w-100 center">
             {{ $users->links() }}
         </div>
+        @else
+        <div class="card mt-2">
+            <div class="card-body">
+                <div class="center flex-column">
+                    <div class="h3">
+                        У вас нет пользователей
+                    </div>
+                    <div>
+                        <img src="/images/boom.webp" class="card-img" alt="..." style="max-width:400px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @endsection

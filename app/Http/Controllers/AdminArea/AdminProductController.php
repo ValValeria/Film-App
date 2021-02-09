@@ -13,7 +13,7 @@ trait Validate{
     {
        $data = $request->only(['title','short_description',
                                'long_description','image','ingredients',
-                               'price']); 
+                               'price','category']); 
 
        $validator = Validator::make($data,[
           'title'=>'bail|required|min:10|max:50',

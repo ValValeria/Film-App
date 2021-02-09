@@ -58,7 +58,7 @@
                 <label for="staticEmail" class="col-sm-2 col-form-label">Категория</label>
                 <div class="col-sm-2">
                     <select class="form-control" name="category">
-                        <option value="пицца">пицца</option>
+                        <option value="пицца" selected>пицца</option>
                         <option value="салаты">салаты</option>
                     </select>
                 </div>

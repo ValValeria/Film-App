@@ -88,7 +88,7 @@ class AdminProductController extends Controller{
     {
        $response = $this->validateData($request, function() use ($request){
            $file = $request->file('image');
-           $path = $file->storeAs('images', $request->user()->id.$file->getClientOriginalName(),'public');
+           $path = $file->storeAs('images', $file->getClientOriginalName(),'public');
            $product = new Product();
            $product->image = $path;
            $product->short_description = $request->short_description;

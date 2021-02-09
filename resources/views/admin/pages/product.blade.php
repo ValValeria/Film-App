@@ -65,35 +65,34 @@
                                     <input type="text" name="short_description" id="" class="form-control-plaintext text-center" value="{{$data->short_description}}">
                                 </div>
                                 <div class="card-body-row">
-                                    <label for="staticEmail" class="col-3 col-form-label">
-                                        <strong>Цена</strong>
+                                    <label for="staticEmail" <strong>Цена</strong>
                                     </label>
-                                    <div class="col-4">
+                                    <div>
                                         <input type="number" name="price" class="form-control-plaintext" value="{{$data->price}}">
                                     </div>
-                                    <div class="col-3">
+                                    <div>
                                         <input type="text" readonly class="form-control-plaintext" value="грн">
                                     </div>
 
-                                    <label for="staticEmail" class="col-sm-3 col-form-label">
+                                    <label>
                                         <strong>Вес</strong>
                                     </label>
-                                    <div class="col-sm-4">
+                                    <div>
                                         <input type="number" class="form-control-plaintext" value="{{$data->weight}}" name="weight">
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div>
                                         <input type="text" readonly class="form-control-plaintext" value="грамм">
                                     </div>
 
-                                    <label for="staticEmail" class="col-sm-3 col-form-label">
+                                    <label>
                                         <strong>Категория</strong>
                                     </label>
-                                    <div class="col-sm-7">
+                                    <div>
                                         <input type="text" class="form-control-plaintext" placeholder="пицца||салаты" value="{{$data->category}}" name="category">
                                     </div>
                                 </div>
 
-                                
+
                                 <div class="pt-3 centerflex-column w-100">
                                     <div class="w-100 mb-1">
                                         <a href="/product/{{$data->id}}" class="btn btn-block btn-warning w-100">

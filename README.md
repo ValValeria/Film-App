@@ -27,10 +27,8 @@ Also there is the admin panel, which is available only for super user (`http://1
 > Login page for the super admin
 
 ## How to run the app
-Firstly, you need create .env file and fill in your database settings. Then open terminal or type
+Firstly, you need create .env file and fill in your database settings. Then open terminal and type
 * npm install
 * composer install
 * php artisan migrate
 * php artisan serve
-
-If you 

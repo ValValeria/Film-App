@@ -72,11 +72,11 @@
             <div class="row center">
                 <button type="submit" class="btn btn-dark mb-3 col-sm-2">Отправить</button>
             </div>
-            <div class="row">
+            <div class="row w-100">
                 @if ($errors->any())
-                <ul class="list-group">
+                <ul class="list-group w-100">
                     @foreach ($errors->all() as $error)
-                    <li class="list-group-item warn">{{ $error }}</li>
+                    <li class="list-group-item warn w-100">{{ $error }}</li>
                     @endforeach
                 </ul>
                 @endif

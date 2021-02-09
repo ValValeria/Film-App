@@ -6,6 +6,7 @@
         <h4 class="section__title text-center h2">Ваши товары</h4>
 
         <div class="center flex-column w-100">
+            @if(count($data))
             <div class="card w-100">
                 <form class="card-body center flex-row" method="GET">
                     <div class="col-auto" style="flex: 1 1 80%;">
@@ -56,6 +57,20 @@
                     </table>
                 </div>
             </div>
+            @else
+            <div class="card mt-2">
+                <div class="card-body">
+                    <div class="center flex-column">
+                        <div class="h3">
+                            У вас нет товаров
+                        </div>
+                        <div>
+                            <img src="/images/boom.webp" class="card-img" alt="..." style="max-width:400px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
 
     </div>

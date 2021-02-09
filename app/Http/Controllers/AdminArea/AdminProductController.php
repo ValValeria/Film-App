@@ -21,14 +21,22 @@ trait Validate{
           'long_description'=>'required|min:10|max:200',
           'image'=> !$imageNeed?'image':'required|image',
           'price' => 'required|numeric',
-          'category'=>['required',function($attr,$value){
-              return $value== "пицца" || $value== "салаты";
+          'category'=>['required',function($attr,$value,$fail){
+              $isValid = $value== "пицца" || $value== "салаты";
+
+              if(!$isValid){
+                  $fail("Invalid category.");
+              }
           }],
           'weight'=>'numeric',
           'ingredients'=>[function($attr,$value,$fail){
-              return collect($value)->every(function($val){
+              $pass = collect($value)->every(function($val){
                  return gettype($val)=="string";
               });
+
+              if(!$pass){
+                 $fail("Invalid ingredients");
+              }
           }]
        ]);
 

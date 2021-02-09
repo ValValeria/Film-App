@@ -86,6 +86,14 @@
                                         <input type="text" readonly class="form-control-plaintext" value="грамм">
                                     </div>
                                 </div>
+                                <div class="row card-body-row">
+                                    <label for="staticEmail" class="col-sm-3 col-form-label">
+                                        <strong>Категория</strong>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input type="number" class="form-control-plaintext" value="{{$data->category}}" name="weight">
+                                    </div>
+                                </div>
                                 <div class="pt-3 centerflex-column w-100">
                                     <div class="w-100 mb-1">
                                         <a href="/product/{{$data->id}}" class="btn btn-block btn-warning w-100">

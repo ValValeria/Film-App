@@ -55,6 +55,15 @@
                 </div>
             </div>
             <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Категория</label>
+                <div class="col-sm-2">
+                    <select class="form-control" id="exampleFormControlSelect1" name="category">
+                        <option>пицца</option>
+                        <option>салаты</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Масса</label>
                 <div class="col-sm-2">
                     <input type="number" class="form-control" name="weight">

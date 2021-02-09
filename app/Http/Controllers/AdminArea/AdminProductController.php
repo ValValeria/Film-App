@@ -21,6 +21,9 @@ trait Validate{
           'long_description'=>'required|min:10|max:200',
           'image'=> !$imageNeed?'image':'required|image',
           'price' => 'required|numeric',
+          'category'=>['required',function($attr,$value){
+              return $value== "пицца" || $value== "салаты";
+          }],
           'weight'=>'numeric',
           'ingredients'=>[function($attr,$value,$fail){
               return collect($value)->every(function($val){
@@ -85,6 +88,7 @@ class AdminProductController extends Controller{
            $product->title = $request->title;
            $product->price = $request->price;
            $product->weight = $request->input('weight','400');
+           $product->category = $request->input('category', 'пицца');
            $product->ingredients = json_encode($request->input('ingredients',[]), JSON_UNESCAPED_UNICODE);
            $product->save();
 

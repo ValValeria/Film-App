@@ -64,7 +64,7 @@
                                 <div class="card-title pb-1">
                                     <input type="text" name="short_description" id="" class="form-control-plaintext text-center" value="{{$data->short_description}}">
                                 </div>
-                                <div class="row card-body-row w-100">
+                                <div class="card-body-row">
                                     <label for="staticEmail" class="col-3 col-form-label">
                                         <strong>Цена</strong>
                                     </label>
@@ -74,8 +74,7 @@
                                     <div class="col-3">
                                         <input type="text" readonly class="form-control-plaintext" value="грн">
                                     </div>
-                                </div>
-                                <div class="row card-body-row">
+
                                     <label for="staticEmail" class="col-sm-3 col-form-label">
                                         <strong>Вес</strong>
                                     </label>
@@ -85,8 +84,7 @@
                                     <div class="col-sm-3">
                                         <input type="text" readonly class="form-control-plaintext" value="грамм">
                                     </div>
-                                </div>
-                                <div class="row card-body-row">
+
                                     <label for="staticEmail" class="col-sm-3 col-form-label">
                                         <strong>Категория</strong>
                                     </label>
@@ -94,6 +92,8 @@
                                         <input type="text" class="form-control-plaintext" placeholder="пицца||салаты" value="{{$data->category}}" name="category">
                                     </div>
                                 </div>
+
+                                
                                 <div class="pt-3 centerflex-column w-100">
                                     <div class="w-100 mb-1">
                                         <a href="/product/{{$data->id}}" class="btn btn-block btn-warning w-100">
@@ -144,7 +144,7 @@
                                     <div>
                                         <div class="row center">
                                             <input type="text" class="form-control ml-2" id="text">
-                                            <button class="btn btn-primary mt-2" id="btn1">Обновить состав</button>
+                                            <button class="btn btn-dark mt-2" id="btn1">Обновить состав</button>
                                         </div>
 
                                         <div class="row  mt-2">

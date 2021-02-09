@@ -75,14 +75,11 @@ h4 {
 }
 
 .card-body-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, calc(100% / 3));
+    grid-auto-rows: 45px;
 }
 
-.card-body-row label,
-.card-body-row div {
-    flex: 1 1 33%;
-    width:33%;
-}
 
 .inner-shadow {
     box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73 !important;
